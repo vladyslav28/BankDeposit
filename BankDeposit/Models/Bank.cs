@@ -8,6 +8,10 @@ namespace BankDeposit.Models
 {
     public class Bank
     {
+        
+        public List<BankAccount> Accounts { get; set; } = new List<BankAccount>();
+        public Bank() { }
+
 
     }
 }
