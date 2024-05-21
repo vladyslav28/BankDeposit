@@ -9,8 +9,12 @@ namespace BankDeposit.Models
     public class Bank
     {
         private static Random random = new Random();
-        public List<BankAccount> Accounts { get; set; } = new List<BankAccount>();
-        public Bank() { }
+        public List<BankAccount> Accounts { get; set; } 
+        public Bank() {
+            Accounts = new List<BankAccount>();
+          
+            FillTestData(100);
+        }
 
         public void FillTestData(int n)
         {
@@ -34,7 +38,6 @@ namespace BankDeposit.Models
                 });
             }
         }
-
 
         private string GetDepositCategory(DateTime birthDate)
         {
@@ -127,25 +130,46 @@ namespace BankDeposit.Models
             decimal generatedAmount = Math.Round((decimal)(random.Next(10000, 100000100) / 100.0), 2);
             return generatedAmount;
         }
+
+        public List<BankAccount> SearchAccounts(string id, string name, string depositCategory, DateTime? birthDate, DateTime? lastOperationDate, decimal? currentSum)
+        {
+            var result = new List<BankAccount>();
+
+            foreach (var account in Accounts)
+            {
+                if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
+                    (string.IsNullOrEmpty(depositCategory) || account.DepositCategory.Contains(depositCategory)) &&
+                    (string.IsNullOrEmpty(name) || account.Name.Contains(name)) &&
+                    (!birthDate.HasValue || account.BirthDate.Date == birthDate.Value.Date) &&
+                    (!lastOperationDate.HasValue || account.LastOperationDate.Date == lastOperationDate.Value.Date) &&
+                    (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString() )))
+                {
+                    result.Add(account);
+                }
+            }
+
+            return result;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

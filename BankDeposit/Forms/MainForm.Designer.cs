@@ -315,22 +315,27 @@
             buttonSearch.TabIndex = 12;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // dateTimePickerLastOperation
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(339, 130);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
+            dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
+            dateTimePickerLastOperation.Checked = false;
             // 
             // dateTimePickerBirth
             // 
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(339, 51);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
+            dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
+            dateTimePickerBirth.Checked = false;
             // 
             // labelDateLastOperation
             // 

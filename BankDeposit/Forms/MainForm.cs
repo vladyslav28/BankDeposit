@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDeposit.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,13 @@ namespace BankDeposit.Forms
 {
     public partial class MainForm : Form
     {
+        Bank bank = new Bank();
         public MainForm()
         {
+            
             InitializeComponent();
+            InitializeCategoryBox();
+         
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -22,6 +27,47 @@ namespace BankDeposit.Forms
             Close();
         }
 
-        
+        private void InitializeCategoryBox()
+        {
+            categoryBox.Items.Add("Junior(12%)");
+            categoryBox.Items.Add("Standart(15%)");
+            categoryBox.SelectedIndex = -1; 
+        }
+     
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string depositCategory = categoryBox.SelectedItem?.ToString();
+
+            DateTime? birthDate = dateTimePickerBirth.Checked ? (DateTime?)dateTimePickerBirth.Value : null;
+            DateTime? lastOperationDate = dateTimePickerLastOperation.Checked ? (DateTime?)dateTimePickerLastOperation.Value : null;
+
+            decimal? currentSum = null;
+            if (!string.IsNullOrEmpty(sumBox.Text))
+            {
+                if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+                {
+                    currentSum = parsedSum;
+                }
+                else
+                {
+                    //Зробити видачу помилки (красні мітки)
+                    return;
+                }
+            }
+
+            var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
+
+            MessageBox.Show(result.Count.ToString());
+
+           
+        }
+
+
+
     }
 }
+
+
+//         (string id, string name, string depositCategory , DateTime birthDate,
+//         decimal currentSum, DateTime lastOperationDate)
