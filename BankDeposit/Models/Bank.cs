@@ -28,7 +28,7 @@ namespace BankDeposit.Models
                     DepositCategory = depositCategory,
                     Name = name,
                     BirthDate = birthDate,
-                    CurrentAmount = GenerateRandomAmount(),
+                    CurrentSum = GenerateRandomAmount(),
                     LastOperationDate = DateTime.Now.AddDays(-random.Next(1, 365))
 
                 });

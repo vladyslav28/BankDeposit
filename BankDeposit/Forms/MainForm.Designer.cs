@@ -60,8 +60,19 @@
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
-            labelId = new Label();
+            buttonSearch = new Button();
+            dateTimePickerLastOperation = new DateTimePicker();
+            dateTimePickerBirth = new DateTimePicker();
+            labelDateLastOperation = new Label();
+            labelDateBirth = new Label();
+            sumBox = new TextBox();
+            labelSum = new Label();
+            categoryBox = new ComboBox();
+            labelCategory = new Label();
+            nameBox = new TextBox();
+            idBox = new TextBox();
             labelName = new Label();
+            labelId = new Label();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             SuspendLayout();
@@ -72,7 +83,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(830, 28);
+            menuStrip1.Size = new Size(658, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -276,40 +287,143 @@
             // 
             // panelSearch
             // 
+            panelSearch.Anchor = AnchorStyles.Top;
             panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(buttonSearch);
+            panelSearch.Controls.Add(dateTimePickerLastOperation);
+            panelSearch.Controls.Add(dateTimePickerBirth);
+            panelSearch.Controls.Add(labelDateLastOperation);
+            panelSearch.Controls.Add(labelDateBirth);
+            panelSearch.Controls.Add(sumBox);
+            panelSearch.Controls.Add(labelSum);
+            panelSearch.Controls.Add(categoryBox);
+            panelSearch.Controls.Add(labelCategory);
+            panelSearch.Controls.Add(nameBox);
+            panelSearch.Controls.Add(idBox);
             panelSearch.Controls.Add(labelName);
             panelSearch.Controls.Add(labelId);
-            panelSearch.Location = new Point(92, 40);
+            panelSearch.Location = new Point(58, 31);
             panelSearch.Name = "panelSearch";
-            panelSearch.Size = new Size(615, 201);
+            panelSearch.Size = new Size(534, 212);
             panelSearch.TabIndex = 1;
             // 
-            // labelId
+            // buttonSearch
             // 
-            labelId.AutoSize = true;
-            labelId.Location = new Point(19, 23);
-            labelId.Name = "labelId";
-            labelId.Size = new Size(22, 20);
-            labelId.TabIndex = 0;
-            labelId.Text = "Id";
+            buttonSearch.Location = new Point(233, 179);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(93, 28);
+            buttonSearch.TabIndex = 12;
+            buttonSearch.Text = "Search";
+            buttonSearch.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerLastOperation
+            // 
+            dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
+            dateTimePickerLastOperation.Location = new Point(339, 130);
+            dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
+            dateTimePickerLastOperation.Size = new Size(179, 27);
+            dateTimePickerLastOperation.TabIndex = 11;
+            // 
+            // dateTimePickerBirth
+            // 
+            dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
+            dateTimePickerBirth.Location = new Point(339, 51);
+            dateTimePickerBirth.Name = "dateTimePickerBirth";
+            dateTimePickerBirth.Size = new Size(179, 27);
+            dateTimePickerBirth.TabIndex = 10;
+            // 
+            // labelDateLastOperation
+            // 
+            labelDateLastOperation.AutoSize = true;
+            labelDateLastOperation.Location = new Point(339, 98);
+            labelDateLastOperation.Name = "labelDateLastOperation";
+            labelDateLastOperation.Size = new Size(178, 20);
+            labelDateLastOperation.TabIndex = 9;
+            labelDateLastOperation.Text = "Дата останньої операції";
+            // 
+            // labelDateBirth
+            // 
+            labelDateBirth.AutoSize = true;
+            labelDateBirth.Location = new Point(339, 19);
+            labelDateBirth.Name = "labelDateBirth";
+            labelDateBirth.Size = new Size(133, 20);
+            labelDateBirth.TabIndex = 8;
+            labelDateBirth.Text = "Дата народження";
+            // 
+            // sumBox
+            // 
+            sumBox.Location = new Point(82, 132);
+            sumBox.Name = "sumBox";
+            sumBox.Size = new Size(187, 27);
+            sumBox.TabIndex = 7;
+            // 
+            // labelSum
+            // 
+            labelSum.AutoSize = true;
+            labelSum.Location = new Point(23, 132);
+            labelSum.Name = "labelSum";
+            labelSum.Size = new Size(44, 20);
+            labelSum.TabIndex = 6;
+            labelSum.Text = "Сума";
+            // 
+            // categoryBox
+            // 
+            categoryBox.FormattingEnabled = true;
+            categoryBox.Location = new Point(82, 90);
+            categoryBox.Name = "categoryBox";
+            categoryBox.Size = new Size(187, 28);
+            categoryBox.TabIndex = 5;
+            // 
+            // labelCategory
+            // 
+            labelCategory.AutoSize = true;
+            labelCategory.Location = new Point(3, 90);
+            labelCategory.Name = "labelCategory";
+            labelCategory.Size = new Size(76, 20);
+            labelCategory.TabIndex = 4;
+            labelCategory.Text = "Категорія";
+            // 
+            // nameBox
+            // 
+            nameBox.Location = new Point(82, 51);
+            nameBox.Name = "nameBox";
+            nameBox.Size = new Size(187, 27);
+            nameBox.TabIndex = 3;
+            // 
+            // idBox
+            // 
+            idBox.Location = new Point(82, 12);
+            idBox.Name = "idBox";
+            idBox.Size = new Size(187, 27);
+            idBox.TabIndex = 2;
             // 
             // labelName
             // 
             labelName.AutoSize = true;
-            labelName.Location = new Point(8, 62);
+            labelName.Location = new Point(34, 51);
             labelName.Name = "labelName";
             labelName.Size = new Size(33, 20);
             labelName.TabIndex = 1;
             labelName.Text = "ПІБ";
             // 
+            // labelId
+            // 
+            labelId.AutoSize = true;
+            labelId.Location = new Point(45, 12);
+            labelId.Name = "labelId";
+            labelId.Size = new Size(22, 20);
+            labelId.TabIndex = 0;
+            labelId.Text = "Id";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(830, 472);
+            ClientSize = new Size(658, 498);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            MinimumSize = new Size(675, 545);
             Name = "MainForm";
             Text = "MainForm";
             menuStrip1.ResumeLayout(false);
@@ -355,5 +469,16 @@
         private Panel panelSearch;
         private Label labelName;
         private Label labelId;
+        private TextBox nameBox;
+        private TextBox idBox;
+        private Label labelCategory;
+        private ComboBox categoryBox;
+        private TextBox sumBox;
+        private Label labelSum;
+        private Label labelDateBirth;
+        private DateTimePicker dateTimePickerLastOperation;
+        private DateTimePicker dateTimePickerBirth;
+        private Label labelDateLastOperation;
+        private Button buttonSearch;
     }
 }
