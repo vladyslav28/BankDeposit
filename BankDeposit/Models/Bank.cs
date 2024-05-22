@@ -33,7 +33,7 @@ namespace BankDeposit.Models
                     Name = name,
                     BirthDate = birthDate,
                     CurrentSum = GenerateRandomAmount(),
-                    LastOperationDate = DateTime.Now.AddDays(-random.Next(1, 365))
+                    LastOperationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0,0).AddDays(-random.Next(1, 700))
 
                 });
             }

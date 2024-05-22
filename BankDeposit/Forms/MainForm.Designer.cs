@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -73,8 +74,11 @@
             idBox = new TextBox();
             labelName = new Label();
             labelId = new Label();
+            resultList = new ListBox();
+            bankAccountBindingSource = new BindingSource(components);
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -319,23 +323,23 @@
             // 
             // dateTimePickerLastOperation
             // 
+            dateTimePickerLastOperation.Checked = false;
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(339, 130);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
-            dateTimePickerLastOperation.Checked = false;
             // 
             // dateTimePickerBirth
             // 
+            dateTimePickerBirth.Checked = false;
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(339, 51);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
-            dateTimePickerBirth.Checked = false;
             // 
             // labelDateLastOperation
             // 
@@ -420,11 +424,30 @@
             labelId.TabIndex = 0;
             labelId.Text = "Id";
             // 
+            // resultList
+            // 
+            resultList.DataSource = bankAccountBindingSource;
+            resultList.DisplayMember = "CustomDisplay";
+            resultList.FormattingEnabled = true;
+            resultList.Location = new Point(58, 287);
+            resultList.Name = "resultList";
+            resultList.Size = new Size(392, 184);
+            resultList.TabIndex = 2;
+            resultList.ValueMember = "Id";
+            // 
+            // bankAccountBindingSource
+            // 
+            bankAccountBindingSource.DataSource = typeof(Models.BankAccount);
+    
+            
+
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(658, 498);
+            Controls.Add(resultList);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -435,6 +458,7 @@
             menuStrip1.PerformLayout();
             panelSearch.ResumeLayout(false);
             panelSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -485,5 +509,7 @@
         private DateTimePicker dateTimePickerBirth;
         private Label labelDateLastOperation;
         private Button buttonSearch;
+        private ListBox resultList;
+        private BindingSource bankAccountBindingSource;
     }
 }

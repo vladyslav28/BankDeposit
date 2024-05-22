@@ -16,10 +16,10 @@ namespace BankDeposit.Forms
         Bank bank = new Bank();
         public MainForm()
         {
-            
+
             InitializeComponent();
             InitializeCategoryBox();
-         
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,9 +31,9 @@ namespace BankDeposit.Forms
         {
             categoryBox.Items.Add("Junior(12%)");
             categoryBox.Items.Add("Standart(15%)");
-            categoryBox.SelectedIndex = -1; 
+            categoryBox.SelectedIndex = -1;
         }
-     
+
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -57,14 +57,15 @@ namespace BankDeposit.Forms
             }
 
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
+            bankAccountBindingSource.DataSource = result;
 
             MessageBox.Show(result.Count.ToString());
 
-           
+
+
         }
 
-
-
+        
     }
 }
 
