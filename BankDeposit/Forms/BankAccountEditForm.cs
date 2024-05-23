@@ -19,6 +19,9 @@ namespace BankDeposit.Forms
             InitializeComponent();
             InitializeCategoryBox();
 
+            MessageBox.Show(dateTimePickerBirth.Value.ToString());
+            MessageBox.Show(dateTimePickerLastOperation.Value.ToString());
+
             this.bankAccount = bankAccount;
             idBox.Text = bankAccount.Id.ToString();
             nameBox.Text = bankAccount.Name;
@@ -46,13 +49,13 @@ namespace BankDeposit.Forms
         private void dateTimePickerBirthDate_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
-            MessageBox.Show(dateTimePickerBirth.Value.ToString());
+            
         }
 
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
-            MessageBox.Show(dateTimePickerLastOperation.Value.ToString());
+            
         }
     }
 }

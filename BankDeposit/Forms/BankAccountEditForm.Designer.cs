@@ -72,7 +72,7 @@
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.Size = new Size(184, 27);
             dateTimePickerLastOperation.TabIndex = 27;
-            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerLastOperation.Value = DateTime.Today;
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -82,7 +82,7 @@
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.Size = new Size(184, 27);
             dateTimePickerBirth.TabIndex = 26;
-            dateTimePickerBirth.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerBirth.Value = DateTime.Today;
             dateTimePickerBirth.ValueChanged += dateTimePickerBirthDate_ValueChanged;
             // 
             // buttonEdit

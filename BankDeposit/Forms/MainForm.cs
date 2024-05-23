@@ -20,6 +20,9 @@ namespace BankDeposit.Forms
             InitializeComponent();
             InitializeCategoryBox();
 
+            MessageBox.Show(dateTimePickerBirth.Value.ToString());
+            MessageBox.Show(dateTimePickerLastOperation.Value.ToString());
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,6 +60,8 @@ namespace BankDeposit.Forms
 
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
+
+            
         }
 
         private void Editbutton_Click(object sender, EventArgs e)
