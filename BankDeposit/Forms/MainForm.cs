@@ -37,9 +37,8 @@ namespace BankDeposit.Forms
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            string depositCategory = categoryBox.SelectedItem?.ToString();
-
-            DateTime? birthDate = dateTimePickerBirth.Checked ? dateTimePickerBirth.Value : null;
+            string depositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
+            DateTime? birthDate = dateTimePickerBirth.Checked ? dateTimePickerBirth.Value.Date : null;
             DateTime? lastOperationDate = dateTimePickerLastOperation.Checked ? dateTimePickerLastOperation.Value.Date : null;
 
             decimal? currentSum = null;
@@ -58,11 +57,6 @@ namespace BankDeposit.Forms
 
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
-
-
-            MessageBox.Show(dateTimePickerBirth.Value.ToString());
-            //MessageBox.Show(result.Value.ToString());
-
         }
 
         private void Editbutton_Click(object sender, EventArgs e)
@@ -70,9 +64,18 @@ namespace BankDeposit.Forms
             var dialog = new BankAccountEditForm(bank.Accounts[0]);
             dialog.Show();
         }
+
+        private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
+        }
+
+        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
+        }
     }
 }
 
 
-//         (string id, string name, string depositCategory , DateTime birthDate,
-//         decimal currentSum, DateTime lastOperationDate)
+

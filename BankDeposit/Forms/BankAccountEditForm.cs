@@ -13,7 +13,7 @@ namespace BankDeposit.Forms
 {
     public partial class BankAccountEditForm : Form
     {
-        readonly BankAccount bankAccount = new BankAccount();
+        BankAccount bankAccount = new BankAccount();
         public BankAccountEditForm(BankAccount bankAccount)
         {
             InitializeComponent();
@@ -25,22 +25,16 @@ namespace BankDeposit.Forms
             if (bankAccount.DepositCategory == "Junior(12%)")
             {
                 categoryBox.SelectedIndex = 0;
-                
+
             }
             else if (bankAccount.DepositCategory == "Standart(15%)")
             {
                 categoryBox.SelectedIndex = 1;
-               
+
             }
-
             sumBox.Text = bankAccount.CurrentSum.ToString();
-
-            dateTimePickerBirth.Value = bankAccount.BirthDate.Date;
-            dateTimePickerBirth.Update();
-
-            MessageBox.Show(bankAccount.BirthDate.ToString());
-            MessageBox.Show(dateTimePickerBirth.Value.ToString());
-
+            dateTimePickerBirth.Value = bankAccount.BirthDate;
+            dateTimePickerLastOperation.Value = bankAccount.LastOperationDate;
         }
 
         private void InitializeCategoryBox()
@@ -49,5 +43,16 @@ namespace BankDeposit.Forms
             categoryBox.Items.Add("Standart(15%)");
         }
 
+        private void dateTimePickerBirthDate_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
+            MessageBox.Show(dateTimePickerBirth.Value.ToString());
+        }
+
+        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
+            MessageBox.Show(dateTimePickerLastOperation.Value.ToString());
+        }
     }
 }

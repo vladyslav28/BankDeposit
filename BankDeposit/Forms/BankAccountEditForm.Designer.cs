@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             panelEdit = new Panel();
+            dateTimePickerLastOperation = new DateTimePicker();
+            dateTimePickerBirth = new DateTimePicker();
             buttonEdit = new Button();
             nameBox = new TextBox();
-            dateTimePickerLastOperation = new DateTimePicker();
             labelId = new Label();
-            dateTimePickerBirth = new DateTimePicker();
             labelName = new Label();
             labelDateLastOperation = new Label();
             idBox = new TextBox();
@@ -47,11 +47,11 @@
             // 
             // panelEdit
             // 
+            panelEdit.Controls.Add(dateTimePickerLastOperation);
+            panelEdit.Controls.Add(dateTimePickerBirth);
             panelEdit.Controls.Add(buttonEdit);
             panelEdit.Controls.Add(nameBox);
-            panelEdit.Controls.Add(dateTimePickerLastOperation);
             panelEdit.Controls.Add(labelId);
-            panelEdit.Controls.Add(dateTimePickerBirth);
             panelEdit.Controls.Add(labelName);
             panelEdit.Controls.Add(labelDateLastOperation);
             panelEdit.Controls.Add(idBox);
@@ -64,6 +64,26 @@
             panelEdit.Name = "panelEdit";
             panelEdit.Size = new Size(671, 272);
             panelEdit.TabIndex = 0;
+            // 
+            // dateTimePickerLastOperation
+            // 
+            dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
+            dateTimePickerLastOperation.Location = new Point(387, 129);
+            dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
+            dateTimePickerLastOperation.Size = new Size(184, 27);
+            dateTimePickerLastOperation.TabIndex = 27;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
+            // 
+            // dateTimePickerBirth
+            // 
+            dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
+            dateTimePickerBirth.Location = new Point(387, 46);
+            dateTimePickerBirth.Name = "dateTimePickerBirth";
+            dateTimePickerBirth.Size = new Size(184, 27);
+            dateTimePickerBirth.TabIndex = 26;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerBirth.ValueChanged += dateTimePickerBirthDate_ValueChanged;
             // 
             // buttonEdit
             // 
@@ -81,15 +101,6 @@
             nameBox.Size = new Size(187, 27);
             nameBox.TabIndex = 16;
             // 
-            // dateTimePickerLastOperation
-            // 
-            dateTimePickerLastOperation.Checked = false;
-            dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
-            dateTimePickerLastOperation.Location = new Point(387, 127);
-            dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
-            dateTimePickerLastOperation.Size = new Size(179, 27);
-            dateTimePickerLastOperation.TabIndex = 24;
-            // 
             // labelId
             // 
             labelId.AutoSize = true;
@@ -98,16 +109,6 @@
             labelId.Size = new Size(22, 20);
             labelId.TabIndex = 13;
             labelId.Text = "Id";
-            // 
-            // dateTimePickerBirth
-            // 
-            dateTimePickerBirth.Checked = false;
-            dateTimePickerBirth.CustomFormat = "";
-            dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
-            dateTimePickerBirth.Location = new Point(388, 48);
-            dateTimePickerBirth.Name = "dateTimePickerBirth";
-            dateTimePickerBirth.Size = new Size(179, 27);
-            dateTimePickerBirth.TabIndex = 23;
             // 
             // labelName
             // 
@@ -195,9 +196,7 @@
         private Panel panelEdit;
         private Button buttonEdit;
         private TextBox nameBox;
-        private DateTimePicker dateTimePickerLastOperation;
         private Label labelId;
-        private DateTimePicker dateTimePickerBirth;
         private Label labelName;
         private Label labelDateLastOperation;
         private TextBox idBox;
@@ -206,5 +205,7 @@
         private TextBox sumBox;
         private ComboBox categoryBox;
         private Label labelSum;
+        private DateTimePicker dateTimePickerBirth;
+        private DateTimePicker dateTimePickerLastOperation;
     }
 }

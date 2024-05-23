@@ -31,11 +31,10 @@ namespace BankDeposit.Models
                     Id = i + 1,
                     DepositCategory = depositCategory,
                     Name = name,
-                    BirthDate = birthDate,
+                    BirthDate = birthDate.Date,
                     CurrentSum = GenerateRandomAmount(),
-                    LastOperationDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0,0).AddDays(-random.Next(1, 700))).Date
-                    
-                });
+                    LastOperationDate = DateTime.Today.AddDays(-random.Next(1, 700)).Date
+            });
             }
         }
 
@@ -140,17 +139,14 @@ namespace BankDeposit.Models
                 if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
                     (string.IsNullOrEmpty(depositCategory) || account.DepositCategory.Contains(depositCategory)) &&
                     (string.IsNullOrEmpty(name) || account.Name.Contains(name)) &&
-                    (!birthDate.HasValue || account.BirthDate == birthDate.Value) &&
+                    (!birthDate.HasValue || account.BirthDate.Date == birthDate.Value.Date) &&
                     (!lastOperationDate.HasValue || account.LastOperationDate.Date == lastOperationDate.Value.Date) &&
                     (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString() )))
                 {
                     result.Add(account);
-
                 }
             }
-
             return result;
-            
         }
 
 

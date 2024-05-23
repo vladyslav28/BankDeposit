@@ -331,6 +331,8 @@
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
             // 
@@ -341,6 +343,8 @@
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 23, 0, 0, 0, 0);
+            dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // labelDateLastOperation
             // 
