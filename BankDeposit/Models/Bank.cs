@@ -33,8 +33,8 @@ namespace BankDeposit.Models
                     Name = name,
                     BirthDate = birthDate,
                     CurrentSum = GenerateRandomAmount(),
-                    LastOperationDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0,0).AddDays(-random.Next(1, 700))
-
+                    LastOperationDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0,0).AddDays(-random.Next(1, 700))).Date
+                    
                 });
             }
         }
@@ -118,11 +118,11 @@ namespace BankDeposit.Models
 
         private DateTime GenerateRandomBirthDate()
         {
-            int year = random.Next(DateTime.Now.Year - 80, DateTime.Now.Year - 14);
+            int year = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year - 14);
             int month = random.Next(1, 13);
             int day = random.Next(1, DateTime.DaysInMonth(year, month) + 1);
 
-            return new DateTime(year, month, day);
+            return new DateTime(year, month, day,0,0,0);
         }
 
         private decimal GenerateRandomAmount()
@@ -130,7 +130,7 @@ namespace BankDeposit.Models
             decimal generatedAmount = Math.Round((decimal)(random.Next(10000, 100000100) / 100.0), 2);
             return generatedAmount;
         }
-
+       
         public List<BankAccount> SearchAccounts(string id, string name, string depositCategory, DateTime? birthDate, DateTime? lastOperationDate, decimal? currentSum)
         {
             var result = new List<BankAccount>();
@@ -140,15 +140,17 @@ namespace BankDeposit.Models
                 if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
                     (string.IsNullOrEmpty(depositCategory) || account.DepositCategory.Contains(depositCategory)) &&
                     (string.IsNullOrEmpty(name) || account.Name.Contains(name)) &&
-                    (!birthDate.HasValue || account.BirthDate.Date == birthDate.Value.Date) &&
+                    (!birthDate.HasValue || account.BirthDate == birthDate.Value) &&
                     (!lastOperationDate.HasValue || account.LastOperationDate.Date == lastOperationDate.Value.Date) &&
                     (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString() )))
                 {
                     result.Add(account);
+
                 }
             }
 
             return result;
+            
         }
 
 

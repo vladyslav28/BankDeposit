@@ -76,6 +76,7 @@
             labelId = new Label();
             resultList = new ListBox();
             bankAccountBindingSource = new BindingSource(components);
+            Editbutton = new Button();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
@@ -438,15 +439,23 @@
             // bankAccountBindingSource
             // 
             bankAccountBindingSource.DataSource = typeof(Models.BankAccount);
-    
-            
-
+            // 
+            // Editbutton
+            // 
+            Editbutton.Location = new Point(500, 305);
+            Editbutton.Name = "Editbutton";
+            Editbutton.Size = new Size(116, 29);
+            Editbutton.TabIndex = 3;
+            Editbutton.Text = "Редагувати";
+            Editbutton.UseVisualStyleBackColor = true;
+            Editbutton.Click += Editbutton_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(658, 498);
+            Controls.Add(Editbutton);
             Controls.Add(resultList);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
@@ -511,5 +520,6 @@
         private Button buttonSearch;
         private ListBox resultList;
         private BindingSource bankAccountBindingSource;
+        private Button Editbutton;
     }
 }

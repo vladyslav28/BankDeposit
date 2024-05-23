@@ -9,7 +9,7 @@ namespace BankDeposit.Models
 {
     public class BankAccount
     {
-        public int Id { get; set; } //Value
+        public int Id { get; set; } 
         public string DepositCategory { get; set; } 
         public string Name { get; set; } 
         public DateTime BirthDate { get; set; } 
@@ -19,10 +19,11 @@ namespace BankDeposit.Models
         
         public string CustomDisplay
         {
-            get { return $"{Name}  {LastOperationDate.ToString("dd/MM/yyyy")}  {CurrentSum} ₴ "; }
+            get { return $"   {LastOperationDate} ///{BirthDate} "; }
         }
 
         public BankAccount() { }
     }
 }
-
+// зробити другий ліст в якому буде виводитись инфа про обраного клієнта. Після звязку
+// Зробити схожий вивід з поясннеям Name:""
