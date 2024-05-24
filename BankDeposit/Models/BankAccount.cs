@@ -19,7 +19,7 @@ namespace BankDeposit.Models
         
         public string CustomDisplay
         {
-            get { return $"   {LastOperationDate} ///{BirthDate} "; }
+            get { return $" {CurrentSum} {LastOperationDate.ToString("dd.MM.yyyy")} /// {BirthDate.ToString("dd.MM.yyyy")} "; }
         }
 
         public BankAccount() { }

@@ -20,8 +20,6 @@ namespace BankDeposit.Forms
             InitializeComponent();
             InitializeCategoryBox();
 
-            MessageBox.Show(dateTimePickerBirth.Value.ToString());
-            MessageBox.Show(dateTimePickerLastOperation.Value.ToString());
 
         }
 
@@ -62,12 +60,20 @@ namespace BankDeposit.Forms
             bankAccountBindingSource.DataSource = result;
 
             
+
         }
 
         private void Editbutton_Click(object sender, EventArgs e)
         {
-            var dialog = new BankAccountEditForm(bank.Accounts[0]);
-            dialog.Show();
+            if (resultList.SelectedItems.Count > 0)
+            {
+                BankAccount bankAccount = resultList.SelectedItem as BankAccount;
+                var bookEditForm = new BankAccountEditForm(bankAccount);
+                if (bookEditForm.ShowDialog() == DialogResult.OK)
+                {
+                    buttonSearch_Click(null, null);
+                }
+            }
         }
 
         private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)

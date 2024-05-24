@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelEdit = new Panel();
+            buttonCancel = new Button();
             dateTimePickerLastOperation = new DateTimePicker();
             dateTimePickerBirth = new DateTimePicker();
             buttonEdit = new Button();
@@ -47,6 +48,7 @@
             // 
             // panelEdit
             // 
+            panelEdit.Controls.Add(buttonCancel);
             panelEdit.Controls.Add(dateTimePickerLastOperation);
             panelEdit.Controls.Add(dateTimePickerBirth);
             panelEdit.Controls.Add(buttonEdit);
@@ -65,6 +67,16 @@
             panelEdit.Size = new Size(671, 272);
             panelEdit.TabIndex = 0;
             // 
+            // buttonCancel
+            // 
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            buttonCancel.Location = new Point(323, 229);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(95, 40);
+            buttonCancel.TabIndex = 28;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            // 
             // dateTimePickerLastOperation
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
@@ -72,7 +84,7 @@
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.Size = new Size(184, 27);
             dateTimePickerLastOperation.TabIndex = 27;
-            dateTimePickerLastOperation.Value = DateTime.Today;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -82,17 +94,19 @@
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.Size = new Size(184, 27);
             dateTimePickerBirth.TabIndex = 26;
-            dateTimePickerBirth.Value = DateTime.Today;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
             dateTimePickerBirth.ValueChanged += dateTimePickerBirthDate_ValueChanged;
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(281, 176);
+            buttonEdit.DialogResult = DialogResult.OK;
+            buttonEdit.Location = new Point(222, 229);
             buttonEdit.Name = "buttonEdit";
-            buttonEdit.Size = new Size(93, 28);
+            buttonEdit.Size = new Size(95, 40);
             buttonEdit.TabIndex = 25;
-            buttonEdit.Text = "OK";
+            buttonEdit.Text = "Ok";
             buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // nameBox
             // 
@@ -207,5 +221,6 @@
         private Label labelSum;
         private DateTimePicker dateTimePickerBirth;
         private DateTimePicker dateTimePickerLastOperation;
+        private Button buttonCancel;
     }
 }

@@ -38,9 +38,9 @@ namespace BankDeposit.Models
             }
         }
 
-        private string GetDepositCategory(DateTime birthDate)
+        public string GetDepositCategory(DateTime birthDate)
         {
-            DateTime today = DateTime.Now;
+            DateTime today = DateTime.Now.Date;
             int age = today.Year - birthDate.Year;
 
             if (today < birthDate.AddYears(age))
