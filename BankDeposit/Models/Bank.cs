@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BankDeposit.Models
@@ -9,17 +10,17 @@ namespace BankDeposit.Models
     public class Bank
     {
         private static Random random = new Random();
-        public List<BankAccount> Accounts { get; set; }
+        public List<BankAccount> BankAccounts { get; set; }
         public List<BankAccount> DeletedAccounts { get; private set; }
         public Bank() {
-            Accounts = new List<BankAccount>();
+            BankAccounts = new List<BankAccount>();
             DeletedAccounts = new List<BankAccount>();
-            FillTestData(100);
+            //FillTestData(100);
         }
 
         public void FillTestData(int n)
         {
-            Accounts.Clear();
+            BankAccounts.Clear();
             for (int i = 0; i < n; i++)
             {
 
@@ -27,7 +28,7 @@ namespace BankDeposit.Models
                 string name = GenerateRandomName();
                 string depositCategory = GetDepositCategory(birthDate);
 
-                Accounts.Add(new BankAccount
+                BankAccounts.Add(new BankAccount
                 {
                     Id = i + 1,
                     DepositCategory = depositCategory,
@@ -135,7 +136,7 @@ namespace BankDeposit.Models
         {
             var result = new List<BankAccount>();
 
-            foreach (var account in Accounts)
+            foreach (var account in BankAccounts)
             {
                 if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
                     (string.IsNullOrEmpty(depositCategory) || account.DepositCategory.Contains(depositCategory)) &&
@@ -153,7 +154,7 @@ namespace BankDeposit.Models
         public bool DeleteAccount(int accountId)
         {
             BankAccount account = null;
-            foreach (var a in Accounts)
+            foreach (var a in BankAccounts)
             {
                 if (a.Id == accountId)
                 {
@@ -164,14 +165,24 @@ namespace BankDeposit.Models
 
             if (account != null)
             {
-                Accounts.Remove(account);
+                BankAccounts.Remove(account);
                 return true;
             }
             return false;
         }
 
 
+        public void SaveData(string path)
+        {
+            var jsonString = JsonSerializer.Serialize(this);
+            File.WriteAllText(path, jsonString);
+        }
 
+        public static Bank LoadData(string path)
+        {
+            var jsonString = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<Bank>(jsonString);
+        }
 
 
 

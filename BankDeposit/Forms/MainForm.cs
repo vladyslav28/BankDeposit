@@ -14,10 +14,26 @@ namespace BankDeposit.Forms
     public partial class MainForm : Form
     {
         Bank bank = new Bank();
+        
+       
         public MainForm()
         {
             InitializeComponent();
             InitializeCategoryBox();
+            bank = Bank.LoadData(PATH_TO_DATA);
+
+            bankAccountBindingSource.DataSource = bank.BankAccounts;
+            UpdateLabelCount();
+           
+        }
+
+       
+
+
+
+        private void UpdateLabelCount()
+        {
+            labelCount.Text = $"Кількість елементів: {resultList.Items.Count}";
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -42,7 +58,7 @@ namespace BankDeposit.Forms
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
 
-
+            UpdateLabelCount();
 
         }
 
@@ -99,6 +115,7 @@ namespace BankDeposit.Forms
         {
             categoryBox.Items.Add("Junior(12%)");
             categoryBox.Items.Add("Standart(15%)");
+
             categoryBox.SelectedIndex = -1;
         }
 
@@ -112,10 +129,29 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
+        const string PATH_TO_DATA = ".\\bank.txt";
 
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bank = Bank.LoadData(PATH_TO_DATA);
+        }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bank.SaveData(PATH_TO_DATA);
+        }
 
-
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            categoryBox.SelectedIndex = -1;
+            dateTimePickerBirth.Value = DateTime.Today.Date;
+            dateTimePickerLastOperation.Value = DateTime.Today.Date;
+            dateTimePickerBirth.Checked = false;
+            dateTimePickerLastOperation.Checked = false;
+            idBox.Text = "";
+            sumBox.Text = "";
+            nameBox.Text = "";
+        }
     }
 
 }

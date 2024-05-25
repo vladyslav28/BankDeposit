@@ -64,6 +64,7 @@ namespace BankDeposit.Forms
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
+            buttonReset = new Button();
             buttonSearch = new Button();
             dateTimePickerLastOperation = new DateTimePicker();
             dateTimePickerBirth = new DateTimePicker();
@@ -84,6 +85,7 @@ namespace BankDeposit.Forms
             panelShow = new Panel();
             buttonAdd = new Button();
             buttonDelete = new Button();
+            labelCount = new Label();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
@@ -124,6 +126,7 @@ namespace BankDeposit.Forms
             openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
             openToolStripMenuItem.Size = new Size(181, 26);
             openToolStripMenuItem.Text = "&Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // toolStripSeparator
             // 
@@ -138,6 +141,7 @@ namespace BankDeposit.Forms
             saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
             saveToolStripMenuItem.Size = new Size(181, 26);
             saveToolStripMenuItem.Text = "&Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
@@ -302,6 +306,7 @@ namespace BankDeposit.Forms
             // 
             panelSearch.Anchor = AnchorStyles.Top;
             panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(buttonReset);
             panelSearch.Controls.Add(buttonSearch);
             panelSearch.Controls.Add(dateTimePickerLastOperation);
             panelSearch.Controls.Add(dateTimePickerBirth);
@@ -320,9 +325,21 @@ namespace BankDeposit.Forms
             panelSearch.Size = new Size(534, 212);
             panelSearch.TabIndex = 1;
             // 
+            // buttonReset
+            // 
+            buttonReset.BackColor = SystemColors.ControlLight;
+            buttonReset.ForeColor = Color.CornflowerBlue;
+            buttonReset.Location = new Point(3, 178);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(281, 29);
+            buttonReset.TabIndex = 13;
+            buttonReset.Text = "Скинути пошукові налаштування";
+            buttonReset.UseVisualStyleBackColor = false;
+            buttonReset.Click += buttonReset_Click;
+            // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(233, 179);
+            buttonSearch.Location = new Point(350, 182);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(93, 28);
             buttonSearch.TabIndex = 12;
@@ -339,7 +356,7 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
-            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 25, 0, 0, 0, 0);
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -351,7 +368,7 @@ namespace BankDeposit.Forms
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
-            dateTimePickerBirth.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 25, 0, 0, 0, 0);
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // labelDateLastOperation
@@ -454,7 +471,7 @@ namespace BankDeposit.Forms
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(418, 3);
+            buttonEdit.Location = new Point(418, 33);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(116, 29);
             buttonEdit.TabIndex = 3;
@@ -485,7 +502,7 @@ namespace BankDeposit.Forms
             // 
             // buttonAdd
             // 
-            buttonAdd.Location = new Point(418, 38);
+            buttonAdd.Location = new Point(418, 68);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(116, 30);
             buttonAdd.TabIndex = 6;
@@ -495,7 +512,7 @@ namespace BankDeposit.Forms
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(418, 74);
+            buttonDelete.Location = new Point(418, 104);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(116, 33);
             buttonDelete.TabIndex = 5;
@@ -503,11 +520,20 @@ namespace BankDeposit.Forms
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
+            // labelCount
+            // 
+            labelCount.AutoSize = true;
+            labelCount.Location = new Point(77, 254);
+            labelCount.Name = "labelCount";
+            labelCount.Size = new Size(0, 20);
+            labelCount.TabIndex = 5;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(658, 498);
+            Controls.Add(labelCount);
             Controls.Add(panelShow);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
@@ -579,5 +605,7 @@ namespace BankDeposit.Forms
         private Panel panelShow;
         private Button buttonDelete;
         private Button buttonAdd;
+        private Label labelCount;
+        private Button buttonReset;
     }
 }
