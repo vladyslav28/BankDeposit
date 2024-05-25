@@ -14,12 +14,12 @@ namespace BankDeposit.Forms
     public partial class BankAccountEditForm : Form
     {
         BankAccount bankAccount = new BankAccount();
+        Bank bank = new Bank(); 
+
         public BankAccountEditForm(BankAccount bankAccount)
         {
             InitializeComponent();
             InitializeCategoryBox();
-
-
 
             this.bankAccount = bankAccount;
             idBox.Text = bankAccount.Id.ToString();
@@ -27,34 +27,14 @@ namespace BankDeposit.Forms
             if (bankAccount.DepositCategory == "Junior(12%)")
             {
                 categoryBox.SelectedIndex = 0;
-
             }
             else if (bankAccount.DepositCategory == "Standart(15%)")
             {
                 categoryBox.SelectedIndex = 1;
-
             }
             sumBox.Text = bankAccount.CurrentSum.ToString();
             dateTimePickerBirth.Value = bankAccount.BirthDate;
             dateTimePickerLastOperation.Value = bankAccount.LastOperationDate;
-
-
-        }
-
-        private void InitializeCategoryBox()
-        {
-            categoryBox.Items.Add("Junior(12%)");
-            categoryBox.Items.Add("Standart(15%)");
-        }
-
-        private void dateTimePickerBirthDate_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
-        }
-
-        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -62,8 +42,8 @@ namespace BankDeposit.Forms
             bankAccount.Name = nameBox.Text;
             bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
             bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-            string depositCategory = GetDepositCategory(dateTimePickerBirth.Value.Date);
-           
+            string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date); 
+
             if (depositCategory == "Junior(12%)")
             {
                 categoryBox.SelectedIndex = 0;
@@ -84,31 +64,42 @@ namespace BankDeposit.Forms
                 }
                 else
                 {
-                    //Зробити видачу помилки (красні мітки)
                     return;
                 }
             }
             bankAccount.CurrentSum = currentSum ?? 0;
-
-            //
-            
-
-
         }
 
-        private string GetDepositCategory(DateTime birthDate)
+        private void InitializeCategoryBox()
         {
-            DateTime today = DateTime.Now.Date;
-            int age = today.Year - birthDate.Year;
-
-            if (today < birthDate.AddYears(age))
-            {
-                age--;
-            }
-
-            return age >= 18 ? "Standart(15%)" : "Junior(12%)";
+            categoryBox.Items.Add("Junior(12%)");
+            categoryBox.Items.Add("Standart(15%)");
         }
+
+        private void dateTimePickerBirthDate_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
+        }
+
+        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
+        }
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 }
 
 

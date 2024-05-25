@@ -17,6 +17,11 @@ namespace BankDeposit.Models
         public DateTime LastOperationDate { get; set; } 
        
         
+        
+        public BankAccount() { }
+
+
+
         public string CustomDisplay
         {
             get { return $" {Name} "; }
@@ -32,14 +37,10 @@ namespace BankDeposit.Models
                     $"Дата народження:{BirthDate.ToString("dd.MM.yyyy")}" + Environment.NewLine +
                     $"Категорія депозиту:{DepositCategory} " + Environment.NewLine +
                     $"Поточна сума:{CurrentSum} " + Environment.NewLine +
-                    $"Дата останьої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine 
+                    $"Дата останьої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine
                     ;
             }
 
-
         }
-        public BankAccount() { }
     }
 }
-// зробити другий ліст в якому буде виводитись инфа про обраного клієнта. Після звязку
-// Зробити схожий вивід з поясннеям Name:""

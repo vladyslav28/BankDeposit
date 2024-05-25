@@ -79,16 +79,15 @@ namespace BankDeposit.Forms
             labelId = new Label();
             resultList = new ListBox();
             bankAccountBindingSource = new BindingSource(components);
-            Editbutton = new Button();
+            buttonEdit = new Button();
             showBox = new TextBox();
             panelShow = new Panel();
-            bankAccountBindingSource1 = new BindingSource(components);
+            buttonAdd = new Button();
             buttonDelete = new Button();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
             panelShow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -443,7 +442,7 @@ namespace BankDeposit.Forms
             resultList.DataSource = bankAccountBindingSource;
             resultList.DisplayMember = "CustomDisplay";
             resultList.FormattingEnabled = true;
-            resultList.Location = new Point(4, 1);
+            resultList.Location = new Point(0, 3);
             resultList.Name = "resultList";
             resultList.Size = new Size(135, 184);
             resultList.TabIndex = 2;
@@ -453,45 +452,52 @@ namespace BankDeposit.Forms
             // 
             bankAccountBindingSource.DataSource = typeof(Models.BankAccount);
             // 
-            // Editbutton
+            // buttonEdit
             // 
-            Editbutton.Location = new Point(418, 46);
-            Editbutton.Name = "Editbutton";
-            Editbutton.Size = new Size(116, 29);
-            Editbutton.TabIndex = 3;
-            Editbutton.Text = "Редагувати";
-            Editbutton.UseVisualStyleBackColor = true;
-            Editbutton.Click += Editbutton_Click;
+            buttonEdit.Location = new Point(418, 3);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Size = new Size(116, 29);
+            buttonEdit.TabIndex = 3;
+            buttonEdit.Text = "Редагувати";
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // showBox
             // 
             showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay1", true));
-            showBox.Location = new Point(167, 0);
+            showBox.Location = new Point(152, 3);
             showBox.Multiline = true;
             showBox.Name = "showBox";
-            showBox.Size = new Size(245, 185);
+            showBox.Size = new Size(245, 184);
             showBox.TabIndex = 4;
             // 
             // panelShow
             // 
+            panelShow.Controls.Add(buttonAdd);
             panelShow.Controls.Add(buttonDelete);
             panelShow.Controls.Add(showBox);
-            panelShow.Controls.Add(Editbutton);
+            panelShow.Controls.Add(buttonEdit);
             panelShow.Controls.Add(resultList);
-            panelShow.Location = new Point(58, 301);
+            panelShow.Location = new Point(58, 298);
             panelShow.Name = "panelShow";
-            panelShow.Size = new Size(534, 185);
+            panelShow.Size = new Size(534, 188);
             panelShow.TabIndex = 4;
             // 
-            // bankAccountBindingSource1
+            // buttonAdd
             // 
-            bankAccountBindingSource1.DataSource = typeof(Models.BankAccount);
+            buttonAdd.Location = new Point(418, 38);
+            buttonAdd.Name = "buttonAdd";
+            buttonAdd.Size = new Size(116, 30);
+            buttonAdd.TabIndex = 6;
+            buttonAdd.Text = "Додати";
+            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(415, 100);
+            buttonDelete.Location = new Point(418, 74);
             buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(108, 33);
+            buttonDelete.Size = new Size(116, 33);
             buttonDelete.TabIndex = 5;
             buttonDelete.Text = "Видалити";
             buttonDelete.UseVisualStyleBackColor = true;
@@ -516,7 +522,6 @@ namespace BankDeposit.Forms
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).EndInit();
             panelShow.ResumeLayout(false);
             panelShow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -569,10 +574,10 @@ namespace BankDeposit.Forms
         private Button buttonSearch;
         private ListBox resultList;
         private BindingSource bankAccountBindingSource;
-        private Button Editbutton;
+        private Button buttonEdit;
         private TextBox showBox;
         private Panel panelShow;
-        private BindingSource bankAccountBindingSource1;
         private Button buttonDelete;
+        private Button buttonAdd;
     }
 }

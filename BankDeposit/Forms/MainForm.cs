@@ -16,25 +16,9 @@ namespace BankDeposit.Forms
         Bank bank = new Bank();
         public MainForm()
         {
-
             InitializeComponent();
             InitializeCategoryBox();
-
-
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void InitializeCategoryBox()
-        {
-            categoryBox.Items.Add("Junior(12%)");
-            categoryBox.Items.Add("Standart(15%)");
-            categoryBox.SelectedIndex = -1;
-        }
-
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -51,7 +35,6 @@ namespace BankDeposit.Forms
                 }
                 else
                 {
-                    //Зробити видачу помилки (красні мітки)
                     return;
                 }
             }
@@ -63,7 +46,7 @@ namespace BankDeposit.Forms
 
         }
 
-        private void Editbutton_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItems.Count > 0)
             {
@@ -75,7 +58,50 @@ namespace BankDeposit.Forms
                 }
             }
         }
-        
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (resultList.SelectedItem is BankAccount bankAccount)
+            {
+                bool isDeleted = bank.DeleteAccount(bankAccount.Id);
+                if (isDeleted)
+                {
+                    MessageBox.Show("Account deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    buttonSearch_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete account. Account not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No account selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void InitializeCategoryBox()
+        {
+            categoryBox.Items.Add("Junior(12%)");
+            categoryBox.Items.Add("Standart(15%)");
+            categoryBox.SelectedIndex = -1;
+        }
+
         private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
@@ -86,27 +112,12 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            if (resultList.SelectedItems.Count > 0)
-            {
-                BankAccount bankAccount = resultList.SelectedItem as BankAccount;
-                bankAccount.Name = null;
-                bankAccount.DepositCategory = null;
-                bankAccount.BirthDate = DateTime.Today;
-                bankAccount.LastOperationDate = DateTime.Today;
-                bankAccount.CurrentSum = 0;
-                buttonSearch_Click(null, null);
-            }
 
-
-
-
-        }
 
 
 
     }
+
 }
 
 

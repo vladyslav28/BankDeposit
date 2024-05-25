@@ -9,10 +9,11 @@ namespace BankDeposit.Models
     public class Bank
     {
         private static Random random = new Random();
-        public List<BankAccount> Accounts { get; set; } 
+        public List<BankAccount> Accounts { get; set; }
+        public List<BankAccount> DeletedAccounts { get; private set; }
         public Bank() {
             Accounts = new List<BankAccount>();
-          
+            DeletedAccounts = new List<BankAccount>();
             FillTestData(100);
         }
 
@@ -149,9 +150,25 @@ namespace BankDeposit.Models
             return result;
         }
 
+        public bool DeleteAccount(int accountId)
+        {
+            BankAccount account = null;
+            foreach (var a in Accounts)
+            {
+                if (a.Id == accountId)
+                {
+                    account = a;
+                    break;
+                }
+            }
 
-
-
+            if (account != null)
+            {
+                Accounts.Remove(account);
+                return true;
+            }
+            return false;
+        }
 
 
 
