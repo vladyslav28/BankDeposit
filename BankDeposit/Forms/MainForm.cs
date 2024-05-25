@@ -59,7 +59,7 @@ namespace BankDeposit.Forms
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
 
-            
+
 
         }
 
@@ -75,7 +75,7 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
+        
         private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
@@ -85,6 +85,27 @@ namespace BankDeposit.Forms
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (resultList.SelectedItems.Count > 0)
+            {
+                BankAccount bankAccount = resultList.SelectedItem as BankAccount;
+                bankAccount.Name = null;
+                bankAccount.DepositCategory = null;
+                bankAccount.BirthDate = DateTime.Today;
+                bankAccount.LastOperationDate = DateTime.Today;
+                bankAccount.CurrentSum = 0;
+                buttonSearch_Click(null, null);
+            }
+
+
+
+
+        }
+
+
+
     }
 }
 

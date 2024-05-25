@@ -15,13 +15,29 @@ namespace BankDeposit.Models
         public DateTime BirthDate { get; set; } 
         public decimal CurrentSum { get; set; } 
         public DateTime LastOperationDate { get; set; } 
-
+       
         
         public string CustomDisplay
         {
-            get { return $" {CurrentSum} {LastOperationDate.ToString("dd.MM.yyyy")} /// {BirthDate.ToString("dd.MM.yyyy")} "; }
+            get { return $" {Name} "; }
         }
 
+        public string CustomDisplay1
+        {
+            get
+            {
+                return
+                    $"ID:{Id} " + Environment.NewLine +
+                    $"ПІБ:{Name} " + Environment.NewLine +
+                    $"Дата народження:{BirthDate.ToString("dd.MM.yyyy")}" + Environment.NewLine +
+                    $"Категорія депозиту:{DepositCategory} " + Environment.NewLine +
+                    $"Поточна сума:{CurrentSum} " + Environment.NewLine +
+                    $"Дата останьої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine 
+                    ;
+            }
+
+
+        }
         public BankAccount() { }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace BankDeposit.Forms
+﻿using System.Data;
+using System.Windows.Forms;
+
+namespace BankDeposit.Forms
 {
     partial class MainForm
     {
@@ -77,9 +80,15 @@
             resultList = new ListBox();
             bankAccountBindingSource = new BindingSource(components);
             Editbutton = new Button();
+            showBox = new TextBox();
+            panelShow = new Panel();
+            bankAccountBindingSource1 = new BindingSource(components);
+            buttonDelete = new Button();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
+            panelShow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -331,7 +340,7 @@
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
-            dateTimePickerLastOperation.Value = DateTime.Today;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -343,7 +352,7 @@
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
-            dateTimePickerBirth.Value = DateTime.Today;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 24, 0, 0, 0, 0);
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // labelDateLastOperation
@@ -434,9 +443,9 @@
             resultList.DataSource = bankAccountBindingSource;
             resultList.DisplayMember = "CustomDisplay";
             resultList.FormattingEnabled = true;
-            resultList.Location = new Point(58, 287);
+            resultList.Location = new Point(4, 1);
             resultList.Name = "resultList";
-            resultList.Size = new Size(392, 184);
+            resultList.Size = new Size(135, 184);
             resultList.TabIndex = 2;
             resultList.ValueMember = "Id";
             // 
@@ -446,7 +455,7 @@
             // 
             // Editbutton
             // 
-            Editbutton.Location = new Point(500, 305);
+            Editbutton.Location = new Point(418, 46);
             Editbutton.Name = "Editbutton";
             Editbutton.Size = new Size(116, 29);
             Editbutton.TabIndex = 3;
@@ -454,13 +463,46 @@
             Editbutton.UseVisualStyleBackColor = true;
             Editbutton.Click += Editbutton_Click;
             // 
+            // showBox
+            // 
+            showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay1", true));
+            showBox.Location = new Point(167, 0);
+            showBox.Multiline = true;
+            showBox.Name = "showBox";
+            showBox.Size = new Size(245, 185);
+            showBox.TabIndex = 4;
+            // 
+            // panelShow
+            // 
+            panelShow.Controls.Add(buttonDelete);
+            panelShow.Controls.Add(showBox);
+            panelShow.Controls.Add(Editbutton);
+            panelShow.Controls.Add(resultList);
+            panelShow.Location = new Point(58, 301);
+            panelShow.Name = "panelShow";
+            panelShow.Size = new Size(534, 185);
+            panelShow.TabIndex = 4;
+            // 
+            // bankAccountBindingSource1
+            // 
+            bankAccountBindingSource1.DataSource = typeof(Models.BankAccount);
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.Location = new Point(415, 100);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(108, 33);
+            buttonDelete.TabIndex = 5;
+            buttonDelete.Text = "Видалити";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(658, 498);
-            Controls.Add(Editbutton);
-            Controls.Add(resultList);
+            Controls.Add(panelShow);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -472,6 +514,9 @@
             panelSearch.ResumeLayout(false);
             panelSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).EndInit();
+            panelShow.ResumeLayout(false);
+            panelShow.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -525,5 +570,9 @@
         private ListBox resultList;
         private BindingSource bankAccountBindingSource;
         private Button Editbutton;
+        private TextBox showBox;
+        private Panel panelShow;
+        private BindingSource bankAccountBindingSource1;
+        private Button buttonDelete;
     }
 }
