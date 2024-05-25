@@ -82,24 +82,32 @@ namespace BankDeposit.Forms
                 bool isDeleted = bank.DeleteAccount(bankAccount.Id);
                 if (isDeleted)
                 {
-                    MessageBox.Show("Account deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Акаунт видалено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     buttonSearch_Click(null, null);
                 }
-                else
-                {
-                    MessageBox.Show("Failed to delete account. Account not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+               
             }
             else
             {
-                MessageBox.Show("No account selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Акаунт не обрано", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-
+            int newId = bank.BankAccounts.Any() ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;     
+            var addForm = new BankAccountAddForm(newId, bank); 
+            if (addForm.ShowDialog() == DialogResult.OK)
+            {         
+                BankAccount newAccount = addForm.BankAccount;
+                bank.AddAccount(newAccount);
+                buttonSearch_Click(null, null);
+            }
         }
+
+
+
 
 
 
@@ -115,7 +123,6 @@ namespace BankDeposit.Forms
         {
             categoryBox.Items.Add("Junior(12%)");
             categoryBox.Items.Add("Standart(15%)");
-
             categoryBox.SelectedIndex = -1;
         }
 

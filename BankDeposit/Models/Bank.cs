@@ -185,6 +185,13 @@ namespace BankDeposit.Models
         }
 
 
+        public void AddAccount(BankAccount newAccount)
+        {
+            if (BankAccounts.Any(a => a.Id == newAccount.Id))
+                throw new ArgumentException($"Акаунт з ID {newAccount.Id} вже існує", nameof(newAccount));
+
+            BankAccounts.Add(newAccount);
+        }
 
 
 

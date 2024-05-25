@@ -37,12 +37,38 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = bankAccount.LastOperationDate;
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonEditOk_Click(object sender, EventArgs e)
         {
             bankAccount.Name = nameBox.Text;
             bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
             bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-            string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date); 
+            bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
+
+            //decimal? currentSum = null;
+            //if (!string.IsNullOrEmpty(sumBox.Text))
+            //{
+            //    if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+            //    {
+            //        currentSum = parsedSum;
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
+            //}
+            bankAccount.CurrentSum = decimal.Parse(sumBox.Text); // Exeption
+        }
+
+        private void InitializeCategoryBox()
+        {
+            categoryBox.Items.Add("Junior(12%)");
+            categoryBox.Items.Add("Standart(15%)");
+        }
+
+        private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
+            string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
 
             if (depositCategory == "Junior(12%)")
             {
@@ -53,32 +79,6 @@ namespace BankDeposit.Forms
                 categoryBox.SelectedIndex = 1;
             }
 
-            bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
-
-            decimal? currentSum = null;
-            if (!string.IsNullOrEmpty(sumBox.Text))
-            {
-                if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
-                {
-                    currentSum = parsedSum;
-                }
-                else
-                {
-                    return;
-                }
-            }
-            bankAccount.CurrentSum = currentSum ?? 0;
-        }
-
-        private void InitializeCategoryBox()
-        {
-            categoryBox.Items.Add("Junior(12%)");
-            categoryBox.Items.Add("Standart(15%)");
-        }
-
-        private void dateTimePickerBirthDate_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
         }
 
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
