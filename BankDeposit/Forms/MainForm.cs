@@ -23,17 +23,81 @@ namespace BankDeposit.Forms
 
             bankAccountBindingSource.DataSource = bank.BankAccounts;
             UpdateLabelCount();
+            dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerBirth.Value = DateTime.Now.Date;
+            InitializeErrorLabels();
 
-            
         }
 
         private void UpdateLabelCount()
         {
             labelCount.Text = $"Кількість елементів: {resultList.Items.Count}";
         }
+        private void InitializeErrorLabels()
+        {
+            errorIdLabel.Visible = false;
+            errorNameLabel.Visible = false;
+            errorSumLabel.Visible = false;
+        }
+
+        private bool ValidateInput()
+        {
+            bool isValid = true;
+
+
+            if (!string.IsNullOrEmpty(idBox.Text) && !int.TryParse(idBox.Text, out _))
+            {
+
+                errorIdLabel.Visible = true;
+                isValid = false;
+            }
+            else
+            {
+                errorIdLabel.Visible = false;
+            }
+
+
+            if (!string.IsNullOrEmpty(nameBox.Text) && nameBox.Text.Any(char.IsDigit))
+            {
+
+                errorNameLabel.Visible = true;
+                isValid = false;
+            }
+            else
+            {
+                errorNameLabel.Visible = false;
+            }
+
+            if (!string.IsNullOrEmpty(sumBox.Text))
+            {
+                if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ','))
+                {
+
+                    errorSumLabel.Visible = true;
+                    isValid = false;
+                }
+                else
+                {
+                    errorSumLabel.Visible = false;
+                }
+            }
+            else
+            {
+                errorSumLabel.Visible = false;
+            }
+
+            return isValid;
+        }
+
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput())
+            {
+                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string depositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
             DateTime? birthDate = dateTimePickerBirth.Checked ? dateTimePickerBirth.Value.Date : null;
             DateTime? lastOperationDate = dateTimePickerLastOperation.Checked ? dateTimePickerLastOperation.Value.Date : null;
@@ -45,17 +109,13 @@ namespace BankDeposit.Forms
                 {
                     currentSum = parsedSum;
                 }
-                else
-                {
-                    MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
             }
 
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
             UpdateLabelCount();
         }
+
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
@@ -82,7 +142,7 @@ namespace BankDeposit.Forms
                                      selectedAccount.BirthDate != originalAccount.BirthDate ||
                                      selectedAccount.LastOperationDate != originalAccount.LastOperationDate ||
                                      selectedAccount.DepositCategory != originalAccount.DepositCategory ||
-                                     selectedAccount.CurrentSum != originalAccount.CurrentSum ;
+                                     selectedAccount.CurrentSum != originalAccount.CurrentSum;
 
                     if (isChanged)
                     {
@@ -124,6 +184,12 @@ namespace BankDeposit.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput())
+            {
+                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int newId = bank.BankAccounts.Any() ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;
             var addForm = new BankAccountAddForm(newId, bank);
             if (addForm.ShowDialog() == DialogResult.OK)
@@ -132,9 +198,9 @@ namespace BankDeposit.Forms
                 bank.AddAccount(newAccount);
                 buttonSearch_Click(null, null);
                 MessageBox.Show("Акаунт додано", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
         }
+
 
         private void buttonMoney_Click(object sender, EventArgs e)
         {
@@ -204,11 +270,24 @@ namespace BankDeposit.Forms
             idBox.Text = "";
             sumBox.Text = "";
             nameBox.Text = "";
+            InitializeErrorLabels();
+
         }
 
-        
+        private void idBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInput();
+        }
 
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInput();
+        }
 
+        private void sumBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInput();
+        }
     }
 
 }
