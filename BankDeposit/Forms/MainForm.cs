@@ -66,33 +66,69 @@ namespace BankDeposit.Forms
         {
             if (resultList.SelectedItems.Count > 0)
             {
-                BankAccount bankAccount = resultList.SelectedItem as BankAccount;
-                var bookEditForm = new BankAccountEditForm(bankAccount);
-                if (bookEditForm.ShowDialog() == DialogResult.OK)
+                BankAccount selectedAccount = resultList.SelectedItem as BankAccount;
+
+                var originalAccount = new BankAccount
                 {
-                    buttonSearch_Click(null, null);
+                    Id = selectedAccount.Id,
+                    Name = selectedAccount.Name,
+                    BirthDate = selectedAccount.BirthDate,
+                    LastOperationDate = selectedAccount.LastOperationDate,
+                    DepositCategory = selectedAccount.DepositCategory,
+                    CurrentSum = selectedAccount.CurrentSum
+                };
+
+                var bookEditForm  = new BankAccountEditForm(selectedAccount);
+                if (bookEditForm .ShowDialog() == DialogResult.OK)
+                {
+
+                    bool isChanged = selectedAccount.Name != originalAccount.Name ||
+                                     selectedAccount.Id != originalAccount.Id ||
+                                     selectedAccount.BirthDate != originalAccount.BirthDate ||
+                                     selectedAccount.LastOperationDate != originalAccount.LastOperationDate ||
+                                     selectedAccount.DepositCategory != originalAccount.DepositCategory ||
+                                     selectedAccount.CurrentSum != originalAccount.CurrentSum;
+
+                    if (isChanged)
+                    {
+                        MessageBox.Show("Інформацію змінено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        buttonSearch_Click(null, null);
+                    }
                 }
             }
         }
+
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
             {
-                bool isDeleted = bank.DeleteAccount(bankAccount.Id);
-                if (isDeleted)
-                {
-                    MessageBox.Show("Акаунт видалено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    buttonSearch_Click(null, null);
-                }
+                string message = $"Ви впевнені, що хочете видалити цей акаунт ?" + Environment.NewLine + Environment.NewLine +
+                          $"ID: {bankAccount.Id} " + Environment.NewLine +
+                          $"ПІБ: {bankAccount.Name} " + Environment.NewLine +
+                          $"Дата народження: {bankAccount.BirthDate.ToString("dd.MM.yyyy")}" + Environment.NewLine +
+                          $"Категорія депозиту: {bankAccount.DepositCategory} " + Environment.NewLine +
+                          $"Поточна сума: {bankAccount.CurrentSum} " + Environment.NewLine +
+                          $"Дата останьої операції: {bankAccount.LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine;
 
-               
+                DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    bool isDeleted = bank.DeleteAccount(bankAccount.Id);
+                    if (isDeleted)
+                    {
+                        buttonSearch_Click(null, null);
+                        MessageBox.Show("Акаунт видалено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Акаунт не обрано", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {

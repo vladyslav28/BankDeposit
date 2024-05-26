@@ -60,7 +60,7 @@ namespace BankDeposit.Forms
             BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
             BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
             BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
-            BankAccount.CurrentSum = decimal.Parse(sumBox.Text);
+            BankAccount.CurrentSum = decimal.Parse(sumBox.Text); //
 
            
         }

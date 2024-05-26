@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelAdd = new Panel();
+            buttonCancel = new Button();
             dateTimePickerLastOperation = new DateTimePicker();
             dateTimePickerBirth = new DateTimePicker();
             nameBox = new TextBox();
@@ -47,6 +48,7 @@
             // 
             // panelAdd
             // 
+            panelAdd.Controls.Add(buttonCancel);
             panelAdd.Controls.Add(dateTimePickerLastOperation);
             panelAdd.Controls.Add(dateTimePickerBirth);
             panelAdd.Controls.Add(nameBox);
@@ -64,6 +66,16 @@
             panelAdd.Name = "panelAdd";
             panelAdd.Size = new Size(623, 256);
             panelAdd.TabIndex = 0;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            buttonCancel.Location = new Point(338, 216);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(76, 27);
+            buttonCancel.TabIndex = 40;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
             // 
             // dateTimePickerLastOperation
             // 
@@ -209,5 +221,6 @@
         private Label labelSum;
         private DateTimePicker dateTimePickerBirth;
         private DateTimePicker dateTimePickerLastOperation;
+        private Button buttonCancel;
     }
 }
