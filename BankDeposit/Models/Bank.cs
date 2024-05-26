@@ -119,7 +119,7 @@ namespace BankDeposit.Models
 
         private DateTime GenerateRandomBirthDate()
         {
-            int year = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year - 14);
+            int year = random.Next(DateTime.Now.Year - 90, DateTime.Now.Year - 14);
             int month = random.Next(1, 13);
             int day = random.Next(1, DateTime.DaysInMonth(year, month) + 1);
 
@@ -187,8 +187,11 @@ namespace BankDeposit.Models
 
         public void AddAccount(BankAccount newAccount)
         {
-            if (BankAccounts.Any(a => a.Id == newAccount.Id))
-                throw new ArgumentException($"Акаунт з ID {newAccount.Id} вже існує", nameof(newAccount));
+            if (BankAccounts.Any(a => a.Id == newAccount.Id)) 
+            { 
+            //
+            }
+               
 
             BankAccounts.Add(newAccount);
         }

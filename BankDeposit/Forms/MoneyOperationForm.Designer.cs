@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panelMoney = new Panel();
+            applyInterest = new Button();
+            buttonDeposit = new Button();
+            buttonWithdraw = new Button();
+            textBoxAmount = new TextBox();
             buttonIdSearch = new Button();
             label3 = new Label();
             sumLabel = new Label();
@@ -43,11 +47,17 @@
             idBox = new TextBox();
             labelCategory = new Label();
             labelSum = new Label();
+            buttonOk = new Button();
+            buttonCancel = new Button();
             panelMoney.SuspendLayout();
             SuspendLayout();
             // 
             // panelMoney
             // 
+            panelMoney.Controls.Add(applyInterest);
+            panelMoney.Controls.Add(buttonDeposit);
+            panelMoney.Controls.Add(buttonWithdraw);
+            panelMoney.Controls.Add(textBoxAmount);
             panelMoney.Controls.Add(buttonIdSearch);
             panelMoney.Controls.Add(label3);
             panelMoney.Controls.Add(sumLabel);
@@ -64,9 +74,45 @@
             panelMoney.Controls.Add(labelSum);
             panelMoney.Location = new Point(52, 34);
             panelMoney.Name = "panelMoney";
-            panelMoney.Size = new Size(711, 386);
+            panelMoney.Size = new Size(475, 247);
             panelMoney.TabIndex = 0;
-          
+            // 
+            // applyInterest
+            // 
+            applyInterest.Location = new Point(3, 143);
+            applyInterest.Name = "applyInterest";
+            applyInterest.Size = new Size(105, 62);
+            applyInterest.TabIndex = 61;
+            applyInterest.Text = "Нарахувати відсоток";
+            applyInterest.UseVisualStyleBackColor = true;
+            applyInterest.Click += applyInterest_Click;
+            // 
+            // buttonDeposit
+            // 
+            buttonDeposit.Location = new Point(310, 180);
+            buttonDeposit.Name = "buttonDeposit";
+            buttonDeposit.Size = new Size(116, 25);
+            buttonDeposit.TabIndex = 60;
+            buttonDeposit.Text = "Покласти";
+            buttonDeposit.UseVisualStyleBackColor = true;
+            buttonDeposit.Click += buttonDeposit_Click;
+            // 
+            // buttonWithdraw
+            // 
+            buttonWithdraw.Location = new Point(310, 118);
+            buttonWithdraw.Name = "buttonWithdraw";
+            buttonWithdraw.Size = new Size(116, 27);
+            buttonWithdraw.TabIndex = 59;
+            buttonWithdraw.Text = "Зняти";
+            buttonWithdraw.UseVisualStyleBackColor = true;
+            buttonWithdraw.Click += buttonWithdraw_Click;
+            // 
+            // textBoxAmount
+            // 
+            textBoxAmount.Location = new Point(143, 146);
+            textBoxAmount.Name = "textBoxAmount";
+            textBoxAmount.Size = new Size(161, 27);
+            textBoxAmount.TabIndex = 58;
             // 
             // buttonIdSearch
             // 
@@ -81,7 +127,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(85, 94);
+            label3.Location = new Point(81, 95);
             label3.Name = "label3";
             label3.Size = new Size(0, 20);
             label3.TabIndex = 56;
@@ -89,7 +135,7 @@
             // sumLabel
             // 
             sumLabel.AutoSize = true;
-            sumLabel.Location = new Point(85, 94);
+            sumLabel.Location = new Point(81, 95);
             sumLabel.Name = "sumLabel";
             sumLabel.Size = new Size(0, 20);
             sumLabel.TabIndex = 56;
@@ -169,7 +215,6 @@
             idBox.Name = "idBox";
             idBox.Size = new Size(56, 27);
             idBox.TabIndex = 42;
-         
             // 
             // labelCategory
             // 
@@ -183,17 +228,39 @@
             // labelSum
             // 
             labelSum.AutoSize = true;
-            labelSum.Location = new Point(31, 94);
+            labelSum.Location = new Point(14, 95);
             labelSum.Name = "labelSum";
-            labelSum.Size = new Size(44, 20);
+            labelSum.Size = new Size(61, 20);
             labelSum.TabIndex = 46;
-            labelSum.Text = "Сума";
+            labelSum.Text = "Баланс:";
+            // 
+            // buttonOk
+            // 
+            buttonOk.Location = new Point(178, 283);
+            buttonOk.Name = "buttonOk";
+            buttonOk.Size = new Size(76, 47);
+            buttonOk.TabIndex = 1;
+            buttonOk.Text = "Ok";
+            buttonOk.UseVisualStyleBackColor = true;
+            buttonOk.Click += buttonOk_Click;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.Location = new Point(281, 283);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 47);
+            buttonCancel.TabIndex = 2;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // MoneyOperationForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(596, 327);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonOk);
             Controls.Add(panelMoney);
             Name = "MoneyOperationForm";
             Text = "MoneyOperationForm";
@@ -219,5 +286,11 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private Button buttonWithdraw;
+        private TextBox textBoxAmount;
+        private Button buttonDeposit;
+        private Button applyInterest;
+        private Button buttonOk;
+        private Button buttonCancel;
     }
 }

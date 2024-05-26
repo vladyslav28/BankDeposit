@@ -25,7 +25,6 @@ namespace BankDeposit.Forms
 
             this.bank = bank;
             BankAccount = new BankAccount { Id = newId };
-
             idBox.Text = newId.ToString(); 
         }
 
@@ -34,6 +33,7 @@ namespace BankDeposit.Forms
             categoryBox.Items.Add("Junior(12%)");
             categoryBox.Items.Add("Standart(15%)");
         }
+
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
@@ -60,12 +60,15 @@ namespace BankDeposit.Forms
             BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
             BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
             BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
-            BankAccount.CurrentSum = decimal.Parse(sumBox.Text); //
-
-           
+            BankAccount.CurrentSum = Math.Round(decimal.Parse(sumBox.Text), 2); // 
         }
+        
+    
+
+
+
+
+
+    
     }
-
-
-
 }

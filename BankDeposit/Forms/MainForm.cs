@@ -23,7 +23,6 @@ namespace BankDeposit.Forms
 
             bankAccountBindingSource.DataSource = bank.BankAccounts;
             UpdateLabelCount();
-
         }
 
         private void UpdateLabelCount()
@@ -134,15 +133,23 @@ namespace BankDeposit.Forms
             }
         }
 
-
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
             {
                 var moneyOperationForm = new MoneyOperationForm(bankAccount, bank);
-                moneyOperationForm.ShowDialog();
+
+                if (moneyOperationForm.ShowDialog() == DialogResult.OK)
+                {
+                    buttonSearch_Click(null, null);
+                }
             }
         }
+
+
+
+
+
 
 
 

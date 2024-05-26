@@ -20,7 +20,12 @@ namespace BankDeposit.Forms
         {
             InitializeComponent();
             InitializeCategoryBox();
+            PasteData(bankAccount);
+          
+        }
 
+        public void PasteData(BankAccount bankAccount)
+        {
             this.bankAccount = bankAccount;
             idBox.Text = bankAccount.Id.ToString();
             nameBox.Text = bankAccount.Name;
@@ -44,20 +49,9 @@ namespace BankDeposit.Forms
             bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
             bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
 
-            //decimal? currentSum = null;
-            //if (!string.IsNullOrEmpty(sumBox.Text))
-            //{
-            //    if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
-            //    {
-            //        currentSum = parsedSum;
-            //    }
-            //    else
-            //    {
-            //        return;
-            //    }
-            //}
-            bankAccount.CurrentSum = decimal.Parse(sumBox.Text); // Exeption
+            bankAccount.CurrentSum = Math.Round(decimal.Parse(sumBox.Text), 2); // Exeption
         }
+        
 
         private void InitializeCategoryBox()
         {
@@ -91,15 +85,9 @@ namespace BankDeposit.Forms
 
 
 
+
+
     }
-
-
-
-
-
-
-
-
 }
 
 
