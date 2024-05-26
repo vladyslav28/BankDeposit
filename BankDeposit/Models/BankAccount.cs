@@ -46,7 +46,6 @@ namespace BankDeposit.Models
         {
             decimal interestRate = DepositCategory == "Junior(12%)" ? 12 : 15;
             int daysPassed = (DateTime.Now.Date - LastOperationDate.Date).Days;
-            MessageBox.Show(daysPassed.ToString());
             decimal interest = CurrentSum * (interestRate / 100) * (daysPassed / 365m);
             if (interest > 0)
             {

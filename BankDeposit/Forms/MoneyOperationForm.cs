@@ -27,6 +27,7 @@ namespace BankDeposit.Forms
             categoryLabel.Text = BankAccount.DepositCategory;
             sumLabel.Text = BankAccount.CurrentSum.ToString("F2");
             dateTimePickerLastOperation.Value = BankAccount.LastOperationDate.Date;
+            textBoxAmount.Text = "";
         }
 
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
@@ -64,6 +65,7 @@ namespace BankDeposit.Forms
                 if (BankAccount.Withdraw(amount))
                 {
                     DisplayAccountData();
+
                 }
                 else
                 {

@@ -14,7 +14,7 @@ namespace BankDeposit.Forms
     public partial class BankAccountEditForm : Form
     {
         private BankAccount bankAccount;
-        Bank bank = new Bank(); 
+        private Bank bank = new Bank(); 
 
         public BankAccountEditForm(BankAccount bankAccount)
         {
@@ -49,9 +49,18 @@ namespace BankDeposit.Forms
             bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
             bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
 
-            bankAccount.CurrentSum = Math.Round(decimal.Parse(sumBox.Text), 2); // Exeption
+            if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+            {
+                bankAccount.CurrentSum = Math.Round(parsedSum, 2);
+            }
+            else
+            {
+                MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
-        
+
 
         private void InitializeCategoryBox()
         {

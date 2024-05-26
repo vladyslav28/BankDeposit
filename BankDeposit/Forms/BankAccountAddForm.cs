@@ -60,15 +60,24 @@ namespace BankDeposit.Forms
             BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
             BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
             BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
-            BankAccount.CurrentSum = Math.Round(decimal.Parse(sumBox.Text), 2); // 
+            if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+            {
+                BankAccount.CurrentSum = Math.Round(parsedSum, 2);
+            }
+            else
+            {
+                MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+
         }
-        
-    
 
 
 
 
 
-    
+
+
+
     }
 }

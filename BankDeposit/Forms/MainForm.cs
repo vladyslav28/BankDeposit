@@ -23,6 +23,8 @@ namespace BankDeposit.Forms
 
             bankAccountBindingSource.DataSource = bank.BankAccounts;
             UpdateLabelCount();
+
+            
         }
 
         private void UpdateLabelCount()
@@ -45,7 +47,8 @@ namespace BankDeposit.Forms
                 }
                 else
                 {
-                    return;
+                    MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
 
@@ -79,7 +82,7 @@ namespace BankDeposit.Forms
                                      selectedAccount.BirthDate != originalAccount.BirthDate ||
                                      selectedAccount.LastOperationDate != originalAccount.LastOperationDate ||
                                      selectedAccount.DepositCategory != originalAccount.DepositCategory ||
-                                     selectedAccount.CurrentSum != originalAccount.CurrentSum;
+                                     selectedAccount.CurrentSum != originalAccount.CurrentSum ;
 
                     if (isChanged)
                     {
