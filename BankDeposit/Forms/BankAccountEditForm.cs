@@ -13,7 +13,7 @@ namespace BankDeposit.Forms
 {
     public partial class BankAccountEditForm : Form
     {
-        BankAccount bankAccount = new BankAccount();
+        private BankAccount bankAccount;
         Bank bank = new Bank(); 
 
         public BankAccountEditForm(BankAccount bankAccount)

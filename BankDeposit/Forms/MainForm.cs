@@ -14,8 +14,7 @@ namespace BankDeposit.Forms
     public partial class MainForm : Form
     {
         Bank bank = new Bank();
-        
-       
+
         public MainForm()
         {
             InitializeComponent();
@@ -24,12 +23,8 @@ namespace BankDeposit.Forms
 
             bankAccountBindingSource.DataSource = bank.BankAccounts;
             UpdateLabelCount();
-           
+
         }
-
-       
-
-
 
         private void UpdateLabelCount()
         {
@@ -57,9 +52,7 @@ namespace BankDeposit.Forms
 
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
-
             UpdateLabelCount();
-
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -78,8 +71,8 @@ namespace BankDeposit.Forms
                     CurrentSum = selectedAccount.CurrentSum
                 };
 
-                var bookEditForm  = new BankAccountEditForm(selectedAccount);
-                if (bookEditForm .ShowDialog() == DialogResult.OK)
+                var bookEditForm = new BankAccountEditForm(selectedAccount);
+                if (bookEditForm.ShowDialog() == DialogResult.OK)
                 {
 
                     bool isChanged = selectedAccount.Name != originalAccount.Name ||
@@ -91,13 +84,12 @@ namespace BankDeposit.Forms
 
                     if (isChanged)
                     {
-                        MessageBox.Show("Інформацію змінено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         buttonSearch_Click(null, null);
                     }
                 }
             }
         }
-
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -118,31 +110,39 @@ namespace BankDeposit.Forms
                     if (isDeleted)
                     {
                         buttonSearch_Click(null, null);
-                        MessageBox.Show("Акаунт видалено", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Акаунт видалено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Акаунт не обрано", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Акаунт не обрано", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            int newId = bank.BankAccounts.Any() ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;     
-            var addForm = new BankAccountAddForm(newId, bank); 
+            int newId = bank.BankAccounts.Any() ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;
+            var addForm = new BankAccountAddForm(newId, bank);
             if (addForm.ShowDialog() == DialogResult.OK)
-            {         
+            {
                 BankAccount newAccount = addForm.BankAccount;
                 bank.AddAccount(newAccount);
                 buttonSearch_Click(null, null);
+                MessageBox.Show("Акаунт додано", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
         }
 
 
+        private void buttonMoney_Click(object sender, EventArgs e)
+        {
+            if (resultList.SelectedItem is BankAccount bankAccount)
+            {
+                var moneyOperationForm = new MoneyOperationForm(bankAccount, bank);
+                moneyOperationForm.ShowDialog();
+            }
+        }
 
 
 
@@ -195,6 +195,10 @@ namespace BankDeposit.Forms
             sumBox.Text = "";
             nameBox.Text = "";
         }
+
+        
+
+
     }
 
 }

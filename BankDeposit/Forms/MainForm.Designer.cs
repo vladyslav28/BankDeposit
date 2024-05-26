@@ -86,6 +86,7 @@ namespace BankDeposit.Forms
             buttonAdd = new Button();
             buttonDelete = new Button();
             labelCount = new Label();
+            buttonMoney = new Button();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
@@ -356,7 +357,7 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
             dateTimePickerLastOperation.TabIndex = 11;
-            dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 26, 0, 0, 0, 0);
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -368,7 +369,7 @@ namespace BankDeposit.Forms
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
             dateTimePickerBirth.TabIndex = 10;
-            dateTimePickerBirth.Value = DateTime.Now.Date;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 26, 0, 0, 0, 0);
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // labelDateLastOperation
@@ -490,14 +491,15 @@ namespace BankDeposit.Forms
             // 
             // panelShow
             // 
+            panelShow.Controls.Add(buttonMoney);
             panelShow.Controls.Add(buttonAdd);
             panelShow.Controls.Add(buttonDelete);
             panelShow.Controls.Add(showBox);
             panelShow.Controls.Add(buttonEdit);
             panelShow.Controls.Add(resultList);
-            panelShow.Location = new Point(58, 298);
+            panelShow.Location = new Point(58, 269);
             panelShow.Name = "panelShow";
-            panelShow.Size = new Size(534, 188);
+            panelShow.Size = new Size(534, 217);
             panelShow.TabIndex = 4;
             // 
             // buttonAdd
@@ -523,10 +525,20 @@ namespace BankDeposit.Forms
             // labelCount
             // 
             labelCount.AutoSize = true;
-            labelCount.Location = new Point(77, 254);
+            labelCount.Location = new Point(62, 246);
             labelCount.Name = "labelCount";
             labelCount.Size = new Size(0, 20);
             labelCount.TabIndex = 5;
+            // 
+            // buttonMoney
+            // 
+            buttonMoney.Location = new Point(379, 189);
+            buttonMoney.Name = "buttonMoney";
+            buttonMoney.Size = new Size(152, 25);
+            buttonMoney.TabIndex = 7;
+            buttonMoney.Text = "Робота з грошима";
+            buttonMoney.UseVisualStyleBackColor = true;
+            buttonMoney.Click += buttonMoney_Click;
             // 
             // MainForm
             // 
@@ -607,5 +619,6 @@ namespace BankDeposit.Forms
         private Button buttonAdd;
         private Label labelCount;
         private Button buttonReset;
+        private Button buttonMoney;
     }
 }
