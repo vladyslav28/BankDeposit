@@ -42,7 +42,7 @@ namespace BankDeposit.Models
             }
         }
 
-        public void ApplyInterest()
+        public decimal ApplyInterest()
         {
             decimal interestRate = DepositCategory == "Junior(12%)" ? 12 : 15;
             int daysPassed = (DateTime.Now.Date - LastOperationDate.Date).Days;
@@ -52,26 +52,32 @@ namespace BankDeposit.Models
                 CurrentSum += Math.Round(interest, 2);
                 LastOperationDate = DateTime.Now.Date;
             }
+            return interest;
         }
 
-        public void Deposit(decimal amount)
+        public decimal Deposit(decimal amount)
         {
-            ApplyInterest();
+            decimal interest = ApplyInterest();
             CurrentSum = Math.Round(CurrentSum + amount, 2);
+            return interest;
         }
 
-        public bool Withdraw(decimal amount)
+        public (bool, decimal) Withdraw(decimal amount)
         {
-            ApplyInterest();
+            decimal interest = ApplyInterest();
             if (CurrentSum >= amount)
             {
                 CurrentSum = Math.Round(CurrentSum - amount, 2);
-                return true;
+                return (true, interest);
             }
             else
             {
-                return false;
+                return (false, interest);
             }
         }
+
+
+
+
     }
 }

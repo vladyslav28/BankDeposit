@@ -8,7 +8,7 @@ namespace BankDeposit.Forms
     public partial class MoneyOperationForm : Form
     {
         public BankAccount BankAccount { get; private set; }
-        private BankAccount originalBankAccount; 
+        private BankAccount originalBankAccount;
         private Bank bank;
 
         public MoneyOperationForm(BankAccount account, Bank bank)
@@ -16,7 +16,7 @@ namespace BankDeposit.Forms
             InitializeComponent();
             this.bank = bank;
             BankAccount = account;
-            originalBankAccount = new BankAccount(account); 
+            originalBankAccount = new BankAccount(account);
             DisplayAccountData();
         }
 
@@ -44,7 +44,7 @@ namespace BankDeposit.Forms
                 {
                     CancelOperation();
                     BankAccount = account;
-                    originalBankAccount = new BankAccount(account); 
+                    originalBankAccount = new BankAccount(account);
                     DisplayAccountData();
                 }
                 else
@@ -62,10 +62,11 @@ namespace BankDeposit.Forms
         {
             if (decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
-                if (BankAccount.Withdraw(amount))
+                var (success, interest) = BankAccount.Withdraw(amount);
+                if (success)
                 {
                     DisplayAccountData();
-
+                    DisplayInterestMessage(interest);
                 }
                 else
                 {
@@ -82,12 +83,26 @@ namespace BankDeposit.Forms
         {
             if (decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
-                BankAccount.Deposit(amount);
+                decimal interest = BankAccount.Deposit(amount);
                 DisplayAccountData();
+                DisplayInterestMessage(interest);
             }
             else
             {
                 MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DisplayInterestMessage(decimal interest)
+        {
+            if (interest > 0)
+            {
+                string message = $"Нараховано: {interest:F2} " + Environment.NewLine +
+                                 $"Початкова сума: {originalBankAccount.CurrentSum:F2}." + Environment.NewLine +
+                                 $"Категорієя депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
+                                 $"Поточний баланс: {BankAccount.CurrentSum:F2}";
+
+                MessageBox.Show(message, "Нарахування відсотків", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -98,21 +113,22 @@ namespace BankDeposit.Forms
             DisplayAccountData();
 
             decimal interest = BankAccount.CurrentSum - initialSum;
-            if (interest > 0)
-            {
-                string message = $"Нараховано: {interest:F2} " + Environment.NewLine +
-                                 $"Початкова сума: {initialSum:F2}." + Environment.NewLine +
-                                 $"Категорієя депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
-                                 $"Поточний баланс: {BankAccount.CurrentSum:F2}";
-
-                MessageBox.Show(message, "Нарахування відсотків", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            DisplayInterestMessage(interest);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            var result = MessageBox.Show("Ви дійсно хочете зберегти зміни?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                CancelOperation();
+                DisplayAccountData(); 
+            }
         }
 
         private void CancelOperation()
