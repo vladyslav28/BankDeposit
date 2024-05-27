@@ -1,12 +1,6 @@
 ﻿using BankDeposit.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BankDeposit.Forms
@@ -14,22 +8,25 @@ namespace BankDeposit.Forms
     public partial class MainForm : Form
     {
         Bank bank = new Bank();
+        const string PATH_TO_DATA = ".\\bank.txt";
 
         public MainForm()
         {
             InitializeComponent();
             InitializeCategoryBox();
-            bank = Bank.LoadData(PATH_TO_DATA);
-
-            bankAccountBindingSource.DataSource = bank.BankAccounts;
-            UpdateLabelCount();
+            LoadBankData();
             dateTimePickerLastOperation.Value = DateTime.Now.Date;
             dateTimePickerBirth.Value = DateTime.Now.Date;
             InitializeErrorLabels();
-
         }
 
-        //
+        private void LoadBankData()
+        {
+            bank = Bank.LoadData(PATH_TO_DATA);
+            bankAccountBindingSource.DataSource = bank.BankAccounts;
+            UpdateLabelCount();
+        }
+
         private void UpdateLabelCount()
         {
             labelCount.Text = $"Кількість елементів: {resultList.Items.Count}";
@@ -37,7 +34,43 @@ namespace BankDeposit.Forms
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult result = MessageBox.Show(
+                "Зберегти всі зміни?",
+                "Завершення сеансу",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                bank.SaveData(PATH_TO_DATA);
+                ShowLoginForm();
+            }
+            else if (result == DialogResult.No)
+            {
+                LoadBankData();
+                ShowLoginForm();
+            }
+
+        }
+
+        private void ShowLoginForm()
+        {
+            this.Hide();
+            using (var loginForm = new LoginForm())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+
+                    LoadBankData();
+                    this.Show();
+                }
+                else
+                {
+
+                    Application.Exit();
+                }
+            }
         }
 
         private void InitializeCategoryBox()
@@ -57,11 +90,9 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
-        const string PATH_TO_DATA = ".\\bank.txt";
-
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bank = Bank.LoadData(PATH_TO_DATA);
+            LoadBankData();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,7 +111,6 @@ namespace BankDeposit.Forms
             sumBox.Text = "";
             nameBox.Text = "";
             InitializeErrorLabels();
-
         }
 
         private void idBox_TextChanged(object sender, EventArgs e)
@@ -98,22 +128,19 @@ namespace BankDeposit.Forms
             ValidateInput();
         }
 
-        //
-
         private void InitializeErrorLabels()
         {
             errorIdLabel.Visible = false;
             errorNameLabel.Visible = false;
             errorSumLabel.Visible = false;
         }
+
         private bool ValidateInput()
         {
             bool isValid = true;
 
-
             if (!string.IsNullOrEmpty(idBox.Text) && !int.TryParse(idBox.Text, out _))
             {
-
                 errorIdLabel.Visible = true;
                 isValid = false;
             }
@@ -122,10 +149,8 @@ namespace BankDeposit.Forms
                 errorIdLabel.Visible = false;
             }
 
-
             if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
             {
-
                 errorNameLabel.Visible = true;
                 isValid = false;
             }
@@ -138,7 +163,6 @@ namespace BankDeposit.Forms
             {
                 if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ','))
                 {
-
                     errorSumLabel.Visible = true;
                     isValid = false;
                 }
@@ -154,9 +178,6 @@ namespace BankDeposit.Forms
 
             return isValid;
         }
-
-
-
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -184,9 +205,6 @@ namespace BankDeposit.Forms
             UpdateLabelCount();
         }
 
-
-
-        //
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (!ValidateInput())
@@ -216,8 +234,6 @@ namespace BankDeposit.Forms
             }
         }
 
-
-        //
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -253,8 +269,6 @@ namespace BankDeposit.Forms
             }
         }
 
-
-        //
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -273,7 +287,6 @@ namespace BankDeposit.Forms
             if (int.TryParse(input, out int accountId))
             {
                 BankAccount bankAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
-
                 if (bankAccount != null)
                 {
                     DeleteBankAccount(bankAccount);
@@ -311,10 +324,6 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
-       
-
-        //
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
@@ -416,11 +425,5 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
-       
     }
-
 }
-
-
-
