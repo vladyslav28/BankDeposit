@@ -123,7 +123,7 @@ namespace BankDeposit.Forms
             }
 
 
-            if (!string.IsNullOrEmpty(nameBox.Text) && nameBox.Text.Any(char.IsDigit))
+            if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
             {
 
                 errorNameLabel.Visible = true;
@@ -158,8 +158,6 @@ namespace BankDeposit.Forms
 
 
 
-
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             if (!ValidateInput())
@@ -185,24 +183,6 @@ namespace BankDeposit.Forms
             bankAccountBindingSource.DataSource = result;
             UpdateLabelCount();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -255,7 +235,7 @@ namespace BankDeposit.Forms
             }
         }
 
-        private void роботаЗГрошимаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void фінансовіОпераціїToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (bank.BankAccounts.Any())
             {
@@ -332,10 +312,7 @@ namespace BankDeposit.Forms
             }
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         //
 
@@ -440,7 +417,7 @@ namespace BankDeposit.Forms
             }
         }
 
-        
+       
     }
 
 }

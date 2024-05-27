@@ -49,11 +49,15 @@
             labelSum = new Label();
             buttonOk = new Button();
             buttonCancel = new Button();
+            errorIdLabel = new Label();
+            erorrSumLabel = new Label();
             panelMoney.SuspendLayout();
             SuspendLayout();
             // 
             // panelMoney
             // 
+            panelMoney.Controls.Add(erorrSumLabel);
+            panelMoney.Controls.Add(errorIdLabel);
             panelMoney.Controls.Add(applyInterest);
             panelMoney.Controls.Add(buttonDeposit);
             panelMoney.Controls.Add(buttonWithdraw);
@@ -89,7 +93,7 @@
             // 
             // buttonDeposit
             // 
-            buttonDeposit.Location = new Point(310, 180);
+            buttonDeposit.Location = new Point(334, 181);
             buttonDeposit.Name = "buttonDeposit";
             buttonDeposit.Size = new Size(116, 25);
             buttonDeposit.TabIndex = 60;
@@ -99,7 +103,7 @@
             // 
             // buttonWithdraw
             // 
-            buttonWithdraw.Location = new Point(310, 118);
+            buttonWithdraw.Location = new Point(334, 119);
             buttonWithdraw.Name = "buttonWithdraw";
             buttonWithdraw.Size = new Size(116, 27);
             buttonWithdraw.TabIndex = 59;
@@ -109,14 +113,15 @@
             // 
             // textBoxAmount
             // 
-            textBoxAmount.Location = new Point(143, 146);
+            textBoxAmount.Location = new Point(180, 148);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(161, 27);
             textBoxAmount.TabIndex = 58;
+            textBoxAmount.TextChanged += textBoxAmount_TextChanged;
             // 
             // buttonIdSearch
             // 
-            buttonIdSearch.Location = new Point(143, 3);
+            buttonIdSearch.Location = new Point(166, 3);
             buttonIdSearch.Name = "buttonIdSearch";
             buttonIdSearch.Size = new Size(111, 27);
             buttonIdSearch.TabIndex = 57;
@@ -254,6 +259,28 @@
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // errorIdLabel
+            // 
+            errorIdLabel.AutoSize = true;
+            errorIdLabel.ForeColor = Color.Red;
+            errorIdLabel.Location = new Point(147, 6);
+            errorIdLabel.Name = "errorIdLabel";
+            errorIdLabel.Size = new Size(15, 20);
+            errorIdLabel.TabIndex = 62;
+            errorIdLabel.Text = "*";
+            errorIdLabel.Visible = false;
+            // 
+            // erorrSumLabel
+            // 
+            erorrSumLabel.AutoSize = true;
+            erorrSumLabel.ForeColor = Color.Red;
+            erorrSumLabel.Location = new Point(347, 151);
+            erorrSumLabel.Name = "erorrSumLabel";
+            erorrSumLabel.Size = new Size(15, 20);
+            erorrSumLabel.TabIndex = 63;
+            erorrSumLabel.Text = "*";
+            erorrSumLabel.Visible = false;
+            // 
             // MoneyOperationForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -292,5 +319,7 @@
         private Button applyInterest;
         private Button buttonOk;
         private Button buttonCancel;
+        private Label errorIdLabel;
+        private Label erorrSumLabel;
     }
 }

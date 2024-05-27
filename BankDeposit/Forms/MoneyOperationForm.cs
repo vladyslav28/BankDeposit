@@ -127,7 +127,7 @@ namespace BankDeposit.Forms
             else
             {
                 CancelOperation();
-                DisplayAccountData(); 
+                DisplayAccountData();
             }
         }
 
@@ -146,6 +146,11 @@ namespace BankDeposit.Forms
             CancelOperation();
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void textBoxAmount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
