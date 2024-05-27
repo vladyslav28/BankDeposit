@@ -57,12 +57,17 @@ namespace BankDeposit.Forms
             toolsToolStripMenuItem = new ToolStripMenuItem();
             customizeToolStripMenuItem = new ToolStripMenuItem();
             optionsToolStripMenuItem = new ToolStripMenuItem();
+            роботаЗГрошимаToolStripMenuItem = new ToolStripMenuItem();
+            додатиЕлементToolStripMenuItem = new ToolStripMenuItem();
+            видалитиЕлементToolStripMenuItem = new ToolStripMenuItem();
+            редагуватиToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             contentsToolStripMenuItem = new ToolStripMenuItem();
             indexToolStripMenuItem = new ToolStripMenuItem();
             searchToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
             errorIdLabel = new Label();
             errorNameLabel = new Label();
@@ -119,7 +124,7 @@ namespace BankDeposit.Forms
             newToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             newToolStripMenuItem.Name = "newToolStripMenuItem";
             newToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.N;
-            newToolStripMenuItem.Size = new Size(181, 26);
+            newToolStripMenuItem.Size = new Size(224, 26);
             newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -266,9 +271,38 @@ namespace BankDeposit.Forms
             // 
             // optionsToolStripMenuItem
             // 
+            optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { роботаЗГрошимаToolStripMenuItem, додатиЕлементToolStripMenuItem, видалитиЕлементToolStripMenuItem, редагуватиToolStripMenuItem });
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             optionsToolStripMenuItem.Size = new Size(161, 26);
             optionsToolStripMenuItem.Text = "&Options";
+            // 
+            // роботаЗГрошимаToolStripMenuItem
+            // 
+            роботаЗГрошимаToolStripMenuItem.Name = "роботаЗГрошимаToolStripMenuItem";
+            роботаЗГрошимаToolStripMenuItem.Size = new Size(225, 26);
+            роботаЗГрошимаToolStripMenuItem.Text = "Фінансові операції";
+            роботаЗГрошимаToolStripMenuItem.Click += роботаЗГрошимаToolStripMenuItem_Click;
+            // 
+            // додатиЕлементToolStripMenuItem
+            // 
+            додатиЕлементToolStripMenuItem.Name = "додатиЕлементToolStripMenuItem";
+            додатиЕлементToolStripMenuItem.Size = new Size(225, 26);
+            додатиЕлементToolStripMenuItem.Text = "Додати елемент";
+            додатиЕлементToolStripMenuItem.Click += додатиЕлементToolStripMenuItem_Click;
+            // 
+            // видалитиЕлементToolStripMenuItem
+            // 
+            видалитиЕлементToolStripMenuItem.Name = "видалитиЕлементToolStripMenuItem";
+            видалитиЕлементToolStripMenuItem.Size = new Size(225, 26);
+            видалитиЕлементToolStripMenuItem.Text = "Видалити елемент";
+            видалитиЕлементToolStripMenuItem.Click += видалитиЕлементToolStripMenuItem_Click;
+            // 
+            // редагуватиToolStripMenuItem
+            // 
+            редагуватиToolStripMenuItem.Name = "редагуватиToolStripMenuItem";
+            редагуватиToolStripMenuItem.Size = new Size(225, 26);
+            редагуватиToolStripMenuItem.Text = "Редагувати";
+            редагуватиToolStripMenuItem.Click += редагуватиToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -280,31 +314,39 @@ namespace BankDeposit.Forms
             // contentsToolStripMenuItem
             // 
             contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            contentsToolStripMenuItem.Size = new Size(150, 26);
+            contentsToolStripMenuItem.Size = new Size(224, 26);
             contentsToolStripMenuItem.Text = "&Contents";
             // 
             // indexToolStripMenuItem
             // 
             indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            indexToolStripMenuItem.Size = new Size(150, 26);
+            indexToolStripMenuItem.Size = new Size(224, 26);
             indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
             // 
             searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            searchToolStripMenuItem.Size = new Size(150, 26);
+            searchToolStripMenuItem.Size = new Size(224, 26);
             searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(147, 6);
+            toolStripSeparator5.Size = new Size(221, 6);
             // 
             // aboutToolStripMenuItem
             // 
+            aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { виконавСтгрПЗПІ23УсВладиславToolStripMenuItem });
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(150, 26);
+            aboutToolStripMenuItem.Size = new Size(224, 26);
             aboutToolStripMenuItem.Text = "&About...";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
+            // виконавСтгрПЗПІ23УсВладиславToolStripMenuItem
+            // 
+            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Name = "виконавСтгрПЗПІ23УсВладиславToolStripMenuItem";
+            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Size = new Size(356, 26);
+            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Text = "Виконав ст.гр.ПЗПІ-23-6 Ус Владислав";
             // 
             // panelSearch
             // 
@@ -379,9 +421,9 @@ namespace BankDeposit.Forms
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(350, 182);
+            buttonSearch.Location = new Point(350, 178);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(93, 28);
+            buttonSearch.Size = new Size(92, 32);
             buttonSearch.TabIndex = 12;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
@@ -665,5 +707,10 @@ namespace BankDeposit.Forms
         private Label errorSumLabel;
         private Label errorIdLabel;
         private Label errorNameLabel;
+        private ToolStripMenuItem роботаЗГрошимаToolStripMenuItem;
+        private ToolStripMenuItem додатиЕлементToolStripMenuItem;
+        private ToolStripMenuItem видалитиЕлементToolStripMenuItem;
+        private ToolStripMenuItem редагуватиToolStripMenuItem;
+        private ToolStripMenuItem виконавСтгрПЗПІ23УсВладиславToolStripMenuItem;
     }
 }

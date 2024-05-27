@@ -21,6 +21,7 @@ namespace BankDeposit.Forms
         public BankAccountAddForm(int newId, Bank bank)
         {
             InitializeComponent();
+            
             InitializeCategoryBox();
 
             this.bank = bank;

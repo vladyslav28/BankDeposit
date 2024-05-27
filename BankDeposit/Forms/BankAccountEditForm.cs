@@ -19,6 +19,7 @@ namespace BankDeposit.Forms
         public BankAccountEditForm(BankAccount bankAccount)
         {
             InitializeComponent();
+            
             InitializeCategoryBox();
             PasteData(bankAccount);
           
