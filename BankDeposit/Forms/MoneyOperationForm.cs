@@ -26,7 +26,7 @@ namespace BankDeposit.Forms
             idBox.Text = BankAccount.Id.ToString();
             nameLabel.Text = BankAccount.Name;
             categoryLabel.Text = BankAccount.DepositCategory;
-            sumLabel.Text = BankAccount.CurrentSum.ToString() + "₴";
+            sumLabel.Text = BankAccount.CurrentSum.ToString() + " ₴";
             dateTimePickerLastOperation.Value = BankAccount.LastOperationDate.Date;
             textBoxAmount.Text = "";
         }
@@ -48,7 +48,7 @@ namespace BankDeposit.Forms
                     errorSumLabel.Visible = true;
                     if (showErrorMessages)
                     {
-                        errorInfoAmountLabel.Text = "Значення містить заборонені символи.";
+                        errorInfoAmountLabel.Text = "Сума містить заборонені символи";
                         errorInfoAmountLabel.Visible = true;
                     }
                     isValid = false;

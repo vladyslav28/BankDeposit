@@ -151,7 +151,7 @@ namespace BankDeposit.Forms
                 errorIdLabel.Visible = true;
                 if (showErrorMessages)
                 {
-                    errorInfoIdLabel.Text = "ID містить літери або символи";
+                    errorInfoIdLabel.Text = "ID містить заборонені символи";
                     errorInfoIdLabel.Visible = true;
                 }
                 isValid = false;
@@ -171,11 +171,11 @@ namespace BankDeposit.Forms
                     errorInfoNameLabel.Text = "";
                     if (nameBox.Text.Any(char.IsDigit))
                     {
-                        errorInfoNameLabel.Text += "ПІБ містить цифри. ";
+                        errorInfoNameLabel.Text += "ПІБ містить заборонені символи";
                     }
                     if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.' && !char.IsDigit(c)))
                     {
-                        errorInfoNameLabel.Text += "ПІБ містить заборонені символи ";
+                        errorInfoNameLabel.Text += "ПІБ містить заборонені символи";
                     }
                     errorInfoNameLabel.Visible = true;
                 }
@@ -195,7 +195,7 @@ namespace BankDeposit.Forms
                     errorSumLabel.Visible = true;
                     if (showErrorMessages)
                     {
-                        erorrInfoSumLabel.Text = "Сума містить заборонені символи.";
+                        erorrInfoSumLabel.Text = "Сума містить заборонені символи";
                         erorrInfoSumLabel.Visible = true;
                     }
                     isValid = false;
@@ -457,7 +457,6 @@ namespace BankDeposit.Forms
                             selectedAccount.LastOperationDate = originalAccount.LastOperationDate;
                             selectedAccount.DepositCategory = originalAccount.DepositCategory;
                             selectedAccount.CurrentSum = originalAccount.CurrentSum;
-                            continue;
                         }
                     }
                     else

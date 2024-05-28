@@ -77,7 +77,7 @@
             panelAdd.Controls.Add(sumBox);
             panelAdd.Controls.Add(categoryBox);
             panelAdd.Controls.Add(labelSum);
-            panelAdd.Location = new Point(45, 12);
+            panelAdd.Location = new Point(45, 30);
             panelAdd.Name = "panelAdd";
             panelAdd.Size = new Size(626, 283);
             panelAdd.TabIndex = 0;

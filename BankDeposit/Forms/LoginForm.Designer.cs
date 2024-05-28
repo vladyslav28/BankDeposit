@@ -94,7 +94,7 @@
             label1.Size = new Size(112, 20);
             label1.TabIndex = 5;
             label1.Text = "Вхід в систему ";
-            label1.Click += label1_Click;
+  
             // 
             // panelLogin
             // 

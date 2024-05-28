@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BankDeposit.Forms
 {
     public partial class LoginForm : Form
     {
-
-
         public LoginForm()
         {
             InitializeComponent();
             textBoxUsername.Text = "Admin";
-
-
+            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
         }
-
-
 
         private void buttonLogin_Click_1(object sender, EventArgs e)
         {
@@ -37,17 +25,19 @@ namespace BankDeposit.Forms
             else
             {
                 labelError.Text = "Неправильний пароль";
+                labelError.Visible = true;
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
-
+            labelError.Visible = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

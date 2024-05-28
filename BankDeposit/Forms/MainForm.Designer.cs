@@ -114,7 +114,7 @@ namespace BankDeposit.Forms
             openToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openToolStripMenuItem.Size = new Size(224, 26);
+            openToolStripMenuItem.Size = new Size(181, 26);
             openToolStripMenuItem.Text = "&Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -197,19 +197,19 @@ namespace BankDeposit.Forms
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(221, 6);
+            toolStripSeparator5.Size = new Size(192, 6);
             // 
             // helpWithTypeToolStripMenuItem
             // 
             helpWithTypeToolStripMenuItem.Name = "helpWithTypeToolStripMenuItem";
-            helpWithTypeToolStripMenuItem.Size = new Size(224, 26);
+            helpWithTypeToolStripMenuItem.Size = new Size(195, 26);
             helpWithTypeToolStripMenuItem.Text = "&Help with data";
             helpWithTypeToolStripMenuItem.Click += helpWithTypeToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Size = new Size(195, 26);
             aboutToolStripMenuItem.Text = "&About program";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -238,7 +238,7 @@ namespace BankDeposit.Forms
             panelSearch.Controls.Add(idBox);
             panelSearch.Controls.Add(labelName);
             panelSearch.Controls.Add(labelId);
-            panelSearch.Location = new Point(102, 31);
+            panelSearch.Location = new Point(102, 30);
             panelSearch.Name = "panelSearch";
             panelSearch.Size = new Size(579, 270);
             panelSearch.TabIndex = 1;
