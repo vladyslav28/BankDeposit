@@ -29,6 +29,7 @@ namespace BankDeposit.Forms
             categoryBox.Items.Add("Standart(15%)");
         }
 
+
         private void InitializeErrorLabels()
         {
             labelErrorName.Visible = false;

@@ -77,7 +77,7 @@
             panelEdit.Controls.Add(sumBox);
             panelEdit.Controls.Add(categoryBox);
             panelEdit.Controls.Add(labelSum);
-            panelEdit.Location = new Point(27, 30);
+            panelEdit.Location = new Point(18, 30);
             panelEdit.Name = "panelEdit";
             panelEdit.Size = new Size(671, 272);
             panelEdit.TabIndex = 0;
@@ -290,8 +290,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(751, 332);
+            ClientSize = new Size(705, 336);
             Controls.Add(panelEdit);
+            MinimumSize = new Size(723, 383);
             Name = "BankAccountEditForm";
             Text = "BankAccountEditForm";
             panelEdit.ResumeLayout(false);

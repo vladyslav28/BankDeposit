@@ -22,6 +22,38 @@ namespace BankDeposit.Forms
             dateTimePickerBirth.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.Value = DateTime.Now.Date;
             InitializeErrorLabels();
+
+        }
+
+
+        private void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+
+                ShowHelp();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                //ConfirmAction();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+        }
+
+        
+
+        private void ShowHelp()
+        {
+            string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
+               "Поля Id можуть мати лише числові значення" + Environment.NewLine +
+               "Поля Суми можуть мати лише числові значення,роздільником є кома (,)" + Environment.NewLine +
+               "Категорія визначається за датою народження,якщо клієнтові менше 18 років(відносно сьогоднішньої дати),то категорія її депозиту Junior(12%),якщо більше 18 - Standart(15%)";
+
+            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LoadBankData()
@@ -473,10 +505,26 @@ namespace BankDeposit.Forms
 
         private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
+                "Поля Id можуть мати лише числові значення" + Environment.NewLine +
+                "Поля Суми можуть мати лише числові значення,роздільником є кома (,)" + Environment.NewLine +
+                "Категорія визначається за датою народження,якщо клієнтові менше 18 років(відносно сьогоднішньої дати),то категорія її депозиту Junior(12%),якщо більше 18 - Standart(15%)";
 
+            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "Програма створена для керування інформацією вкладників банку" + Environment.NewLine +
+                "Додатковими функціями програми є можливість проводити фінансові операції такі як:" + Environment.NewLine +
+                "зняття коштів,поповнення рахунку,нарахування відсотків за певною категорією депозиту" + Environment.NewLine + Environment.NewLine +
+                "Програма розроблена: ст.гр ПЗПІ-23-6 Ус Владиславом";
+
+
+            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
