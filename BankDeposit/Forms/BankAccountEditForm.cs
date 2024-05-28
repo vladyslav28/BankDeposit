@@ -14,15 +14,15 @@ namespace BankDeposit.Forms
     public partial class BankAccountEditForm : Form
     {
         private BankAccount bankAccount;
-        private Bank bank = new Bank(); 
+        private Bank bank = new Bank();
 
         public BankAccountEditForm(BankAccount bankAccount)
         {
             InitializeComponent();
-            
+
             InitializeCategoryBox();
             PasteData(bankAccount);
-          
+
         }
 
         public void PasteData(BankAccount bankAccount)
@@ -90,13 +90,10 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
 
-
-
-
-
-
-
+        }
     }
 }
 

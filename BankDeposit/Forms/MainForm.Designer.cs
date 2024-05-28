@@ -51,6 +51,7 @@ namespace BankDeposit.Forms
             aboutToolStripMenuItem = new ToolStripMenuItem();
             виконавСтгрПЗПІ23УсВладиславToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
+            label4 = new Label();
             erorrInfoSumLabel = new Label();
             errorInfoNameLabel = new Label();
             errorInfoIdLabel = new Label();
@@ -211,6 +212,7 @@ namespace BankDeposit.Forms
             // 
             panelSearch.Anchor = AnchorStyles.Top;
             panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(label4);
             panelSearch.Controls.Add(erorrInfoSumLabel);
             panelSearch.Controls.Add(errorInfoNameLabel);
             panelSearch.Controls.Add(errorInfoIdLabel);
@@ -235,6 +237,16 @@ namespace BankDeposit.Forms
             panelSearch.Name = "panelSearch";
             panelSearch.Size = new Size(561, 270);
             panelSearch.TabIndex = 1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.Window;
+            label4.Location = new Point(246, 121);
+            label4.Name = "label4";
+            label4.Size = new Size(17, 20);
+            label4.TabIndex = 66;
+            label4.Text = "₴";
             // 
             // erorrInfoSumLabel
             // 
@@ -317,9 +329,9 @@ namespace BankDeposit.Forms
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(192, 233);
+            buttonSearch.Location = new Point(182, 235);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(92, 32);
+            buttonSearch.Size = new Size(116, 30);
             buttonSearch.TabIndex = 12;
             buttonSearch.Text = "Пошук";
             buttonSearch.UseVisualStyleBackColor = true;
@@ -598,5 +610,6 @@ namespace BankDeposit.Forms
         private Label errorInfoNameLabel;
         private Label errorInfoIdLabel;
         private Label erorrInfoSumLabel;
+        private Label label4;
     }
 }

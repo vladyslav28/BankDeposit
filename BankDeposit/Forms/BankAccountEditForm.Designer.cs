@@ -43,11 +43,13 @@
             sumBox = new TextBox();
             categoryBox = new ComboBox();
             labelSum = new Label();
+            label4 = new Label();
             panelEdit.SuspendLayout();
             SuspendLayout();
             // 
             // panelEdit
             // 
+            panelEdit.Controls.Add(label4);
             panelEdit.Controls.Add(buttonCancel);
             panelEdit.Controls.Add(dateTimePickerLastOperation);
             panelEdit.Controls.Add(dateTimePickerBirth);
@@ -116,7 +118,7 @@
             // 
             nameBox.Location = new Point(130, 48);
             nameBox.Name = "nameBox";
-            nameBox.Size = new Size(187, 27);
+            nameBox.Size = new Size(193, 27);
             nameBox.TabIndex = 16;
             // 
             // labelId
@@ -151,7 +153,7 @@
             idBox.Enabled = false;
             idBox.Location = new Point(130, 9);
             idBox.Name = "idBox";
-            idBox.Size = new Size(187, 27);
+            idBox.Size = new Size(193, 27);
             idBox.TabIndex = 15;
             // 
             // labelDateBirth
@@ -176,7 +178,7 @@
             // 
             sumBox.Location = new Point(130, 129);
             sumBox.Name = "sumBox";
-            sumBox.Size = new Size(187, 27);
+            sumBox.Size = new Size(193, 27);
             sumBox.TabIndex = 20;
             // 
             // categoryBox
@@ -184,7 +186,7 @@
             categoryBox.FormattingEnabled = true;
             categoryBox.Location = new Point(130, 87);
             categoryBox.Name = "categoryBox";
-            categoryBox.Size = new Size(187, 28);
+            categoryBox.Size = new Size(193, 28);
             categoryBox.TabIndex = 18;
             // 
             // labelSum
@@ -195,6 +197,17 @@
             labelSum.Size = new Size(44, 20);
             labelSum.TabIndex = 19;
             labelSum.Text = "Сума";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.Window;
+            label4.Location = new Point(300, 134);
+            label4.Name = "label4";
+            label4.Size = new Size(17, 20);
+            label4.TabIndex = 66;
+            label4.Text = "₴";
+            label4.Click += label4_Click;
             // 
             // BankAccountEditForm
             // 
@@ -226,5 +239,6 @@
         private DateTimePicker dateTimePickerBirth;
         private DateTimePicker dateTimePickerLastOperation;
         private Button buttonCancel;
+        private Label label4;
     }
 }

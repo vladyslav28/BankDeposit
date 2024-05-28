@@ -18,6 +18,7 @@ namespace BankDeposit.Forms
             BankAccount = account;
             originalBankAccount = new BankAccount(account);
             DisplayAccountData();
+            InitializeErrorLabels();
         }
 
         private void DisplayAccountData()
@@ -25,9 +26,51 @@ namespace BankDeposit.Forms
             idBox.Text = BankAccount.Id.ToString();
             nameLabel.Text = BankAccount.Name;
             categoryLabel.Text = BankAccount.DepositCategory;
-            sumLabel.Text = BankAccount.CurrentSum.ToString("F2");
+            sumLabel.Text = BankAccount.CurrentSum.ToString() + "₴";
             dateTimePickerLastOperation.Value = BankAccount.LastOperationDate.Date;
             textBoxAmount.Text = "";
+        }
+
+        private void InitializeErrorLabels()
+        {
+            errorSumLabel.Visible = false;
+            errorInfoAmountLabel.Visible = false;
+        }
+
+        private bool ValidateInput(bool showErrorMessages)
+        {
+            bool isValid = true;
+
+            if (!string.IsNullOrEmpty(textBoxAmount.Text))
+            {
+                if (!decimal.TryParse(textBoxAmount.Text, out _) || textBoxAmount.Text.Any(c => !char.IsDigit(c) && c != ',' && c != '.'))
+                {
+                    errorSumLabel.Visible = true;
+                    if (showErrorMessages)
+                    {
+                        errorInfoAmountLabel.Text = "Значення містить заборонені символи.";
+                        errorInfoAmountLabel.Visible = true;
+                    }
+                    isValid = false;
+                }
+                else
+                {
+                    errorSumLabel.Visible = false;
+                    errorInfoAmountLabel.Visible = false;
+                }
+            }
+            else
+            {
+                errorSumLabel.Visible = false;
+                errorInfoAmountLabel.Visible = false;
+            }
+
+            if (!isValid && showErrorMessages)
+            {
+                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return isValid;
         }
 
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
@@ -60,7 +103,7 @@ namespace BankDeposit.Forms
 
         private void buttonWithdraw_Click(object sender, EventArgs e)
         {
-            if (decimal.TryParse(textBoxAmount.Text, out decimal amount))
+            if (ValidateInput(true) && decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
                 var (success, interest) = BankAccount.Withdraw(amount);
                 if (success)
@@ -73,23 +116,15 @@ namespace BankDeposit.Forms
                     MessageBox.Show("Недостатньо коштів для зняття", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void buttonDeposit_Click(object sender, EventArgs e)
         {
-            if (decimal.TryParse(textBoxAmount.Text, out decimal amount))
+            if (ValidateInput(true) && decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
                 decimal interest = BankAccount.Deposit(amount);
                 DisplayAccountData();
                 DisplayInterestMessage(interest);
-            }
-            else
-            {
-                MessageBox.Show("Невірний формат суми", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -99,7 +134,7 @@ namespace BankDeposit.Forms
             {
                 string message = $"Нараховано: {interest:F2} " + Environment.NewLine +
                                  $"Початкова сума: {originalBankAccount.CurrentSum:F2}." + Environment.NewLine +
-                                 $"Категорієя депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
+                                 $"Категорія депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
                                  $"Поточний баланс: {BankAccount.CurrentSum:F2}";
 
                 MessageBox.Show(message, "Нарахування відсотків", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,16 +153,19 @@ namespace BankDeposit.Forms
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Ви дійсно хочете зберегти зміни?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (ValidateInput(true))
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                CancelOperation();
-                DisplayAccountData();
+                var result = MessageBox.Show("Ви дійсно хочете зберегти зміни?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    CancelOperation();
+                    DisplayAccountData();
+                }
             }
         }
 
@@ -150,7 +188,9 @@ namespace BankDeposit.Forms
 
         private void textBoxAmount_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateInput(false);
         }
+
+    
     }
 }
