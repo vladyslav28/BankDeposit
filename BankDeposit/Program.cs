@@ -1,4 +1,5 @@
 using BankDeposit.Forms;
+using System.Globalization;
 
 namespace BankDeposit
 {
@@ -15,7 +16,7 @@ namespace BankDeposit
             ApplicationConfiguration.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             using (var loginForm = new LoginForm())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)

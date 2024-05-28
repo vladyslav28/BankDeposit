@@ -13,9 +13,13 @@ namespace BankDeposit.Forms
         public MainForm()
         {
             InitializeComponent();
+           
+
             InitializeCategoryBox();
             LoadBankData();
             dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
+            dateTimePickerBirth.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.Value = DateTime.Now.Date;
             InitializeErrorLabels();
         }
@@ -61,13 +65,11 @@ namespace BankDeposit.Forms
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
-
                     LoadBankData();
                     this.Show();
                 }
                 else
                 {
-
                     Application.Exit();
                 }
             }
@@ -115,75 +117,122 @@ namespace BankDeposit.Forms
 
         private void idBox_TextChanged(object sender, EventArgs e)
         {
-            ValidateInput();
+            ValidateInput(false);
         }
 
         private void nameBox_TextChanged(object sender, EventArgs e)
         {
-            ValidateInput();
+            ValidateInput(false);
         }
 
         private void sumBox_TextChanged(object sender, EventArgs e)
         {
-            ValidateInput();
+            ValidateInput(false);
         }
 
         private void InitializeErrorLabels()
         {
             errorIdLabel.Visible = false;
+            errorInfoIdLabel.Visible = false;
+
             errorNameLabel.Visible = false;
+            errorInfoNameLabel.Visible = false;
+
             errorSumLabel.Visible = false;
+            erorrInfoSumLabel.Visible = false;
         }
 
-        private bool ValidateInput()
+        private bool ValidateInput(bool showErrorMessages)
         {
             bool isValid = true;
 
+           
             if (!string.IsNullOrEmpty(idBox.Text) && !int.TryParse(idBox.Text, out _))
             {
                 errorIdLabel.Visible = true;
+                if (showErrorMessages)
+                {
+                    errorInfoIdLabel.Text = "ID містить літери або символи";
+                    errorInfoIdLabel.Visible = true;
+                }
                 isValid = false;
             }
             else
             {
                 errorIdLabel.Visible = false;
+                errorInfoIdLabel.Visible = false;
             }
 
+        
             if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
             {
                 errorNameLabel.Visible = true;
+                if (showErrorMessages)
+                {
+                    errorInfoNameLabel.Text = "";
+                    if (nameBox.Text.Any(char.IsDigit))
+                    {
+                        errorInfoNameLabel.Text += "ПІБ містить цифри. ";
+                    }
+                    if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.' && !char.IsDigit(c)))
+                    {
+                        errorInfoNameLabel.Text += "ПІБ містить заборонені символи ";
+                    }
+                    errorInfoNameLabel.Visible = true;
+                }
                 isValid = false;
             }
             else
             {
                 errorNameLabel.Visible = false;
+                errorInfoNameLabel.Visible = false;
             }
 
+           
             if (!string.IsNullOrEmpty(sumBox.Text))
             {
                 if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ','))
                 {
                     errorSumLabel.Visible = true;
+                    if (showErrorMessages)
+                    {
+                        erorrInfoSumLabel.Text = "Сума містить текст або заборонені символи.";
+                        erorrInfoSumLabel.Visible = true;
+                    }
                     isValid = false;
                 }
                 else
                 {
                     errorSumLabel.Visible = false;
+                    erorrInfoSumLabel.Visible = false;
                 }
             }
             else
             {
                 errorSumLabel.Visible = false;
+                erorrInfoSumLabel.Visible = false;
+            }
+
+            if (!isValid && showErrorMessages)
+            {
+                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return isValid;
         }
 
+
+
+
+
+
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
+            bool isValid = ValidateInput(true);
+            if (!isValid)
             {
-                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return;
             }
 
@@ -207,11 +256,6 @@ namespace BankDeposit.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
-            {
-                MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             AddBankAccount();
         }
 
@@ -281,15 +325,15 @@ namespace BankDeposit.Forms
             }
         }
 
-        private void видалитиЕлементToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видалитиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Введіть ID акаунту для видалення:", "Видалити акаунт", "");
             if (int.TryParse(input, out int accountId))
             {
-                BankAccount bankAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
-                if (bankAccount != null)
+                BankAccount selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
+                if (selectedAccount != null)
                 {
-                    DeleteBankAccount(bankAccount);
+                    DeleteBankAccount(selectedAccount);
                 }
                 else
                 {
@@ -312,7 +356,10 @@ namespace BankDeposit.Forms
                              $"Поточна сума: {bankAccount.CurrentSum}" + Environment.NewLine +
                              $"Дата останьої операції: {bankAccount.LastOperationDate:dd.MM.yyyy}" + Environment.NewLine;
 
-            DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+
+         
+            DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
             {
@@ -424,6 +471,16 @@ namespace BankDeposit.Forms
                     continueEditing = false;
                 }
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

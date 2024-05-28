@@ -81,20 +81,24 @@
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(362, 147);
+            dateTimePickerLastOperation.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerLastOperation.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.Size = new Size(184, 27);
             dateTimePickerLastOperation.TabIndex = 39;
-            dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
             // 
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(362, 62);
+            dateTimePickerBirth.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.Size = new Size(184, 27);
             dateTimePickerBirth.TabIndex = 38;
-            dateTimePickerBirth.Value = DateTime.Now.Date;
+            dateTimePickerBirth.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // nameBox

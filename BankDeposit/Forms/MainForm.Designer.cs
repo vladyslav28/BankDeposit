@@ -39,7 +39,6 @@ namespace BankDeposit.Forms
             toolStripSeparator = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
-            toolStripSeparator2 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
             toolsToolStripMenuItem = new ToolStripMenuItem();
             optionsToolStripMenuItem = new ToolStripMenuItem();
@@ -52,6 +51,9 @@ namespace BankDeposit.Forms
             aboutToolStripMenuItem = new ToolStripMenuItem();
             виконавСтгрПЗПІ23УсВладиславToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
+            erorrInfoSumLabel = new Label();
+            errorInfoNameLabel = new Label();
+            errorInfoIdLabel = new Label();
             errorIdLabel = new Label();
             errorNameLabel = new Label();
             errorSumLabel = new Label();
@@ -74,10 +76,10 @@ namespace BankDeposit.Forms
             buttonEdit = new Button();
             showBox = new TextBox();
             panelShow = new Panel();
+            labelCount = new Label();
             buttonMoney = new Button();
             buttonAdd = new Button();
             buttonDelete = new Button();
-            labelCount = new Label();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
@@ -90,13 +92,13 @@ namespace BankDeposit.Forms
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(658, 28);
+            menuStrip1.Size = new Size(782, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, toolStripSeparator2, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "&File";
@@ -107,14 +109,14 @@ namespace BankDeposit.Forms
             openToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openToolStripMenuItem.Size = new Size(224, 26);
+            openToolStripMenuItem.Size = new Size(181, 26);
             openToolStripMenuItem.Text = "&Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(221, 6);
+            toolStripSeparator.Size = new Size(178, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -122,25 +124,20 @@ namespace BankDeposit.Forms
             saveToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveToolStripMenuItem.Size = new Size(224, 26);
+            saveToolStripMenuItem.Size = new Size(181, 26);
             saveToolStripMenuItem.Text = "&Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(221, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(221, 6);
+            toolStripSeparator1.Size = new Size(178, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(224, 26);
-            exitToolStripMenuItem.Text = "E&xit";
+            exitToolStripMenuItem.Size = new Size(181, 26);
+            exitToolStripMenuItem.Text = "&Вийти";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
@@ -176,7 +173,7 @@ namespace BankDeposit.Forms
             видалитиЕлементToolStripMenuItem.Name = "видалитиЕлементToolStripMenuItem";
             видалитиЕлементToolStripMenuItem.Size = new Size(217, 26);
             видалитиЕлементToolStripMenuItem.Text = "Видалити акаунт";
-            видалитиЕлементToolStripMenuItem.Click += видалитиЕлементToolStripMenuItem_Click;
+            видалитиЕлементToolStripMenuItem.Click += видалитиToolStripMenuItem_Click;
             // 
             // фінансовіОпераціїToolStripMenuItem
             // 
@@ -195,13 +192,13 @@ namespace BankDeposit.Forms
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(221, 6);
+            toolStripSeparator5.Size = new Size(139, 6);
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { виконавСтгрПЗПІ23УсВладиславToolStripMenuItem });
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Size = new Size(142, 26);
             aboutToolStripMenuItem.Text = "&About...";
             // 
             // виконавСтгрПЗПІ23УсВладиславToolStripMenuItem
@@ -214,6 +211,9 @@ namespace BankDeposit.Forms
             // 
             panelSearch.Anchor = AnchorStyles.Top;
             panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(erorrInfoSumLabel);
+            panelSearch.Controls.Add(errorInfoNameLabel);
+            panelSearch.Controls.Add(errorInfoIdLabel);
             panelSearch.Controls.Add(errorIdLabel);
             panelSearch.Controls.Add(errorNameLabel);
             panelSearch.Controls.Add(errorSumLabel);
@@ -231,16 +231,50 @@ namespace BankDeposit.Forms
             panelSearch.Controls.Add(idBox);
             panelSearch.Controls.Add(labelName);
             panelSearch.Controls.Add(labelId);
-            panelSearch.Location = new Point(58, 31);
+            panelSearch.Location = new Point(120, 31);
             panelSearch.Name = "panelSearch";
-            panelSearch.Size = new Size(534, 212);
+            panelSearch.Size = new Size(561, 270);
             panelSearch.TabIndex = 1;
+            // 
+            // erorrInfoSumLabel
+            // 
+            erorrInfoSumLabel.AutoSize = true;
+            erorrInfoSumLabel.Font = new Font("Segoe UI", 7F);
+            erorrInfoSumLabel.ForeColor = Color.Red;
+            erorrInfoSumLabel.Location = new Point(88, 148);
+            erorrInfoSumLabel.Name = "erorrInfoSumLabel";
+            erorrInfoSumLabel.Size = new Size(0, 15);
+            erorrInfoSumLabel.TabIndex = 19;
+            erorrInfoSumLabel.Visible = false;
+            // 
+            // errorInfoNameLabel
+            // 
+            errorInfoNameLabel.AutoSize = true;
+            errorInfoNameLabel.Font = new Font("Segoe UI", 7F);
+            errorInfoNameLabel.ForeColor = Color.Red;
+            errorInfoNameLabel.Location = new Point(88, 95);
+            errorInfoNameLabel.Name = "errorInfoNameLabel";
+            errorInfoNameLabel.Size = new Size(0, 15);
+            errorInfoNameLabel.TabIndex = 18;
+            errorInfoNameLabel.Visible = false;
+            // 
+            // errorInfoIdLabel
+            // 
+            errorInfoIdLabel.AutoSize = true;
+            errorInfoIdLabel.Font = new Font("Segoe UI", 7F);
+            errorInfoIdLabel.ForeColor = Color.Red;
+            errorInfoIdLabel.Location = new Point(88, 42);
+            errorInfoIdLabel.Name = "errorInfoIdLabel";
+            errorInfoIdLabel.Size = new Size(0, 15);
+            errorInfoIdLabel.TabIndex = 17;
+            errorInfoIdLabel.Visible = false;
             // 
             // errorIdLabel
             // 
             errorIdLabel.AutoSize = true;
+            errorIdLabel.Font = new Font("Segoe UI", 9F);
             errorIdLabel.ForeColor = Color.Red;
-            errorIdLabel.Location = new Point(284, 15);
+            errorIdLabel.Location = new Point(269, 15);
             errorIdLabel.Name = "errorIdLabel";
             errorIdLabel.Size = new Size(15, 20);
             errorIdLabel.TabIndex = 16;
@@ -251,7 +285,7 @@ namespace BankDeposit.Forms
             // 
             errorNameLabel.AutoSize = true;
             errorNameLabel.ForeColor = Color.Red;
-            errorNameLabel.Location = new Point(284, 56);
+            errorNameLabel.Location = new Point(269, 68);
             errorNameLabel.Name = "errorNameLabel";
             errorNameLabel.Size = new Size(15, 20);
             errorNameLabel.TabIndex = 15;
@@ -262,7 +296,7 @@ namespace BankDeposit.Forms
             // 
             errorSumLabel.AutoSize = true;
             errorSumLabel.ForeColor = Color.Red;
-            errorSumLabel.Location = new Point(284, 134);
+            errorSumLabel.Location = new Point(269, 121);
             errorSumLabel.Name = "errorSumLabel";
             errorSumLabel.Size = new Size(15, 20);
             errorSumLabel.TabIndex = 14;
@@ -273,9 +307,9 @@ namespace BankDeposit.Forms
             // 
             buttonReset.BackColor = SystemColors.ControlLight;
             buttonReset.ForeColor = Color.CornflowerBlue;
-            buttonReset.Location = new Point(3, 178);
+            buttonReset.Location = new Point(304, 233);
             buttonReset.Name = "buttonReset";
-            buttonReset.Size = new Size(281, 29);
+            buttonReset.Size = new Size(252, 32);
             buttonReset.TabIndex = 13;
             buttonReset.Text = "Скинути пошукові налаштування";
             buttonReset.UseVisualStyleBackColor = false;
@@ -283,11 +317,11 @@ namespace BankDeposit.Forms
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(350, 178);
+            buttonSearch.Location = new Point(192, 233);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(92, 32);
             buttonSearch.TabIndex = 12;
-            buttonSearch.Text = "Search";
+            buttonSearch.Text = "Пошук";
             buttonSearch.UseVisualStyleBackColor = true;
             buttonSearch.Click += buttonSearch_Click;
             // 
@@ -296,6 +330,7 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Checked = false;
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(339, 130);
+            dateTimePickerLastOperation.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
@@ -307,7 +342,6 @@ namespace BankDeposit.Forms
             dateTimePickerBirth.Checked = false;
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(339, 51);
-            dateTimePickerBirth.MaxDate = new DateTime(2222, 12, 31, 0, 0, 0, 0);
             dateTimePickerBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.ShowCheckBox = true;
@@ -335,7 +369,7 @@ namespace BankDeposit.Forms
             // 
             // sumBox
             // 
-            sumBox.Location = new Point(82, 132);
+            sumBox.Location = new Point(82, 118);
             sumBox.Name = "sumBox";
             sumBox.Size = new Size(187, 27);
             sumBox.TabIndex = 7;
@@ -344,7 +378,7 @@ namespace BankDeposit.Forms
             // labelSum
             // 
             labelSum.AutoSize = true;
-            labelSum.Location = new Point(23, 132);
+            labelSum.Location = new Point(23, 118);
             labelSum.Name = "labelSum";
             labelSum.Size = new Size(44, 20);
             labelSum.TabIndex = 6;
@@ -353,7 +387,7 @@ namespace BankDeposit.Forms
             // categoryBox
             // 
             categoryBox.FormattingEnabled = true;
-            categoryBox.Location = new Point(82, 90);
+            categoryBox.Location = new Point(82, 171);
             categoryBox.Name = "categoryBox";
             categoryBox.Size = new Size(187, 28);
             categoryBox.TabIndex = 5;
@@ -361,7 +395,7 @@ namespace BankDeposit.Forms
             // labelCategory
             // 
             labelCategory.AutoSize = true;
-            labelCategory.Location = new Point(3, 90);
+            labelCategory.Location = new Point(3, 171);
             labelCategory.Name = "labelCategory";
             labelCategory.Size = new Size(76, 20);
             labelCategory.TabIndex = 4;
@@ -369,7 +403,7 @@ namespace BankDeposit.Forms
             // 
             // nameBox
             // 
-            nameBox.Location = new Point(82, 51);
+            nameBox.Location = new Point(82, 65);
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(187, 27);
             nameBox.TabIndex = 3;
@@ -386,7 +420,7 @@ namespace BankDeposit.Forms
             // labelName
             // 
             labelName.AutoSize = true;
-            labelName.Location = new Point(34, 51);
+            labelName.Location = new Point(34, 65);
             labelName.Name = "labelName";
             labelName.Size = new Size(33, 20);
             labelName.TabIndex = 1;
@@ -406,9 +440,9 @@ namespace BankDeposit.Forms
             resultList.DataSource = bankAccountBindingSource;
             resultList.DisplayMember = "CustomDisplay";
             resultList.FormattingEnabled = true;
-            resultList.Location = new Point(0, 3);
+            resultList.Location = new Point(3, 28);
             resultList.Name = "resultList";
-            resultList.Size = new Size(135, 184);
+            resultList.Size = new Size(150, 184);
             resultList.TabIndex = 2;
             resultList.ValueMember = "Id";
             // 
@@ -418,7 +452,7 @@ namespace BankDeposit.Forms
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(418, 33);
+            buttonEdit.Location = new Point(426, 76);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(116, 29);
             buttonEdit.TabIndex = 3;
@@ -429,28 +463,41 @@ namespace BankDeposit.Forms
             // showBox
             // 
             showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay1", true));
-            showBox.Location = new Point(152, 3);
+            showBox.Location = new Point(172, 28);
             showBox.Multiline = true;
             showBox.Name = "showBox";
-            showBox.Size = new Size(245, 184);
+            showBox.Size = new Size(212, 184);
             showBox.TabIndex = 4;
+            showBox.TextChanged += showBox_TextChanged;
             // 
             // panelShow
             // 
+            panelShow.Anchor = AnchorStyles.Top;
+            panelShow.BorderStyle = BorderStyle.FixedSingle;
+            panelShow.Controls.Add(labelCount);
             panelShow.Controls.Add(buttonMoney);
             panelShow.Controls.Add(buttonAdd);
             panelShow.Controls.Add(buttonDelete);
             panelShow.Controls.Add(showBox);
             panelShow.Controls.Add(buttonEdit);
             panelShow.Controls.Add(resultList);
-            panelShow.Location = new Point(58, 269);
+            panelShow.Location = new Point(120, 307);
             panelShow.Name = "panelShow";
-            panelShow.Size = new Size(534, 217);
+            panelShow.Size = new Size(561, 224);
             panelShow.TabIndex = 4;
+            // 
+            // labelCount
+            // 
+            labelCount.AutoSize = true;
+            labelCount.Location = new Point(3, 0);
+            labelCount.Name = "labelCount";
+            labelCount.Size = new Size(29, 20);
+            labelCount.TabIndex = 5;
+            labelCount.Text = "ffff";
             // 
             // buttonMoney
             // 
-            buttonMoney.Location = new Point(379, 186);
+            buttonMoney.Location = new Point(404, 150);
             buttonMoney.Name = "buttonMoney";
             buttonMoney.Size = new Size(152, 28);
             buttonMoney.TabIndex = 7;
@@ -460,7 +507,7 @@ namespace BankDeposit.Forms
             // 
             // buttonAdd
             // 
-            buttonAdd.Location = new Point(418, 68);
+            buttonAdd.Location = new Point(426, 40);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(116, 30);
             buttonAdd.TabIndex = 6;
@@ -470,7 +517,7 @@ namespace BankDeposit.Forms
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(418, 104);
+            buttonDelete.Location = new Point(426, 111);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(116, 33);
             buttonDelete.TabIndex = 5;
@@ -478,27 +525,19 @@ namespace BankDeposit.Forms
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
-            // labelCount
-            // 
-            labelCount.AutoSize = true;
-            labelCount.Location = new Point(62, 246);
-            labelCount.Name = "labelCount";
-            labelCount.Size = new Size(0, 20);
-            labelCount.TabIndex = 5;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(658, 498);
-            Controls.Add(labelCount);
+            ClientSize = new Size(782, 553);
             Controls.Add(panelShow);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(675, 545);
+            MinimumSize = new Size(800, 600);
             Name = "MainForm";
             Text = "MainForm";
+            Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panelSearch.ResumeLayout(false);
@@ -518,7 +557,6 @@ namespace BankDeposit.Forms
         private ToolStripSeparator toolStripSeparator;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem toolsToolStripMenuItem;
         private ToolStripMenuItem optionsToolStripMenuItem;
@@ -557,5 +595,8 @@ namespace BankDeposit.Forms
         private ToolStripMenuItem редагуватиToolStripMenuItem;
         private ToolStripMenuItem виконавСтгрПЗПІ23УсВладиславToolStripMenuItem;
         private ToolStripMenuItem фінансовіОпераціїToolStripMenuItem;
+        private Label errorInfoNameLabel;
+        private Label errorInfoIdLabel;
+        private Label erorrInfoSumLabel;
     }
 }

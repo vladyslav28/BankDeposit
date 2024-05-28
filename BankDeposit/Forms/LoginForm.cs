@@ -12,18 +12,20 @@ namespace BankDeposit.Forms
 {
     public partial class LoginForm : Form
     {
+
+
         public LoginForm()
         {
             InitializeComponent();
             textBoxUsername.Text = "Admin";
+
+
         }
 
 
-     
 
         private void buttonLogin_Click_1(object sender, EventArgs e)
         {
-            
             string username = textBoxUsername.Text;
             string password = textBoxPassword.Text;
 
@@ -34,9 +36,17 @@ namespace BankDeposit.Forms
             }
             else
             {
-                MessageBox.Show("Неправильний пароль", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                labelError.Text = "Неправильний пароль";
             }
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
 
         }
     }
