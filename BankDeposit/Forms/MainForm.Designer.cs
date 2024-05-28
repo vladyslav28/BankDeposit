@@ -48,8 +48,8 @@ namespace BankDeposit.Forms
             фінансовіОпераціїToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
+            helpWithTypeToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem = new ToolStripMenuItem();
             panelSearch = new Panel();
             label4 = new Label();
             erorrInfoSumLabel = new Label();
@@ -77,14 +77,18 @@ namespace BankDeposit.Forms
             buttonEdit = new Button();
             showBox = new TextBox();
             panelShow = new Panel();
-            labelCount = new Label();
-            buttonMoney = new Button();
-            buttonAdd = new Button();
+            label1 = new Label();
+            panel1 = new Panel();
+            label2 = new Label();
             buttonDelete = new Button();
+            buttonMoney = new Button();
+            labelCount = new Label();
+            buttonAdd = new Button();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
             panelShow.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -110,7 +114,7 @@ namespace BankDeposit.Forms
             openToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openToolStripMenuItem.Size = new Size(181, 26);
+            openToolStripMenuItem.Size = new Size(224, 26);
             openToolStripMenuItem.Text = "&Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -180,12 +184,12 @@ namespace BankDeposit.Forms
             // 
             фінансовіОпераціїToolStripMenuItem.Name = "фінансовіОпераціїToolStripMenuItem";
             фінансовіОпераціїToolStripMenuItem.Size = new Size(225, 26);
-            фінансовіОпераціїToolStripMenuItem.Text = "Фінансові операції";
+            фінансовіОпераціїToolStripMenuItem.Text = "&Фінансові операції";
             фінансовіОпераціїToolStripMenuItem.Click += фінансовіОпераціїToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripSeparator5, aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripSeparator5, helpWithTypeToolStripMenuItem, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(55, 24);
             helpToolStripMenuItem.Text = "&Help";
@@ -193,20 +197,21 @@ namespace BankDeposit.Forms
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(139, 6);
+            toolStripSeparator5.Size = new Size(221, 6);
+            // 
+            // helpWithTypeToolStripMenuItem
+            // 
+            helpWithTypeToolStripMenuItem.Name = "helpWithTypeToolStripMenuItem";
+            helpWithTypeToolStripMenuItem.Size = new Size(224, 26);
+            helpWithTypeToolStripMenuItem.Text = "&Help with data";
+            helpWithTypeToolStripMenuItem.Click += helpWithTypeToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
-            aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { виконавСтгрПЗПІ23УсВладиславToolStripMenuItem });
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(142, 26);
-            aboutToolStripMenuItem.Text = "&About...";
-            // 
-            // виконавСтгрПЗПІ23УсВладиславToolStripMenuItem
-            // 
-            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Name = "виконавСтгрПЗПІ23УсВладиславToolStripMenuItem";
-            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Size = new Size(356, 26);
-            виконавСтгрПЗПІ23УсВладиславToolStripMenuItem.Text = "Виконав ст.гр.ПЗПІ-23-6 Ус Владислав";
+            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Text = "&About program";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // panelSearch
             // 
@@ -233,9 +238,9 @@ namespace BankDeposit.Forms
             panelSearch.Controls.Add(idBox);
             panelSearch.Controls.Add(labelName);
             panelSearch.Controls.Add(labelId);
-            panelSearch.Location = new Point(120, 31);
+            panelSearch.Location = new Point(102, 31);
             panelSearch.Name = "panelSearch";
-            panelSearch.Size = new Size(561, 270);
+            panelSearch.Size = new Size(579, 270);
             panelSearch.TabIndex = 1;
             // 
             // label4
@@ -451,10 +456,12 @@ namespace BankDeposit.Forms
             // 
             resultList.DataSource = bankAccountBindingSource;
             resultList.DisplayMember = "CustomDisplay";
+            resultList.Font = new Font("Segoe UI", 8.5F);
             resultList.FormattingEnabled = true;
-            resultList.Location = new Point(3, 28);
+            resultList.ItemHeight = 19;
+            resultList.Location = new Point(3, 29);
             resultList.Name = "resultList";
-            resultList.Size = new Size(150, 184);
+            resultList.Size = new Size(150, 175);
             resultList.TabIndex = 2;
             resultList.ValueMember = "Id";
             // 
@@ -464,7 +471,7 @@ namespace BankDeposit.Forms
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(426, 76);
+            buttonEdit.Location = new Point(48, 56);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(116, 29);
             buttonEdit.TabIndex = 3;
@@ -475,61 +482,62 @@ namespace BankDeposit.Forms
             // showBox
             // 
             showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay1", true));
-            showBox.Location = new Point(172, 28);
+            showBox.Font = new Font("Segoe UI", 8.5F);
+            showBox.Location = new Point(159, 72);
             showBox.Multiline = true;
             showBox.Name = "showBox";
-            showBox.Size = new Size(212, 184);
+            showBox.Size = new Size(240, 132);
             showBox.TabIndex = 4;
-            showBox.TextChanged += showBox_TextChanged;
             // 
             // panelShow
             // 
             panelShow.Anchor = AnchorStyles.Top;
             panelShow.BorderStyle = BorderStyle.FixedSingle;
+            panelShow.Controls.Add(label1);
+            panelShow.Controls.Add(panel1);
             panelShow.Controls.Add(labelCount);
-            panelShow.Controls.Add(buttonMoney);
             panelShow.Controls.Add(buttonAdd);
-            panelShow.Controls.Add(buttonDelete);
             panelShow.Controls.Add(showBox);
-            panelShow.Controls.Add(buttonEdit);
             panelShow.Controls.Add(resultList);
-            panelShow.Location = new Point(120, 307);
+            panelShow.Location = new Point(80, 307);
             panelShow.Name = "panelShow";
-            panelShow.Size = new Size(561, 224);
+            panelShow.Size = new Size(623, 246);
             panelShow.TabIndex = 4;
             // 
-            // labelCount
+            // label1
             // 
-            labelCount.AutoSize = true;
-            labelCount.Location = new Point(3, 0);
-            labelCount.Name = "labelCount";
-            labelCount.Size = new Size(29, 20);
-            labelCount.TabIndex = 5;
-            labelCount.Text = "ffff";
+            label1.AutoSize = true;
+            label1.Location = new Point(159, 49);
+            label1.Name = "label1";
+            label1.Size = new Size(138, 20);
+            label1.TabIndex = 9;
+            label1.Text = "Обраний елемент:";
             // 
-            // buttonMoney
+            // panel1
             // 
-            buttonMoney.Location = new Point(404, 150);
-            buttonMoney.Name = "buttonMoney";
-            buttonMoney.Size = new Size(152, 28);
-            buttonMoney.TabIndex = 7;
-            buttonMoney.Text = "Фінансові операції";
-            buttonMoney.UseVisualStyleBackColor = true;
-            buttonMoney.Click += buttonMoney_Click;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(buttonEdit);
+            panel1.Controls.Add(buttonDelete);
+            panel1.Controls.Add(buttonMoney);
+            panel1.Location = new Point(406, 20);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(212, 184);
+            panel1.TabIndex = 8;
             // 
-            // buttonAdd
+            // label2
             // 
-            buttonAdd.Location = new Point(426, 40);
-            buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(116, 30);
-            buttonAdd.TabIndex = 6;
-            buttonAdd.Text = "Додати";
-            buttonAdd.UseVisualStyleBackColor = true;
-            buttonAdd.Click += buttonAdd_Click;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 8.3F);
+            label2.Location = new Point(6, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(199, 19);
+            label2.TabIndex = 10;
+            label2.Text = "Робота з обраним елементом";
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(426, 111);
+            buttonDelete.Location = new Point(48, 91);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(116, 33);
             buttonDelete.TabIndex = 5;
@@ -537,19 +545,47 @@ namespace BankDeposit.Forms
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
+            // buttonMoney
+            // 
+            buttonMoney.Location = new Point(48, 130);
+            buttonMoney.Name = "buttonMoney";
+            buttonMoney.Size = new Size(116, 48);
+            buttonMoney.TabIndex = 7;
+            buttonMoney.Text = "Фінансові операції";
+            buttonMoney.UseVisualStyleBackColor = true;
+            buttonMoney.Click += buttonMoney_Click;
+            // 
+            // labelCount
+            // 
+            labelCount.AutoSize = true;
+            labelCount.Font = new Font("Segoe UI", 8.5F);
+            labelCount.Location = new Point(3, 5);
+            labelCount.Name = "labelCount";
+            labelCount.Size = new Size(0, 20);
+            labelCount.TabIndex = 5;
+            // 
+            // buttonAdd
+            // 
+            buttonAdd.Location = new Point(3, 210);
+            buttonAdd.Name = "buttonAdd";
+            buttonAdd.Size = new Size(150, 30);
+            buttonAdd.TabIndex = 6;
+            buttonAdd.Text = "Додати елемент";
+            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(782, 553);
+            ClientSize = new Size(782, 563);
             Controls.Add(panelShow);
             Controls.Add(panelSearch);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(800, 600);
+            MinimumSize = new Size(800, 610);
             Name = "MainForm";
             Text = "MainForm";
-            Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panelSearch.ResumeLayout(false);
@@ -557,6 +593,8 @@ namespace BankDeposit.Forms
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).EndInit();
             panelShow.ResumeLayout(false);
             panelShow.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -605,11 +643,14 @@ namespace BankDeposit.Forms
         private ToolStripMenuItem додатиЕлементToolStripMenuItem;
         private ToolStripMenuItem видалитиЕлементToolStripMenuItem;
         private ToolStripMenuItem редагуватиToolStripMenuItem;
-        private ToolStripMenuItem виконавСтгрПЗПІ23УсВладиславToolStripMenuItem;
         private ToolStripMenuItem фінансовіОпераціїToolStripMenuItem;
         private Label errorInfoNameLabel;
         private Label errorInfoIdLabel;
         private Label erorrInfoSumLabel;
         private Label label4;
+        private Panel panel1;
+        private Label label1;
+        private Label label2;
+        private ToolStripMenuItem helpWithTypeToolStripMenuItem;
     }
 }

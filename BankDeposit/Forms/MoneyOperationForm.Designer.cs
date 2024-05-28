@@ -122,7 +122,7 @@
             errorInfoAmountLabel.AutoSize = true;
             errorInfoAmountLabel.Font = new Font("Segoe UI", 6F);
             errorInfoAmountLabel.ForeColor = Color.Red;
-            errorInfoAmountLabel.Location = new Point(126, 173);
+            errorInfoAmountLabel.Location = new Point(114, 173);
             errorInfoAmountLabel.Name = "errorInfoAmountLabel";
             errorInfoAmountLabel.Size = new Size(0, 12);
             errorInfoAmountLabel.TabIndex = 64;

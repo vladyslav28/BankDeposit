@@ -37,8 +37,8 @@ namespace BankDeposit.Models
                     $"ПІБ:{Name} " + Environment.NewLine +
                     $"Дата народження:{BirthDate.ToString("dd.MM.yyyy")}" + Environment.NewLine +
                     $"Категорія депозиту:{DepositCategory} " + Environment.NewLine +
-                    $"Поточна сума:{CurrentSum} " + Environment.NewLine +
-                    $"Дата останьої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine;
+                    $"Поточна сума:{CurrentSum} ₴" + Environment.NewLine +
+                    $"Дата останньої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine;
             }
         }
 

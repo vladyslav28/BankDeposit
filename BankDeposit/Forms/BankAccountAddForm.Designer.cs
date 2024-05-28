@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             panelAdd = new Panel();
+            labelInfoCategory = new Label();
+            labelErrorCategory = new Label();
+            buttonOk = new Button();
+            labelInfoSum = new Label();
+            labelInfoName = new Label();
+            labelErrorSum = new Label();
+            labelErrorName = new Label();
+            label4 = new Label();
             buttonCancel = new Button();
             dateTimePickerLastOperation = new DateTimePicker();
             dateTimePickerBirth = new DateTimePicker();
@@ -42,13 +50,19 @@
             sumBox = new TextBox();
             categoryBox = new ComboBox();
             labelSum = new Label();
-            buttonAdd = new Button();
-            label4 = new Label();
             panelAdd.SuspendLayout();
             SuspendLayout();
             // 
             // panelAdd
             // 
+            panelAdd.Anchor = AnchorStyles.Top;
+            panelAdd.Controls.Add(labelInfoCategory);
+            panelAdd.Controls.Add(labelErrorCategory);
+            panelAdd.Controls.Add(buttonOk);
+            panelAdd.Controls.Add(labelInfoSum);
+            panelAdd.Controls.Add(labelInfoName);
+            panelAdd.Controls.Add(labelErrorSum);
+            panelAdd.Controls.Add(labelErrorName);
             panelAdd.Controls.Add(label4);
             panelAdd.Controls.Add(buttonCancel);
             panelAdd.Controls.Add(dateTimePickerLastOperation);
@@ -63,26 +77,112 @@
             panelAdd.Controls.Add(sumBox);
             panelAdd.Controls.Add(categoryBox);
             panelAdd.Controls.Add(labelSum);
-            panelAdd.Controls.Add(buttonAdd);
-            panelAdd.Location = new Point(69, 40);
+            panelAdd.Location = new Point(45, 12);
             panelAdd.Name = "panelAdd";
-            panelAdd.Size = new Size(623, 256);
+            panelAdd.Size = new Size(626, 283);
             panelAdd.TabIndex = 0;
+            // 
+            // labelInfoCategory
+            // 
+            labelInfoCategory.AutoSize = true;
+            labelInfoCategory.Font = new Font("Segoe UI", 8.5F);
+            labelInfoCategory.ForeColor = Color.Red;
+            labelInfoCategory.Location = new Point(85, 193);
+            labelInfoCategory.Name = "labelInfoCategory";
+            labelInfoCategory.Size = new Size(0, 20);
+            labelInfoCategory.TabIndex = 73;
+            labelInfoCategory.Visible = false;
+            // 
+            // labelErrorCategory
+            // 
+            labelErrorCategory.AutoSize = true;
+            labelErrorCategory.ForeColor = Color.Red;
+            labelErrorCategory.Location = new Point(284, 170);
+            labelErrorCategory.Name = "labelErrorCategory";
+            labelErrorCategory.Size = new Size(15, 20);
+            labelErrorCategory.TabIndex = 72;
+            labelErrorCategory.Text = "*";
+            labelErrorCategory.Visible = false;
+            // 
+            // buttonOk
+            // 
+            buttonOk.Anchor = AnchorStyles.None;
+            buttonOk.Location = new Point(197, 247);
+            buttonOk.Name = "buttonOk";
+            buttonOk.Size = new Size(116, 29);
+            buttonOk.TabIndex = 71;
+            buttonOk.Text = "Oк";
+            buttonOk.UseVisualStyleBackColor = true;
+            buttonOk.Click += buttonOk_Click;
+            // 
+            // labelInfoSum
+            // 
+            labelInfoSum.AutoSize = true;
+            labelInfoSum.Font = new Font("Segoe UI", 8.5F);
+            labelInfoSum.ForeColor = Color.Red;
+            labelInfoSum.Location = new Point(85, 140);
+            labelInfoSum.Name = "labelInfoSum";
+            labelInfoSum.Size = new Size(0, 20);
+            labelInfoSum.TabIndex = 70;
+            labelInfoSum.Visible = false;
+            // 
+            // labelInfoName
+            // 
+            labelInfoName.AutoSize = true;
+            labelInfoName.Font = new Font("Segoe UI", 8.5F);
+            labelInfoName.ForeColor = Color.Red;
+            labelInfoName.Location = new Point(85, 89);
+            labelInfoName.Name = "labelInfoName";
+            labelInfoName.Size = new Size(0, 20);
+            labelInfoName.TabIndex = 69;
+            labelInfoName.Visible = false;
+            // 
+            // labelErrorSum
+            // 
+            labelErrorSum.AutoSize = true;
+            labelErrorSum.ForeColor = Color.Red;
+            labelErrorSum.Location = new Point(284, 113);
+            labelErrorSum.Name = "labelErrorSum";
+            labelErrorSum.Size = new Size(15, 20);
+            labelErrorSum.TabIndex = 68;
+            labelErrorSum.Text = "*";
+            labelErrorSum.Visible = false;
+            // 
+            // labelErrorName
+            // 
+            labelErrorName.AutoSize = true;
+            labelErrorName.ForeColor = Color.Red;
+            labelErrorName.Location = new Point(284, 62);
+            labelErrorName.Name = "labelErrorName";
+            labelErrorName.Size = new Size(15, 20);
+            labelErrorName.TabIndex = 67;
+            labelErrorName.Text = "*";
+            labelErrorName.Visible = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.Window;
+            label4.Location = new Point(255, 113);
+            label4.Name = "label4";
+            label4.Size = new Size(17, 20);
+            label4.TabIndex = 66;
+            label4.Text = "₴";
             // 
             // buttonCancel
             // 
             buttonCancel.DialogResult = DialogResult.Cancel;
-            buttonCancel.Location = new Point(338, 216);
+            buttonCancel.Location = new Point(321, 247);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(76, 27);
+            buttonCancel.Size = new Size(116, 29);
             buttonCancel.TabIndex = 40;
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             // 
             // dateTimePickerLastOperation
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
-            dateTimePickerLastOperation.Location = new Point(362, 147);
+            dateTimePickerLastOperation.Location = new Point(410, 147);
             dateTimePickerLastOperation.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerLastOperation.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
@@ -94,7 +194,7 @@
             // dateTimePickerBirth
             // 
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
-            dateTimePickerBirth.Location = new Point(362, 62);
+            dateTimePickerBirth.Location = new Point(410, 62);
             dateTimePickerBirth.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
@@ -105,7 +205,7 @@
             // 
             // nameBox
             // 
-            nameBox.Location = new Point(106, 57);
+            nameBox.Location = new Point(85, 59);
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(193, 27);
             nameBox.TabIndex = 31;
@@ -113,7 +213,7 @@
             // labelId
             // 
             labelId.AutoSize = true;
-            labelId.Location = new Point(69, 18);
+            labelId.Location = new Point(57, 18);
             labelId.Name = "labelId";
             labelId.Size = new Size(22, 20);
             labelId.TabIndex = 28;
@@ -122,7 +222,7 @@
             // labelName
             // 
             labelName.AutoSize = true;
-            labelName.Location = new Point(58, 57);
+            labelName.Location = new Point(46, 57);
             labelName.Name = "labelName";
             labelName.Size = new Size(33, 20);
             labelName.TabIndex = 29;
@@ -131,7 +231,7 @@
             // labelDateLastOperation
             // 
             labelDateLastOperation.AutoSize = true;
-            labelDateLastOperation.Location = new Point(363, 104);
+            labelDateLastOperation.Location = new Point(411, 104);
             labelDateLastOperation.Name = "labelDateLastOperation";
             labelDateLastOperation.Size = new Size(178, 20);
             labelDateLastOperation.TabIndex = 37;
@@ -140,7 +240,7 @@
             // idBox
             // 
             idBox.Enabled = false;
-            idBox.Location = new Point(106, 18);
+            idBox.Location = new Point(85, 15);
             idBox.Name = "idBox";
             idBox.Size = new Size(193, 27);
             idBox.TabIndex = 30;
@@ -148,7 +248,7 @@
             // labelDateBirth
             // 
             labelDateBirth.AutoSize = true;
-            labelDateBirth.Location = new Point(363, 25);
+            labelDateBirth.Location = new Point(411, 25);
             labelDateBirth.Name = "labelDateBirth";
             labelDateBirth.Size = new Size(133, 20);
             labelDateBirth.TabIndex = 36;
@@ -157,7 +257,7 @@
             // labelCategory
             // 
             labelCategory.AutoSize = true;
-            labelCategory.Location = new Point(27, 96);
+            labelCategory.Location = new Point(3, 166);
             labelCategory.Name = "labelCategory";
             labelCategory.Size = new Size(76, 20);
             labelCategory.TabIndex = 32;
@@ -165,7 +265,7 @@
             // 
             // sumBox
             // 
-            sumBox.Location = new Point(106, 138);
+            sumBox.Location = new Point(85, 110);
             sumBox.Name = "sumBox";
             sumBox.Size = new Size(193, 27);
             sumBox.TabIndex = 35;
@@ -173,47 +273,28 @@
             // categoryBox
             // 
             categoryBox.FormattingEnabled = true;
-            categoryBox.Location = new Point(106, 96);
+            categoryBox.Location = new Point(85, 162);
             categoryBox.Name = "categoryBox";
             categoryBox.Size = new Size(193, 28);
             categoryBox.TabIndex = 33;
+            categoryBox.SelectedIndexChanged += categoryBox_SelectedIndexChanged;
             // 
             // labelSum
             // 
             labelSum.AutoSize = true;
-            labelSum.Location = new Point(47, 138);
+            labelSum.Location = new Point(35, 113);
             labelSum.Name = "labelSum";
             labelSum.Size = new Size(44, 20);
             labelSum.TabIndex = 34;
             labelSum.Text = "Сума";
             // 
-            // buttonAdd
-            // 
-            buttonAdd.DialogResult = DialogResult.OK;
-            buttonAdd.Location = new Point(246, 216);
-            buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(73, 27);
-            buttonAdd.TabIndex = 0;
-            buttonAdd.Text = "Ok";
-            buttonAdd.UseVisualStyleBackColor = true;
-            buttonAdd.Click += buttonAdd_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = SystemColors.Window;
-            label4.Location = new Point(276, 141);
-            label4.Name = "label4";
-            label4.Size = new Size(17, 20);
-            label4.TabIndex = 66;
-            label4.Text = "₴";
-            // 
             // BankAccountAddForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(713, 332);
             Controls.Add(panelAdd);
+            MinimumSize = new Size(731, 379);
             Name = "BankAccountAddForm";
             Text = "BankAccountAddForm";
             panelAdd.ResumeLayout(false);
@@ -224,7 +305,6 @@
         #endregion
 
         private Panel panelAdd;
-        private Button buttonAdd;
         private TextBox nameBox;
         private Label labelId;
         private Label labelName;
@@ -239,5 +319,12 @@
         private DateTimePicker dateTimePickerLastOperation;
         private Button buttonCancel;
         private Label label4;
+        private Label labelInfoSum;
+        private Label labelInfoName;
+        private Label labelErrorSum;
+        private Label labelErrorName;
+        private Button buttonOk;
+        private Label labelInfoCategory;
+        private Label labelErrorCategory;
     }
 }

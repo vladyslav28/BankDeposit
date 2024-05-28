@@ -35,8 +35,8 @@
             labelError = new Label();
             label1 = new Label();
             panelLogin = new Panel();
-            label2 = new Label();
             label3 = new Label();
+            label2 = new Label();
             panelLogin.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +46,7 @@
             buttonLogin.Name = "buttonLogin";
             buttonLogin.Size = new Size(136, 32);
             buttonLogin.TabIndex = 1;
-            buttonLogin.Text = "Login";
+            buttonLogin.Text = "Продовжити";
             buttonLogin.UseVisualStyleBackColor = true;
             buttonLogin.Click += buttonLogin_Click_1;
             // 
@@ -73,7 +73,7 @@
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(136, 32);
             buttonCancel.TabIndex = 3;
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
@@ -112,15 +112,6 @@
             panelLogin.Size = new Size(307, 188);
             panelLogin.TabIndex = 6;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(23, 40);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 6;
-            label2.Text = "Логін:";
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -129,6 +120,15 @@
             label3.Size = new Size(65, 20);
             label3.TabIndex = 7;
             label3.Text = "Пароль:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(23, 40);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 6;
+            label2.Text = "Логін:";
             // 
             // LoginForm
             // 

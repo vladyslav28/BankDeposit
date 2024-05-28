@@ -13,7 +13,7 @@ namespace BankDeposit.Forms
         public MainForm()
         {
             InitializeComponent();
-           
+
 
             InitializeCategoryBox();
             LoadBankData();
@@ -57,6 +57,14 @@ namespace BankDeposit.Forms
             }
 
         }
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadBankData();
+        }
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bank.SaveData(PATH_TO_DATA);
+        }
 
         private void ShowLoginForm()
         {
@@ -92,15 +100,6 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadBankData();
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bank.SaveData(PATH_TO_DATA);
-        }
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
@@ -146,7 +145,7 @@ namespace BankDeposit.Forms
         {
             bool isValid = true;
 
-           
+
             if (!string.IsNullOrEmpty(idBox.Text) && !int.TryParse(idBox.Text, out _))
             {
                 errorIdLabel.Visible = true;
@@ -163,7 +162,7 @@ namespace BankDeposit.Forms
                 errorInfoIdLabel.Visible = false;
             }
 
-        
+
             if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
             {
                 errorNameLabel.Visible = true;
@@ -188,7 +187,7 @@ namespace BankDeposit.Forms
                 errorInfoNameLabel.Visible = false;
             }
 
-           
+
             if (!string.IsNullOrEmpty(sumBox.Text))
             {
                 if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ','))
@@ -221,11 +220,7 @@ namespace BankDeposit.Forms
             return isValid;
         }
 
-
-
-
-
-
+        //
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -254,6 +249,7 @@ namespace BankDeposit.Forms
             UpdateLabelCount();
         }
 
+        //
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddBankAccount();
@@ -278,6 +274,7 @@ namespace BankDeposit.Forms
             }
         }
 
+        //
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -286,6 +283,7 @@ namespace BankDeposit.Forms
 
                 if (moneyOperationForm.ShowDialog() == DialogResult.OK)
                 {
+                    MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     buttonSearch_Click(null, null);
                 }
             }
@@ -313,6 +311,7 @@ namespace BankDeposit.Forms
             }
         }
 
+        //
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -358,7 +357,7 @@ namespace BankDeposit.Forms
 
 
 
-         
+
             DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
@@ -371,7 +370,7 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
+        //
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItems.Count > 0)
@@ -473,12 +472,12 @@ namespace BankDeposit.Forms
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void showBox_TextChanged(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
