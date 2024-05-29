@@ -65,7 +65,7 @@ namespace BankDeposit.Forms
         {
             bank.SaveData(PATH_TO_DATA);
         }
-
+        //
         private void ShowLoginForm()
         {
             this.Hide();
@@ -231,7 +231,7 @@ namespace BankDeposit.Forms
                 return;
             }
 
-            string depositCategory = categoryBox.SelectedItem?.ToString();
+            string depositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
             DateTime? birthDate = dateTimePickerBirth.Checked ? dateTimePickerBirth.Value.Date : null;
             DateTime? lastOperationDate = dateTimePickerLastOperation.Checked ? dateTimePickerLastOperation.Value.Date : null;
 
@@ -269,7 +269,7 @@ namespace BankDeposit.Forms
             {
                 BankAccount newAccount = addForm.BankAccount;
                 bank.AddAccount(newAccount);
-                buttonSearch_Click(null, null);
+                buttonSearch_Click(null!, null!);
                 MessageBox.Show("Акаунт додано", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -287,7 +287,7 @@ namespace BankDeposit.Forms
                     {
                         MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    buttonSearch_Click(null, null);
+                    buttonSearch_Click(null!, null!);
                 }
             }
             else
@@ -310,7 +310,7 @@ namespace BankDeposit.Forms
                     {
                         MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    buttonSearch_Click(null, null);
+                    buttonSearch_Click(null!, null!);
                 }
             }
             else
@@ -337,7 +337,7 @@ namespace BankDeposit.Forms
             string input = Microsoft.VisualBasic.Interaction.InputBox("Введіть ID акаунту для видалення:", "Видалити акаунт", "");
             if (int.TryParse(input, out int accountId))
             {
-                BankAccount selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
+                BankAccount? selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
                 if (selectedAccount != null)
                 {
                     DeleteBankAccount(selectedAccount);
@@ -373,7 +373,7 @@ namespace BankDeposit.Forms
                 bool isDeleted = bank.DeleteAccount(bankAccount.Id);
                 if (isDeleted)
                 {
-                    buttonSearch_Click(null, null);
+                    buttonSearch_Click(null!, null!);
                     MessageBox.Show("Акаунт видалено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -383,7 +383,7 @@ namespace BankDeposit.Forms
         {
             if (resultList.SelectedItems.Count > 0)
             {
-                BankAccount selectedAccount = resultList.SelectedItem as BankAccount;
+                BankAccount selectedAccount = (resultList.SelectedItem as BankAccount)!;
                 if (selectedAccount != null)
                 {
                     EditBankAccount(selectedAccount);
@@ -400,7 +400,7 @@ namespace BankDeposit.Forms
             string input = Microsoft.VisualBasic.Interaction.InputBox("Введіть ID акаунту для редагування:", "Редагувати акаунт", "");
             if (int.TryParse(input, out int accountId))
             {
-                BankAccount selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
+                BankAccount? selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
                 if (selectedAccount != null)
                 {
                     EditBankAccount(selectedAccount);
@@ -433,7 +433,7 @@ namespace BankDeposit.Forms
                     if (confirmResult == DialogResult.Yes)
                     {
                         MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        buttonSearch_Click(null, null);
+                        buttonSearch_Click(null!, null!);
                     }
                     else
                     {

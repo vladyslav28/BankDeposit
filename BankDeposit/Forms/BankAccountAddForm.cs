@@ -167,7 +167,7 @@ namespace BankDeposit.Forms
             if (bank == null) return false; 
 
             string expectedCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
-            string selectedCategory = categoryBox.SelectedItem?.ToString();
+            string selectedCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
 
             if (string.IsNullOrEmpty(selectedCategory))
             {

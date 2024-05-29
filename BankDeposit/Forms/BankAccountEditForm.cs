@@ -22,7 +22,18 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
 
             InitializeErrorLabels();
+            this.bankAccount = bankAccount;
             PasteData(bankAccount);
+            originalBankAccount = new BankAccount
+            {
+                Id = bankAccount.Id,
+                Name = bankAccount.Name,
+                BirthDate = bankAccount.BirthDate,
+                LastOperationDate = bankAccount.LastOperationDate,
+                DepositCategory = bankAccount.DepositCategory,
+                CurrentSum = bankAccount.CurrentSum
+            };
+
         }
 
         private void InitializeCategoryBox()
@@ -45,17 +56,6 @@ namespace BankDeposit.Forms
 
         public void PasteData(BankAccount bankAccount)
         {
-            this.bankAccount = bankAccount;
-            originalBankAccount = new BankAccount
-            {
-                Id = bankAccount.Id,
-                Name = bankAccount.Name,
-                BirthDate = bankAccount.BirthDate,
-                LastOperationDate = bankAccount.LastOperationDate,
-                DepositCategory = bankAccount.DepositCategory,
-                CurrentSum = bankAccount.CurrentSum
-            };
-
             idBox.Text = bankAccount.Id.ToString();
             nameBox.Text = bankAccount.Name;
             sumBox.Text = bankAccount.CurrentSum.ToString();
@@ -164,7 +164,7 @@ namespace BankDeposit.Forms
         {
             bool isValid = true;
             string expectedCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
-            string selectedCategory = categoryBox.SelectedItem?.ToString();
+            string selectedCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
 
             if (string.IsNullOrEmpty(selectedCategory))
             {

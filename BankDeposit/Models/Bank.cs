@@ -15,7 +15,7 @@ namespace BankDeposit.Models
         public Bank() {
             BankAccounts = new List<BankAccount>();
            
-            //FillTestData(100);
+            FillTestData(100);
         }
 
         private void FillTestData(int n)
@@ -120,8 +120,8 @@ namespace BankDeposit.Models
             foreach (var account in BankAccounts)
             {
                 if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
-                    (string.IsNullOrEmpty(depositCategory) || account.DepositCategory.Contains(depositCategory)) &&
-                    (string.IsNullOrEmpty(name) || account.Name.Contains(name)) &&
+                    (account.DepositCategory == null || account.DepositCategory.Contains(depositCategory)) &&
+                    (account.Name == null|| account.Name.Contains(name)) &&
                     (!birthDate.HasValue || account.BirthDate.Date == birthDate.Value.Date) &&
                     (!lastOperationDate.HasValue || account.LastOperationDate.Date == lastOperationDate.Value.Date) &&
                     (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString() )))
@@ -134,7 +134,7 @@ namespace BankDeposit.Models
 
         public bool DeleteAccount(int accountId)
         {
-            BankAccount account = null;
+            BankAccount? account = null;
             foreach (var a in BankAccounts)
             {
                 if (a.Id == accountId)
@@ -161,7 +161,7 @@ namespace BankDeposit.Models
         public static Bank LoadData(string path)
         {
             var jsonString = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<Bank>(jsonString);
+            return JsonSerializer.Deserialize<Bank>(jsonString) ?? new Bank();
         }
 
         public void AddAccount(BankAccount newAccount)
