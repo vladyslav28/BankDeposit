@@ -17,19 +17,12 @@ namespace BankDeposit
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            using (var loginForm = new LoginForm())
-            {
-                if (loginForm.ShowDialog() == DialogResult.OK)
-                {
-                    
+           
                     Application.Run(new MainForm());
-                }
-                else
-                {
-                    
-                    Application.Exit();
-                }
-            }
+            
+
+
+
         }
     }
 }

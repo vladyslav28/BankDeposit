@@ -36,26 +36,14 @@ namespace BankDeposit.Forms
             labelCount.Text = $"Кількість елементів: {resultList.Items.Count}";
         }
 
+      
+        
+       
+
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Зберегти всі зміни?",
-                "Завершення сеансу",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Question
-            );
-
-            if (result == DialogResult.Yes)
-            {
-                bank.SaveData(PATH_TO_DATA);
-                ShowLoginForm();
-            }
-            else if (result == DialogResult.No)
-            {
-                LoadBankData();
-                ShowLoginForm();
-            }
-
+            this.Close();
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,23 +52,6 @@ namespace BankDeposit.Forms
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bank.SaveData(PATH_TO_DATA);
-        }
-        //
-        private void ShowLoginForm()
-        {
-            this.Hide();
-            using (var loginForm = new LoginForm())
-            {
-                if (loginForm.ShowDialog() == DialogResult.OK)
-                {
-                    LoadBankData();
-                    this.Show();
-                }
-                else
-                {
-                    Application.Exit();
-                }
-            }
         }
 
         private void InitializeCategoryBox()
