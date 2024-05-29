@@ -35,8 +35,6 @@ namespace BankDeposit.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            openToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -84,6 +82,7 @@ namespace BankDeposit.Forms
             buttonMoney = new Button();
             labelCount = new Label();
             buttonAdd = new Button();
+            toolStripSeparator2 = new ToolStripSeparator();
             menuStrip1.SuspendLayout();
             panelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bankAccountBindingSource).BeginInit();
@@ -103,25 +102,10 @@ namespace BankDeposit.Forms
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "&File";
-            // 
-            // openToolStripMenuItem
-            // 
-            openToolStripMenuItem.Image = (Image)resources.GetObject("openToolStripMenuItem.Image");
-            openToolStripMenuItem.ImageTransparentColor = Color.Magenta;
-            openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openToolStripMenuItem.Size = new Size(181, 26);
-            openToolStripMenuItem.Text = "&Open";
-            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator
-            // 
-            toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(178, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -129,25 +113,25 @@ namespace BankDeposit.Forms
             saveToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveToolStripMenuItem.Size = new Size(181, 26);
+            saveToolStripMenuItem.Size = new Size(224, 26);
             saveToolStripMenuItem.Text = "&Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(178, 6);
+            toolStripSeparator1.Size = new Size(221, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(181, 26);
+            exitToolStripMenuItem.Size = new Size(224, 26);
             exitToolStripMenuItem.Text = "&Вийти";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, фінансовіОпераціїToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, фінансовіОпераціїToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(58, 24);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -162,21 +146,21 @@ namespace BankDeposit.Forms
             // додатиЕлементToolStripMenuItem
             // 
             додатиЕлементToolStripMenuItem.Name = "додатиЕлементToolStripMenuItem";
-            додатиЕлементToolStripMenuItem.Size = new Size(217, 26);
+            додатиЕлементToolStripMenuItem.Size = new Size(224, 26);
             додатиЕлементToolStripMenuItem.Text = "Додати акаунт";
             додатиЕлементToolStripMenuItem.Click += додатиЕлементToolStripMenuItem_Click;
             // 
             // редагуватиToolStripMenuItem
             // 
             редагуватиToolStripMenuItem.Name = "редагуватиToolStripMenuItem";
-            редагуватиToolStripMenuItem.Size = new Size(217, 26);
+            редагуватиToolStripMenuItem.Size = new Size(224, 26);
             редагуватиToolStripMenuItem.Text = "Редагувати акаунт";
             редагуватиToolStripMenuItem.Click += редагуватиToolStripMenuItem_Click;
             // 
             // видалитиЕлементToolStripMenuItem
             // 
             видалитиЕлементToolStripMenuItem.Name = "видалитиЕлементToolStripMenuItem";
-            видалитиЕлементToolStripMenuItem.Size = new Size(217, 26);
+            видалитиЕлементToolStripMenuItem.Size = new Size(224, 26);
             видалитиЕлементToolStripMenuItem.Text = "Видалити акаунт";
             видалитиЕлементToolStripMenuItem.Click += видалитиToolStripMenuItem_Click;
             // 
@@ -189,30 +173,29 @@ namespace BankDeposit.Forms
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripSeparator5, helpWithTypeToolStripMenuItem, aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { helpWithTypeToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.ShortcutKeys = Keys.F1;
             helpToolStripMenuItem.Size = new Size(55, 24);
             helpToolStripMenuItem.Text = "&Help";
-            
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(211, 6);
+            toolStripSeparator5.Size = new Size(221, 6);
             // 
             // helpWithTypeToolStripMenuItem
             // 
             helpWithTypeToolStripMenuItem.Name = "helpWithTypeToolStripMenuItem";
             helpWithTypeToolStripMenuItem.ShortcutKeys = Keys.F1;
-            helpWithTypeToolStripMenuItem.Size = new Size(214, 26);
+            helpWithTypeToolStripMenuItem.Size = new Size(224, 26);
             helpWithTypeToolStripMenuItem.Text = "&Help with data";
             helpWithTypeToolStripMenuItem.Click += helpWithTypeToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(214, 26);
+            aboutToolStripMenuItem.Size = new Size(224, 26);
             aboutToolStripMenuItem.Text = "&About program";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -578,8 +561,14 @@ namespace BankDeposit.Forms
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += buttonAdd_Click;
             // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(222, 6);
+            // 
             // MainForm
             // 
+            FormClosing += MainForm_FormClosing;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(782, 563);
@@ -589,7 +578,8 @@ namespace BankDeposit.Forms
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(800, 610);
             Name = "MainForm";
-            Text = "MainForm";
+            Text = "Банк";
+            Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panelSearch.ResumeLayout(false);
@@ -607,8 +597,6 @@ namespace BankDeposit.Forms
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem exitToolStripMenuItem;
@@ -656,5 +644,6 @@ namespace BankDeposit.Forms
         private Label label1;
         private Label label2;
         private ToolStripMenuItem helpWithTypeToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }

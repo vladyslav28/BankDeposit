@@ -171,13 +171,6 @@ namespace BankDeposit.Models
 
 
 
-
-
-
-
-
-
-
     }
 
 

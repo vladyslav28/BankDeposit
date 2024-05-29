@@ -307,7 +307,7 @@
             Controls.Add(panelMoney);
             MinimumSize = new Size(558, 386);
             Name = "MoneyOperationForm";
-            Text = "MoneyOperationForm";
+            Text = "Грошові операції";
             panelMoney.ResumeLayout(false);
             panelMoney.PerformLayout();
             ResumeLayout(false);

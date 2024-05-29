@@ -21,7 +21,7 @@ namespace BankDeposit.Forms
             LoadBankData();
             InitializeErrorLabels();
 
-
+            
         }
 
         private void LoadBankData()
@@ -36,19 +36,35 @@ namespace BankDeposit.Forms
             labelCount.Text = $"Кількість елементів: {resultList.Items.Count}";
         }
 
-      
-        
-       
-
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Ви хочете зберегти зміни перед виходом?", "Зберегти зміни", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+               
+                bank.SaveData(PATH_TO_DATA);
+            }
+            else if (result == DialogResult.No)
+            {
+                
+            }
+            else if (result == DialogResult.Cancel)
+            {
+              
+                e.Cancel = true;
+            }
+        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadBankData();
         }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bank.SaveData(PATH_TO_DATA);
@@ -70,7 +86,6 @@ namespace BankDeposit.Forms
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
-
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
@@ -116,7 +131,6 @@ namespace BankDeposit.Forms
         {
             bool isValid = true;
 
-
             if (!string.IsNullOrEmpty(idBox.Text) && !int.TryParse(idBox.Text, out _))
             {
                 errorIdLabel.Visible = true;
@@ -132,7 +146,6 @@ namespace BankDeposit.Forms
                 errorIdLabel.Visible = false;
                 errorInfoIdLabel.Visible = false;
             }
-
 
             if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
             {
@@ -157,7 +170,6 @@ namespace BankDeposit.Forms
                 errorNameLabel.Visible = false;
                 errorInfoNameLabel.Visible = false;
             }
-
 
             if (!string.IsNullOrEmpty(sumBox.Text))
             {
@@ -191,14 +203,11 @@ namespace BankDeposit.Forms
             return isValid;
         }
 
-        //
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             bool isValid = ValidateInput(true);
             if (!isValid)
             {
-
                 return;
             }
 
@@ -218,9 +227,10 @@ namespace BankDeposit.Forms
             var result = bank.SearchAccounts(idBox.Text, nameBox.Text, depositCategory, birthDate, lastOperationDate, currentSum);
             bankAccountBindingSource.DataSource = result;
             UpdateLabelCount();
+
+            MessageBox.Show(resultList.Items.Count.ToString());
         }
 
-        //
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddBankAccount();
@@ -245,7 +255,6 @@ namespace BankDeposit.Forms
             }
         }
 
-        //
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -266,7 +275,6 @@ namespace BankDeposit.Forms
                 MessageBox.Show("Акаунт не обрано", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void фінансовіОпераціїToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -290,7 +298,6 @@ namespace BankDeposit.Forms
             }
         }
 
-        //
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -334,9 +341,6 @@ namespace BankDeposit.Forms
                              $"Поточна сума: {bankAccount.CurrentSum}" + Environment.NewLine +
                              $"Дата останьої операції: {bankAccount.LastOperationDate:dd.MM.yyyy}" + Environment.NewLine;
 
-
-
-
             DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
@@ -349,7 +353,7 @@ namespace BankDeposit.Forms
                 }
             }
         }
-        //
+
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItems.Count > 0)
@@ -409,7 +413,7 @@ namespace BankDeposit.Forms
                     else
                     {
                         bankAccountEditForm.CancelOperation();
-                        EditBankAccount(selectedAccount); 
+                        EditBankAccount(selectedAccount);
                     }
                 }
             }
@@ -432,10 +436,12 @@ namespace BankDeposit.Forms
                 "зняття коштів,поповнення рахунку,нарахування відсотків за певною категорією депозиту" + Environment.NewLine + Environment.NewLine +
                 "Програма розроблена: ст.гр ПЗПІ-23-6 Ус Владиславом";
 
-
             MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-       
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
