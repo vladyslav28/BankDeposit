@@ -9,7 +9,7 @@ namespace BankDeposit.Forms
         {
             InitializeComponent();
             textBoxUsername.Text = "Admin";
-            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
+            
         }
 
         private void buttonLogin_Click_1(object sender, EventArgs e)

@@ -13,47 +13,15 @@ namespace BankDeposit.Forms
         public MainForm()
         {
             InitializeComponent();
-
-
-            InitializeCategoryBox();
-            LoadBankData();
             dateTimePickerLastOperation.Value = DateTime.Now.Date;
             dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.Value = DateTime.Now.Date;
+            InitializeCategoryBox();
+            LoadBankData();
             InitializeErrorLabels();
 
-        }
 
-
-        private void Form_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1)
-            {
-
-                ShowHelp();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                //ConfirmAction();
-            }
-            else if (e.KeyCode == Keys.Escape)
-            {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
-        }
-
-        
-
-        private void ShowHelp()
-        {
-            string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
-               "Поля Id можуть мати лише числові значення" + Environment.NewLine +
-               "Поля Суми можуть мати лише числові значення,роздільником є кома (,)" + Environment.NewLine +
-               "Категорія визначається за датою народження,якщо клієнтові менше 18 років(відносно сьогоднішньої дати),то категорія її депозиту Junior(12%),якщо більше 18 - Standart(15%)";
-
-            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LoadBankData()
@@ -263,7 +231,7 @@ namespace BankDeposit.Forms
                 return;
             }
 
-            string depositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
+            string depositCategory = categoryBox.SelectedItem?.ToString();
             DateTime? birthDate = dateTimePickerBirth.Checked ? dateTimePickerBirth.Value.Date : null;
             DateTime? lastOperationDate = dateTimePickerLastOperation.Checked ? dateTimePickerLastOperation.Value.Date : null;
 
@@ -315,7 +283,10 @@ namespace BankDeposit.Forms
 
                 if (moneyOperationForm.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (moneyOperationForm.IsChanged())
+                    {
+                        MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     buttonSearch_Click(null, null);
                 }
             }
@@ -324,6 +295,7 @@ namespace BankDeposit.Forms
                 MessageBox.Show("Акаунт не обрано", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void фінансовіОпераціїToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -334,6 +306,10 @@ namespace BankDeposit.Forms
 
                 if (moneyOperationForm.ShowDialog() == DialogResult.OK)
                 {
+                    if (moneyOperationForm.IsChanged())
+                    {
+                        MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     buttonSearch_Click(null, null);
                 }
             }
@@ -442,63 +418,28 @@ namespace BankDeposit.Forms
 
         private void EditBankAccount(BankAccount selectedAccount)
         {
-            bool continueEditing = true;
-
-            while (continueEditing)
+            var bankAccountEditForm = new BankAccountEditForm(selectedAccount);
+            if (bankAccountEditForm.ShowDialog() == DialogResult.OK)
             {
-                var originalAccount = new BankAccount
+                if (bankAccountEditForm.IsChanged())
                 {
-                    Id = selectedAccount.Id,
-                    Name = selectedAccount.Name,
-                    BirthDate = selectedAccount.BirthDate,
-                    LastOperationDate = selectedAccount.LastOperationDate,
-                    DepositCategory = selectedAccount.DepositCategory,
-                    CurrentSum = selectedAccount.CurrentSum
-                };
+                    DialogResult confirmResult = MessageBox.Show(
+                        "Ви впевнені, що хочете зберегти зміни?",
+                        "Підтвердження збереження",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
 
-                var bookEditForm = new BankAccountEditForm(selectedAccount);
-                if (bookEditForm.ShowDialog() == DialogResult.OK)
-                {
-                    bool isChanged = selectedAccount.Name != originalAccount.Name ||
-                                     selectedAccount.Id != originalAccount.Id ||
-                                     selectedAccount.BirthDate != originalAccount.BirthDate ||
-                                     selectedAccount.LastOperationDate != originalAccount.LastOperationDate ||
-                                     selectedAccount.DepositCategory != originalAccount.DepositCategory ||
-                                     selectedAccount.CurrentSum != originalAccount.CurrentSum;
-
-                    if (isChanged)
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        DialogResult confirmResult = MessageBox.Show(
-                            "Ви впевнені, що хочете зберегти зміни?",
-                            "Підтвердження збереження",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question
-                        );
-
-                        if (confirmResult == DialogResult.Yes)
-                        {
-                            MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            buttonSearch_Click(null, null);
-                            continueEditing = false;
-                        }
-                        else
-                        {
-                            selectedAccount.Id = originalAccount.Id;
-                            selectedAccount.Name = originalAccount.Name;
-                            selectedAccount.BirthDate = originalAccount.BirthDate;
-                            selectedAccount.LastOperationDate = originalAccount.LastOperationDate;
-                            selectedAccount.DepositCategory = originalAccount.DepositCategory;
-                            selectedAccount.CurrentSum = originalAccount.CurrentSum;
-                        }
+                        MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        buttonSearch_Click(null, null);
                     }
                     else
                     {
-                        continueEditing = false;
+                        bankAccountEditForm.CancelOperation();
+                        EditBankAccount(selectedAccount); 
                     }
-                }
-                else
-                {
-                    continueEditing = false;
                 }
             }
         }
@@ -524,9 +465,6 @@ namespace BankDeposit.Forms
             MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

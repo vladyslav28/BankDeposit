@@ -110,7 +110,7 @@
             buttonOk.Location = new Point(197, 247);
             buttonOk.Name = "buttonOk";
             buttonOk.Size = new Size(116, 29);
-            buttonOk.TabIndex = 71;
+            buttonOk.TabIndex = 6;
             buttonOk.Text = "Oк";
             buttonOk.UseVisualStyleBackColor = true;
             buttonOk.Click += buttonOk_Click;
@@ -175,7 +175,7 @@
             buttonCancel.Location = new Point(321, 247);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(116, 29);
-            buttonCancel.TabIndex = 40;
+            buttonCancel.TabIndex = 7;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -183,24 +183,20 @@
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(410, 147);
-            dateTimePickerLastOperation.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerLastOperation.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.Size = new Size(184, 27);
-            dateTimePickerLastOperation.TabIndex = 39;
-            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerLastOperation.TabIndex = 5;
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
             // 
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(410, 62);
-            dateTimePickerBirth.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.Size = new Size(184, 27);
-            dateTimePickerBirth.TabIndex = 38;
-            dateTimePickerBirth.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerBirth.TabIndex = 4;
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // nameBox
@@ -208,7 +204,8 @@
             nameBox.Location = new Point(85, 59);
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(193, 27);
-            nameBox.TabIndex = 31;
+            nameBox.TabIndex = 1;
+            nameBox.TextChanged += nameBox_TextChanged;
             // 
             // labelId
             // 
@@ -243,7 +240,8 @@
             idBox.Location = new Point(85, 15);
             idBox.Name = "idBox";
             idBox.Size = new Size(193, 27);
-            idBox.TabIndex = 30;
+            idBox.TabIndex = 1;
+            idBox.TabStop = false;
             // 
             // labelDateBirth
             // 
@@ -268,7 +266,8 @@
             sumBox.Location = new Point(85, 110);
             sumBox.Name = "sumBox";
             sumBox.Size = new Size(193, 27);
-            sumBox.TabIndex = 35;
+            sumBox.TabIndex = 2;
+            sumBox.TextChanged += sumBox_TextChanged;
             // 
             // categoryBox
             // 
@@ -276,7 +275,7 @@
             categoryBox.Location = new Point(85, 162);
             categoryBox.Name = "categoryBox";
             categoryBox.Size = new Size(193, 28);
-            categoryBox.TabIndex = 33;
+            categoryBox.TabIndex = 3;
             categoryBox.SelectedIndexChanged += categoryBox_SelectedIndexChanged;
             // 
             // labelSum
@@ -290,8 +289,10 @@
             // 
             // BankAccountAddForm
             // 
+            AcceptButton = buttonOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = buttonCancel;
             ClientSize = new Size(713, 332);
             Controls.Add(panelAdd);
             MinimumSize = new Size(731, 379);

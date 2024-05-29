@@ -194,25 +194,25 @@ namespace BankDeposit.Forms
             helpToolStripMenuItem.ShortcutKeys = Keys.F1;
             helpToolStripMenuItem.Size = new Size(55, 24);
             helpToolStripMenuItem.Text = "&Help";
-            helpToolStripMenuItem.Click += helpToolStripMenuItem_Click;
+            
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(221, 6);
+            toolStripSeparator5.Size = new Size(211, 6);
             // 
             // helpWithTypeToolStripMenuItem
             // 
             helpWithTypeToolStripMenuItem.Name = "helpWithTypeToolStripMenuItem";
             helpWithTypeToolStripMenuItem.ShortcutKeys = Keys.F1;
-            helpWithTypeToolStripMenuItem.Size = new Size(224, 26);
+            helpWithTypeToolStripMenuItem.Size = new Size(214, 26);
             helpWithTypeToolStripMenuItem.Text = "&Help with data";
             helpWithTypeToolStripMenuItem.Click += helpWithTypeToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Size = new Size(214, 26);
             aboutToolStripMenuItem.Text = "&About program";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -330,7 +330,7 @@ namespace BankDeposit.Forms
             buttonReset.Location = new Point(304, 233);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(252, 32);
-            buttonReset.TabIndex = 13;
+            buttonReset.TabIndex = 7;
             buttonReset.Text = "Скинути пошукові налаштування";
             buttonReset.UseVisualStyleBackColor = false;
             buttonReset.Click += buttonReset_Click;
@@ -340,7 +340,7 @@ namespace BankDeposit.Forms
             buttonSearch.Location = new Point(182, 235);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(116, 30);
-            buttonSearch.TabIndex = 12;
+            buttonSearch.TabIndex = 6;
             buttonSearch.Text = "Пошук";
             buttonSearch.UseVisualStyleBackColor = true;
             buttonSearch.Click += buttonSearch_Click;
@@ -354,7 +354,7 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.ShowCheckBox = true;
             dateTimePickerLastOperation.Size = new Size(179, 27);
-            dateTimePickerLastOperation.TabIndex = 11;
+            dateTimePickerLastOperation.TabIndex = 5;
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
@@ -366,7 +366,7 @@ namespace BankDeposit.Forms
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.ShowCheckBox = true;
             dateTimePickerBirth.Size = new Size(179, 27);
-            dateTimePickerBirth.TabIndex = 10;
+            dateTimePickerBirth.TabIndex = 4;
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // labelDateLastOperation
@@ -392,7 +392,7 @@ namespace BankDeposit.Forms
             sumBox.Location = new Point(82, 118);
             sumBox.Name = "sumBox";
             sumBox.Size = new Size(187, 27);
-            sumBox.TabIndex = 7;
+            sumBox.TabIndex = 2;
             sumBox.TextChanged += sumBox_TextChanged;
             // 
             // labelSum
@@ -410,7 +410,7 @@ namespace BankDeposit.Forms
             categoryBox.Location = new Point(82, 171);
             categoryBox.Name = "categoryBox";
             categoryBox.Size = new Size(187, 28);
-            categoryBox.TabIndex = 5;
+            categoryBox.TabIndex = 3;
             // 
             // labelCategory
             // 
@@ -426,7 +426,7 @@ namespace BankDeposit.Forms
             nameBox.Location = new Point(82, 65);
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(187, 27);
-            nameBox.TabIndex = 3;
+            nameBox.TabIndex = 1;
             nameBox.TextChanged += nameBox_TextChanged;
             // 
             // idBox
@@ -434,7 +434,7 @@ namespace BankDeposit.Forms
             idBox.Location = new Point(82, 12);
             idBox.Name = "idBox";
             idBox.Size = new Size(187, 27);
-            idBox.TabIndex = 2;
+            idBox.TabIndex = 0;
             idBox.TextChanged += idBox_TextChanged;
             // 
             // labelName
@@ -465,7 +465,7 @@ namespace BankDeposit.Forms
             resultList.Location = new Point(3, 29);
             resultList.Name = "resultList";
             resultList.Size = new Size(150, 175);
-            resultList.TabIndex = 2;
+            resultList.TabIndex = 1;
             resultList.ValueMember = "Id";
             // 
             // bankAccountBindingSource
@@ -474,10 +474,10 @@ namespace BankDeposit.Forms
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(48, 56);
+            buttonEdit.Location = new Point(48, 111);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(116, 29);
-            buttonEdit.TabIndex = 3;
+            buttonEdit.TabIndex = 4;
             buttonEdit.Text = "Редагувати";
             buttonEdit.UseVisualStyleBackColor = true;
             buttonEdit.Click += buttonEdit_Click;
@@ -491,6 +491,7 @@ namespace BankDeposit.Forms
             showBox.Name = "showBox";
             showBox.Size = new Size(240, 132);
             showBox.TabIndex = 4;
+            showBox.TabStop = false;
             // 
             // panelShow
             // 
@@ -540,7 +541,7 @@ namespace BankDeposit.Forms
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(48, 91);
+            buttonDelete.Location = new Point(48, 146);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(116, 33);
             buttonDelete.TabIndex = 5;
@@ -550,10 +551,10 @@ namespace BankDeposit.Forms
             // 
             // buttonMoney
             // 
-            buttonMoney.Location = new Point(48, 130);
+            buttonMoney.Location = new Point(48, 57);
             buttonMoney.Name = "buttonMoney";
             buttonMoney.Size = new Size(116, 48);
-            buttonMoney.TabIndex = 7;
+            buttonMoney.TabIndex = 3;
             buttonMoney.Text = "Фінансові операції";
             buttonMoney.UseVisualStyleBackColor = true;
             buttonMoney.Click += buttonMoney_Click;
@@ -572,7 +573,7 @@ namespace BankDeposit.Forms
             buttonAdd.Location = new Point(3, 210);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(150, 30);
-            buttonAdd.TabIndex = 6;
+            buttonAdd.TabIndex = 2;
             buttonAdd.Text = "Додати елемент";
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += buttonAdd_Click;

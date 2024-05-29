@@ -87,7 +87,7 @@
             buttonOk.Location = new Point(230, 236);
             buttonOk.Name = "buttonOk";
             buttonOk.Size = new Size(116, 33);
-            buttonOk.TabIndex = 77;
+            buttonOk.TabIndex = 6;
             buttonOk.Text = "Oк";
             buttonOk.UseVisualStyleBackColor = true;
             buttonOk.Click += buttonOk_Click;
@@ -174,7 +174,7 @@
             buttonCancel.Location = new Point(352, 236);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(116, 33);
-            buttonCancel.TabIndex = 28;
+            buttonCancel.TabIndex = 7;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -182,24 +182,20 @@
             // 
             dateTimePickerLastOperation.Format = DateTimePickerFormat.Custom;
             dateTimePickerLastOperation.Location = new Point(467, 131);
-            dateTimePickerLastOperation.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerLastOperation.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerLastOperation.Name = "dateTimePickerLastOperation";
             dateTimePickerLastOperation.Size = new Size(184, 27);
-            dateTimePickerLastOperation.TabIndex = 27;
-            dateTimePickerLastOperation.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerLastOperation.TabIndex = 5;
             dateTimePickerLastOperation.ValueChanged += dateTimePickerLastOperation_ValueChanged;
             // 
             // dateTimePickerBirth
             // 
             dateTimePickerBirth.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirth.Location = new Point(467, 48);
-            dateTimePickerBirth.MaxDate = new DateTime(2024, 5, 28, 0, 0, 0, 0);
             dateTimePickerBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePickerBirth.Name = "dateTimePickerBirth";
             dateTimePickerBirth.Size = new Size(184, 27);
-            dateTimePickerBirth.TabIndex = 26;
-            dateTimePickerBirth.Value = new DateTime(2024, 5, 28, 0, 0, 0, 0);
+            dateTimePickerBirth.TabIndex = 4;
             dateTimePickerBirth.ValueChanged += dateTimePickerBirth_ValueChanged;
             // 
             // nameBox
@@ -207,7 +203,8 @@
             nameBox.Location = new Point(130, 50);
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(193, 27);
-            nameBox.TabIndex = 16;
+            nameBox.TabIndex = 1;
+            nameBox.TextChanged += nameBox_TextChanged;
             // 
             // labelId
             // 
@@ -243,6 +240,7 @@
             idBox.Name = "idBox";
             idBox.Size = new Size(193, 27);
             idBox.TabIndex = 15;
+            idBox.TabStop = false;
             // 
             // labelDateBirth
             // 
@@ -267,7 +265,8 @@
             sumBox.Location = new Point(130, 106);
             sumBox.Name = "sumBox";
             sumBox.Size = new Size(193, 27);
-            sumBox.TabIndex = 20;
+            sumBox.TabIndex = 2;
+            sumBox.TextChanged += sumBox_TextChanged;
             // 
             // categoryBox
             // 
@@ -275,7 +274,8 @@
             categoryBox.Location = new Point(130, 159);
             categoryBox.Name = "categoryBox";
             categoryBox.Size = new Size(193, 28);
-            categoryBox.TabIndex = 18;
+            categoryBox.TabIndex = 3;
+            categoryBox.SelectedIndexChanged += categoryBox_SelectedIndexChanged;
             // 
             // labelSum
             // 
@@ -288,8 +288,10 @@
             // 
             // BankAccountEditForm
             // 
+            AcceptButton = buttonOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = buttonCancel;
             ClientSize = new Size(705, 336);
             Controls.Add(panelEdit);
             MinimumSize = new Size(723, 383);

@@ -92,7 +92,7 @@
             buttonCancel.Location = new Point(232, 248);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(116, 30);
-            buttonCancel.TabIndex = 2;
+            buttonCancel.TabIndex = 8;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
@@ -112,7 +112,7 @@
             buttonOk.Location = new Point(99, 248);
             buttonOk.Name = "buttonOk";
             buttonOk.Size = new Size(116, 30);
-            buttonOk.TabIndex = 1;
+            buttonOk.TabIndex = 7;
             buttonOk.Text = "Oк";
             buttonOk.UseVisualStyleBackColor = true;
             buttonOk.Click += buttonOk_Click;
@@ -144,7 +144,7 @@
             applyInterest.Location = new Point(3, 143);
             applyInterest.Name = "applyInterest";
             applyInterest.Size = new Size(105, 62);
-            applyInterest.TabIndex = 61;
+            applyInterest.TabIndex = 3;
             applyInterest.Text = "Нарахувати відсоток";
             applyInterest.UseVisualStyleBackColor = true;
             applyInterest.Click += applyInterest_Click;
@@ -154,7 +154,7 @@
             buttonDeposit.Location = new Point(302, 146);
             buttonDeposit.Name = "buttonDeposit";
             buttonDeposit.Size = new Size(116, 30);
-            buttonDeposit.TabIndex = 60;
+            buttonDeposit.TabIndex = 6;
             buttonDeposit.Text = "Поповнити";
             buttonDeposit.UseVisualStyleBackColor = true;
             buttonDeposit.Click += buttonDeposit_Click;
@@ -164,7 +164,7 @@
             buttonWithdraw.Location = new Point(302, 115);
             buttonWithdraw.Name = "buttonWithdraw";
             buttonWithdraw.Size = new Size(116, 30);
-            buttonWithdraw.TabIndex = 59;
+            buttonWithdraw.TabIndex = 5;
             buttonWithdraw.Text = "Зняти";
             buttonWithdraw.UseVisualStyleBackColor = true;
             buttonWithdraw.Click += buttonWithdraw_Click;
@@ -174,7 +174,7 @@
             textBoxAmount.Location = new Point(114, 143);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(166, 27);
-            textBoxAmount.TabIndex = 58;
+            textBoxAmount.TabIndex = 4;
             textBoxAmount.TextChanged += textBoxAmount_TextChanged;
             // 
             // buttonIdSearch
@@ -182,7 +182,7 @@
             buttonIdSearch.Location = new Point(153, 3);
             buttonIdSearch.Name = "buttonIdSearch";
             buttonIdSearch.Size = new Size(116, 27);
-            buttonIdSearch.TabIndex = 57;
+            buttonIdSearch.TabIndex = 2;
             buttonIdSearch.Text = "пошук";
             buttonIdSearch.UseVisualStyleBackColor = true;
             buttonIdSearch.Click += buttonIdSearch_Click;
@@ -277,7 +277,7 @@
             idBox.Location = new Point(85, 3);
             idBox.Name = "idBox";
             idBox.Size = new Size(62, 27);
-            idBox.TabIndex = 42;
+            idBox.TabIndex = 1;
             // 
             // labelCategory
             // 
@@ -299,8 +299,10 @@
             // 
             // MoneyOperationForm
             // 
+            AcceptButton = buttonOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = buttonCancel;
             ClientSize = new Size(540, 339);
             Controls.Add(panelMoney);
             MinimumSize = new Size(558, 386);

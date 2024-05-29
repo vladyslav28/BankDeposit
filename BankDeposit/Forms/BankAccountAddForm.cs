@@ -14,17 +14,21 @@ namespace BankDeposit.Forms
         {
             InitializeComponent();
 
+            this.bank = bank; 
+
             InitializeCategoryBox();
 
-            this.bank = bank;
+            dateTimePickerBirth.Value = DateTime.Now.Date;
+            dateTimePickerBirth.MaxDate = DateTime.Now.Date;
+            dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
+           
+            UpdateCategoryBasedOnBirthDate();
+            
             BankAccount = new BankAccount { Id = newId };
             idBox.Text = newId.ToString();
 
             InitializeErrorLabels();
-
-            nameBox.TextChanged += nameBox_TextChanged;
-            sumBox.TextChanged += sumBox_TextChanged;
-            categoryBox.SelectedIndexChanged += categoryBox_SelectedIndexChanged;
         }
 
         private void InitializeCategoryBox()
@@ -59,15 +63,19 @@ namespace BankDeposit.Forms
 
         private void UpdateCategoryBasedOnBirthDate()
         {
+            if (bank == null) return;
+
             string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
 
             if (depositCategory == "Junior(12%)")
             {
-                categoryBox.SelectedIndex = 0;
+                if (categoryBox.Items.Count > 0)
+                    categoryBox.SelectedIndex = 0;
             }
             else if (depositCategory == "Standart(15%)")
             {
-                categoryBox.SelectedIndex = 1;
+                if (categoryBox.Items.Count > 1)
+                    categoryBox.SelectedIndex = 1;
             }
         }
 
@@ -156,6 +164,8 @@ namespace BankDeposit.Forms
         private bool ValidateCategory(bool showErrorMessages)
         {
             bool isValid = true;
+            if (bank == null) return false; 
+
             string expectedCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
             string selectedCategory = categoryBox.SelectedItem?.ToString();
 
@@ -225,7 +235,7 @@ namespace BankDeposit.Forms
                     BankAccount.Name = nameBox.Text;
                     BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
                     BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-                    BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
+                    BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
                     if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
                     {
                         BankAccount.CurrentSum = Math.Round(parsedSum, 2);

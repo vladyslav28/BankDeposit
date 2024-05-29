@@ -57,6 +57,7 @@
             textBoxUsername.Name = "textBoxUsername";
             textBoxUsername.Size = new Size(124, 27);
             textBoxUsername.TabIndex = 2;
+            textBoxUsername.TabStop = false;
             // 
             // textBoxPassword
             // 
@@ -65,6 +66,7 @@
             textBoxPassword.PasswordChar = '*';
             textBoxPassword.Size = new Size(124, 27);
             textBoxPassword.TabIndex = 0;
+            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
             // 
             // buttonCancel
             // 
@@ -72,7 +74,7 @@
             buttonCancel.Location = new Point(168, 147);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(136, 32);
-            buttonCancel.TabIndex = 3;
+            buttonCancel.TabIndex = 2;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
@@ -94,7 +96,6 @@
             label1.Size = new Size(112, 20);
             label1.TabIndex = 5;
             label1.Text = "Вхід в систему ";
-  
             // 
             // panelLogin
             // 
@@ -132,8 +133,10 @@
             // 
             // LoginForm
             // 
+            AcceptButton = buttonLogin;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = buttonCancel;
             ClientSize = new Size(412, 213);
             Controls.Add(panelLogin);
             MaximumSize = new Size(547, 360);

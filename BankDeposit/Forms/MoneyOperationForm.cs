@@ -41,23 +41,30 @@ namespace BankDeposit.Forms
         {
             bool isValid = true;
 
-            if (!string.IsNullOrEmpty(textBoxAmount.Text))
+            if (string.IsNullOrEmpty(textBoxAmount.Text))
             {
-                if (!decimal.TryParse(textBoxAmount.Text, out _) || textBoxAmount.Text.Any(c => !char.IsDigit(c) && c != ',' && c != '.'))
+                if (showErrorMessages)
                 {
                     errorSumLabel.Visible = true;
-                    if (showErrorMessages)
-                    {
-                        errorInfoAmountLabel.Text = "Сума містить заборонені символи";
-                        errorInfoAmountLabel.Visible = true;
-                    }
-                    isValid = false;
+                    errorInfoAmountLabel.Text = "Сума не може бути порожньою";
+                    errorInfoAmountLabel.Visible = true;
                 }
                 else
                 {
                     errorSumLabel.Visible = false;
                     errorInfoAmountLabel.Visible = false;
                 }
+                isValid = false;
+            }
+            else if (!decimal.TryParse(textBoxAmount.Text, out _) || textBoxAmount.Text.Any(c => !char.IsDigit(c) && c != ','))
+            {
+                errorSumLabel.Visible = true;
+                if (showErrorMessages)
+                {
+                    errorInfoAmountLabel.Text = "Сума містить заборонені символи";
+                    errorInfoAmountLabel.Visible = true;
+                }
+                isValid = false;
             }
             else
             {
@@ -143,17 +150,17 @@ namespace BankDeposit.Forms
 
         private void applyInterest_Click(object sender, EventArgs e)
         {
-            decimal initialSum = BankAccount.CurrentSum;
-            BankAccount.ApplyInterest();
-            DisplayAccountData();
-
-            decimal interest = BankAccount.CurrentSum - initialSum;
-            DisplayInterestMessage(interest);
+            decimal interest = BankAccount.ApplyInterest();
+            if (interest > 0)
+            {
+                DisplayAccountData();
+                DisplayInterestMessage(interest);
+            }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (ValidateInput(true))
+            if (IsChanged())
             {
                 var result = MessageBox.Show("Ви дійсно хочете зберегти зміни?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
@@ -167,6 +174,20 @@ namespace BankDeposit.Forms
                     DisplayAccountData();
                 }
             }
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+        public bool IsChanged()
+        {
+            return BankAccount.Name != originalBankAccount.Name ||
+                   BankAccount.BirthDate != originalBankAccount.BirthDate ||
+                   BankAccount.DepositCategory != originalBankAccount.DepositCategory ||
+                   BankAccount.CurrentSum != originalBankAccount.CurrentSum ||
+                   BankAccount.LastOperationDate != originalBankAccount.LastOperationDate;
         }
 
         private void CancelOperation()
@@ -190,7 +211,6 @@ namespace BankDeposit.Forms
         {
             ValidateInput(false);
         }
-
-    
+  
     }
 }
