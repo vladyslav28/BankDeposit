@@ -112,7 +112,7 @@ namespace BankDeposit.Models
             decimal generatedAmount = Math.Round((decimal)(random.Next(10000, 100000100) / 100.0), 2);
             return generatedAmount;
         }
-       
+
         public List<BankAccount> SearchAccounts(string id, string name, string depositCategory, DateTime? birthDate, DateTime? lastOperationDate, decimal? currentSum)
         {
             var result = new List<BankAccount>();
@@ -121,16 +121,18 @@ namespace BankDeposit.Models
             {
                 if ((string.IsNullOrEmpty(id) || account.Id.ToString().Contains(id)) &&
                     (account.DepositCategory == null || account.DepositCategory.Contains(depositCategory)) &&
-                    (account.Name == null|| account.Name.Contains(name)) &&
+                    (string.IsNullOrEmpty(name) || (account.Name != null && account.Name.ToLower().Contains(name.ToLower()))) &&
                     (!birthDate.HasValue || account.BirthDate.Date == birthDate.Value.Date) &&
                     (!lastOperationDate.HasValue || account.LastOperationDate.Date == lastOperationDate.Value.Date) &&
-                    (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString() )))
+                    (!currentSum.HasValue || account.CurrentSum.ToString().Contains(currentSum.Value.ToString())))
                 {
                     result.Add(account);
                 }
             }
             return result;
         }
+
+
 
         public bool DeleteAccount(int accountId)
         {

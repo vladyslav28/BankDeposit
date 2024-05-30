@@ -228,7 +228,10 @@ namespace BankDeposit.Forms
             bankAccountBindingSource.DataSource = result;
             UpdateLabelCount();
 
-            MessageBox.Show(resultList.Items.Count.ToString());
+            if(resultList.Items.Count == 0)
+            {
+                MessageBox.Show("За обраними критеріями акаунтів не знайдено", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
