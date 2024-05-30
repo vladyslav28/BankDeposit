@@ -19,6 +19,8 @@ namespace BankDeposit.Forms
             originalBankAccount = new BankAccount(account);
             DisplayAccountData();
             InitializeErrorLabels();
+
+
         }
 
         private void DisplayAccountData()
@@ -160,25 +162,8 @@ namespace BankDeposit.Forms
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (IsChanged())
-            {
-                var result = MessageBox.Show("Ви дійсно хочете зберегти зміни?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    CancelOperation();
-                    DisplayAccountData();
-                }
-            }
-            else
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         public bool IsChanged()
@@ -211,6 +196,34 @@ namespace BankDeposit.Forms
         {
             ValidateInput(false);
         }
-  
+
+        private void MoneyOperationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (IsChanged())
+            {
+                DialogResult confirmResult = MessageBox.Show(
+                    "Ви впевнені, що хочете зберегти зміни?",
+                    "Підтвердження збереження",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
+                else if (confirmResult == DialogResult.No)
+                {
+                    CancelOperation();
+                    this.DialogResult = DialogResult.Cancel;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
     }
 }

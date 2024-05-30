@@ -297,7 +297,7 @@
             MinimumSize = new Size(723, 383);
             Name = "BankAccountEditForm";
             Text = "BankAccountEditForm";
-         
+            
             panelEdit.ResumeLayout(false);
             panelEdit.PerformLayout();
             ResumeLayout(false);

@@ -33,7 +33,6 @@ namespace BankDeposit.Forms
                 DepositCategory = bankAccount.DepositCategory,
                 CurrentSum = bankAccount.CurrentSum
             };
-
         }
 
         private void InitializeCategoryBox()
@@ -76,12 +75,11 @@ namespace BankDeposit.Forms
 
         public bool IsChanged()
         {
-            return bankAccount.Name != originalBankAccount.Name ||
-                   bankAccount.Id != originalBankAccount.Id ||
-                   bankAccount.BirthDate != originalBankAccount.BirthDate ||
-                   bankAccount.LastOperationDate != originalBankAccount.LastOperationDate ||
-                   bankAccount.DepositCategory != originalBankAccount.DepositCategory ||
-                   bankAccount.CurrentSum != originalBankAccount.CurrentSum;
+            return nameBox.Text != originalBankAccount.Name ||
+                   dateTimePickerBirth.Value.Date != originalBankAccount.BirthDate ||
+                   dateTimePickerLastOperation.Value.Date != originalBankAccount.LastOperationDate ||
+                   categoryBox.SelectedItem?.ToString() != originalBankAccount.DepositCategory ||
+                   sumBox.Text != originalBankAccount.CurrentSum.ToString();
         }
 
         private bool ValidateName(bool showErrorMessages)
@@ -248,15 +246,46 @@ namespace BankDeposit.Forms
 
             if (isNameValid && isSumValid && isCategoryValid)
             {
-                bankAccount.Name = nameBox.Text;
-                bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
-                bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-                bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
-                if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+                if (IsChanged())
                 {
-                    bankAccount.CurrentSum = Math.Round(parsedSum, 2);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult confirmResult = MessageBox.Show(
+                        "Ви впевнені, що хочете зберегти зміни?",
+                        "Підтвердження збереження",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        bankAccount.Name = nameBox.Text;
+                        bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
+                        bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
+                        bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
+                        if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+                        {
+                            bankAccount.CurrentSum = Math.Round(parsedSum, 2);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                    }
+                    else if (confirmResult == DialogResult.No)
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    bankAccount.Name = nameBox.Text;
+                    bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
+                    bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
+                    bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
+                    if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
+                    {
+                        bankAccount.CurrentSum = Math.Round(parsedSum, 2);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 }
             }
             else
@@ -281,7 +310,5 @@ namespace BankDeposit.Forms
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
-        
     }
 }

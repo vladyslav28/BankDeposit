@@ -401,26 +401,14 @@ namespace BankDeposit.Forms
             {
                 if (bankAccountEditForm.IsChanged())
                 {
-                    DialogResult confirmResult = MessageBox.Show(
-                        "Ви впевнені, що хочете зберегти зміни?",
-                        "Підтвердження збереження",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
-                    );
-
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        buttonSearch_Click(null!, null!);
-                    }
-                    else
-                    {
-                        bankAccountEditForm.CancelOperation();
-                        EditBankAccount(selectedAccount);
-                    }
+                    MessageBox.Show("Інформацію змінено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                buttonSearch_Click(null!, null!);
             }
+         
         }
+
+
 
         private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
