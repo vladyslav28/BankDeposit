@@ -8,7 +8,7 @@ namespace BankDeposit.Forms
     public partial class BankAccountEditForm : Form
     {
         private BankAccount bankAccount;
-        private BankAccount originalBankAccount;
+        private readonly BankAccount originalBankAccount;
         private Bank bank = new Bank();
 
         public BankAccountEditForm(BankAccount bankAccount)
@@ -238,12 +238,15 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
+
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             bool isNameValid = ValidateName(true);
             bool isSumValid = ValidateSum(true);
             bool isCategoryValid = ValidateCategory(true);
 
+            string category = categoryBox.SelectedItem?.ToString() ?? string.Empty;
             if (isNameValid && isSumValid && isCategoryValid)
             {
                 if (IsChanged())
@@ -257,16 +260,9 @@ namespace BankDeposit.Forms
 
                     if (confirmResult == DialogResult.Yes)
                     {
-                        bankAccount.Name = nameBox.Text;
-                        bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
-                        bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-                        bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
-                        if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
-                        {
-                            bankAccount.CurrentSum = Math.Round(parsedSum, 2);
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
+                        bankAccount = bank.UpdateAccount(bankAccount, nameBox.Text, dateTimePickerBirth.Value.Date, dateTimePickerLastOperation.Value.Date, category, sumBox.Text);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                     else if (confirmResult == DialogResult.No)
                     {
@@ -276,16 +272,9 @@ namespace BankDeposit.Forms
                 }
                 else
                 {
-                    bankAccount.Name = nameBox.Text;
-                    bankAccount.BirthDate = dateTimePickerBirth.Value.Date;
-                    bankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-                    bankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
-                    if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
-                    {
-                        bankAccount.CurrentSum = Math.Round(parsedSum, 2);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
+                    bankAccount = bank.UpdateAccount(bankAccount, nameBox.Text, dateTimePickerBirth.Value.Date, dateTimePickerLastOperation.Value.Date, category, sumBox.Text);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
             else
@@ -296,12 +285,7 @@ namespace BankDeposit.Forms
 
         public void CancelOperation()
         {
-            bankAccount.Id = originalBankAccount.Id;
-            bankAccount.Name = originalBankAccount.Name;
-            bankAccount.BirthDate = originalBankAccount.BirthDate;
-            bankAccount.LastOperationDate = originalBankAccount.LastOperationDate;
-            bankAccount.DepositCategory = originalBankAccount.DepositCategory;
-            bankAccount.CurrentSum = originalBankAccount.CurrentSum;
+            bankAccount = bank.CancelAccount(bankAccount, originalBankAccount);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

@@ -307,8 +307,8 @@
             Controls.Add(panelMoney);
             MinimumSize = new Size(558, 386);
             Name = "MoneyOperationForm";
-            Text = "Грошові операції";
-            this.FormClosing += new FormClosingEventHandler(MoneyOperationForm_FormClosing);
+            Text = "Фінансові операції";
+            FormClosing += MoneyOperationForm_FormClosing;
             panelMoney.ResumeLayout(false);
             panelMoney.PerformLayout();
             ResumeLayout(false);

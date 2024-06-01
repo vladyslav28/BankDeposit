@@ -297,7 +297,7 @@
             Controls.Add(panelAdd);
             MinimumSize = new Size(731, 379);
             Name = "BankAccountAddForm";
-            Text = "BankAccountAddForm";
+            Text = "Додання акаунта";
             panelAdd.ResumeLayout(false);
             panelAdd.PerformLayout();
             ResumeLayout(false);

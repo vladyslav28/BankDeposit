@@ -8,81 +8,33 @@ namespace BankDeposit.Forms
     public partial class BankAccountAddForm : Form
     {
         public BankAccount BankAccount { get; private set; }
-        private Bank bank;
+        private readonly Bank bank;
 
         public BankAccountAddForm(int newId, Bank bank)
         {
             InitializeComponent();
 
-            this.bank = bank; 
+            this.bank = bank;
 
             InitializeCategoryBox();
+            InitializeDatePickers();
 
-            dateTimePickerBirth.Value = DateTime.Now.Date;
-            dateTimePickerBirth.MaxDate = DateTime.Now.Date;
-            dateTimePickerLastOperation.Value = DateTime.Now.Date;
-            dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
-           
+
+
             UpdateCategoryBasedOnBirthDate();
-            
+
             BankAccount = new BankAccount { Id = newId };
             idBox.Text = newId.ToString();
 
             InitializeErrorLabels();
         }
 
-        private void InitializeCategoryBox()
+        private void InitializeDatePickers()
         {
-            categoryBox.Items.Add("Junior(12%)");
-            categoryBox.Items.Add("Standart(15%)");
-            categoryBox.SelectedIndex = -1;
-        }
-
-        private void InitializeErrorLabels()
-        {
-            labelErrorName.Visible = false;
-            labelInfoName.Visible = false;
-
-            labelErrorSum.Visible = false;
-            labelInfoSum.Visible = false;
-
-            labelErrorCategory.Visible = false;
-            labelInfoCategory.Visible = false;
-        }
-
-        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
-        }
-
-        private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
-            UpdateCategoryBasedOnBirthDate();
-        }
-
-        private void UpdateCategoryBasedOnBirthDate()
-        {
-            if (bank == null) return;
-
-            string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
-
-            if (depositCategory == "Junior(12%)")
-            {
-                if (categoryBox.Items.Count > 0)
-                    categoryBox.SelectedIndex = 0;
-            }
-            else if (depositCategory == "Standart(15%)")
-            {
-                if (categoryBox.Items.Count > 1)
-                    categoryBox.SelectedIndex = 1;
-            }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            dateTimePickerBirth.Value = DateTime.Now.Date;
+            dateTimePickerBirth.MaxDate = DateTime.Now.Date;
+            dateTimePickerLastOperation.Value = DateTime.Now.Date;
+            dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
         }
 
         private bool ValidateName(bool showErrorMessages)
@@ -164,7 +116,7 @@ namespace BankDeposit.Forms
         private bool ValidateCategory(bool showErrorMessages)
         {
             bool isValid = true;
-            if (bank == null) return false; 
+            if (bank == null) return false;
 
             string expectedCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
             string selectedCategory = categoryBox.SelectedItem?.ToString() ?? string.Empty;
@@ -221,6 +173,60 @@ namespace BankDeposit.Forms
             ValidateCategory(false);
         }
 
+        private void InitializeCategoryBox()
+        {
+            categoryBox.Items.Add("Junior(12%)");
+            categoryBox.Items.Add("Standart(15%)");
+            categoryBox.SelectedIndex = -1;
+        }
+
+        private void InitializeErrorLabels()
+        {
+            labelErrorName.Visible = false;
+            labelInfoName.Visible = false;
+
+            labelErrorSum.Visible = false;
+            labelInfoSum.Visible = false;
+
+            labelErrorCategory.Visible = false;
+            labelInfoCategory.Visible = false;
+        }
+
+        private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
+        }
+
+        private void dateTimePickerBirth_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBirth.Value = dateTimePickerBirth.Value.Date;
+            UpdateCategoryBasedOnBirthDate();
+        }
+
+        private void UpdateCategoryBasedOnBirthDate()
+        {
+            if (bank == null) return;
+
+            string depositCategory = bank.GetDepositCategory(dateTimePickerBirth.Value.Date);
+
+            if (depositCategory == "Junior(12%)")
+            {
+                if (categoryBox.Items.Count > 0)
+                    categoryBox.SelectedIndex = 0;
+            }
+            else if (depositCategory == "Standart(15%)")
+            {
+                if (categoryBox.Items.Count > 1)
+                    categoryBox.SelectedIndex = 1;
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             bool isNameValid = ValidateName(true);
@@ -229,19 +235,15 @@ namespace BankDeposit.Forms
 
             if (isNameValid && isSumValid && isCategoryValid)
             {
-                var result = MessageBox.Show("Ви дійсно хочете зберегти новий акаунт?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                BankAccount.Name = nameBox.Text;
+                BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
+                BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
+                BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
+                if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
                 {
-                    BankAccount.Name = nameBox.Text;
-                    BankAccount.BirthDate = dateTimePickerBirth.Value.Date;
-                    BankAccount.LastOperationDate = dateTimePickerLastOperation.Value.Date;
-                    BankAccount.DepositCategory = categoryBox.SelectedItem?.ToString();
-                    if (decimal.TryParse(sumBox.Text, out decimal parsedSum))
-                    {
-                        BankAccount.CurrentSum = Math.Round(parsedSum, 2);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
+                    BankAccount.CurrentSum = Math.Round(parsedSum, 2);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
             else
@@ -249,5 +251,7 @@ namespace BankDeposit.Forms
                 MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
     }
 }

@@ -579,7 +579,7 @@ namespace BankDeposit.Forms
             MinimumSize = new Size(800, 610);
             Name = "MainForm";
             Text = "Банк";
-            Load += MainForm_Load;
+          
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panelSearch.ResumeLayout(false);

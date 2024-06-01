@@ -21,7 +21,6 @@ namespace BankDeposit.Forms
             LoadBankData();
             InitializeErrorLabels();
 
-            
         }
 
         private void LoadBankData()
@@ -69,6 +68,26 @@ namespace BankDeposit.Forms
         {
             bank.SaveData(PATH_TO_DATA);
         }
+        
+        private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
+                "Поля Id можуть мати лише числові значення" + Environment.NewLine +
+                "Поля Суми можуть мати лише числові значення,роздільником є кома (,)" + Environment.NewLine +
+                "Категорія визначається за датою народження,якщо клієнтові менше 18 років(відносно сьогоднішньої дати),то категорія її депозиту Junior(12%),якщо більше 18 - Standart(15%)";
+
+            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "Програма створена для керування інформацією вкладників банку" + Environment.NewLine +
+                "Додатковими функціями програми є можливість проводити фінансові операції такі як:" + Environment.NewLine +
+                "зняття коштів,поповнення рахунку,нарахування відсотків за певною категорією депозиту" + Environment.NewLine + Environment.NewLine +
+                "Програма розроблена: ст.гр ПЗПІ-23-6 Ус Владиславом";
+
+            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         private void InitializeCategoryBox()
         {
@@ -85,19 +104,6 @@ namespace BankDeposit.Forms
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
-        }
-
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            categoryBox.SelectedIndex = -1;
-            dateTimePickerBirth.Value = DateTime.Today.Date;
-            dateTimePickerLastOperation.Value = DateTime.Today.Date;
-            dateTimePickerBirth.Checked = false;
-            dateTimePickerLastOperation.Checked = false;
-            idBox.Text = "";
-            sumBox.Text = "";
-            nameBox.Text = "";
-            InitializeErrorLabels();
         }
 
         private void idBox_TextChanged(object sender, EventArgs e)
@@ -203,6 +209,9 @@ namespace BankDeposit.Forms
             return isValid;
         }
 
+
+        //
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             bool isValid = ValidateInput(true);
@@ -246,7 +255,7 @@ namespace BankDeposit.Forms
 
         private void AddBankAccount()
         {
-            int newId = bank.BankAccounts.Any() ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;
+            int newId = bank.BankAccounts.Count > 0 ? bank.BankAccounts.Max(a => a.Id) + 1 : 1;
             var addForm = new BankAccountAddForm(newId, bank);
 
             if (addForm.ShowDialog() == DialogResult.OK)
@@ -258,6 +267,7 @@ namespace BankDeposit.Forms
             }
         }
 
+
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -266,6 +276,7 @@ namespace BankDeposit.Forms
 
                 if (moneyOperationForm.ShowDialog() == DialogResult.OK)
                 {
+                   
                     if (moneyOperationForm.IsChanged())
                     {
                         MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -281,7 +292,7 @@ namespace BankDeposit.Forms
 
         private void фінансовіОпераціїToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bank.BankAccounts.Any())
+            if (bank.BankAccounts.Count > 0)
             {
                 BankAccount bankAccount = bank.BankAccounts.First();
                 var moneyOperationForm = new MoneyOperationForm(bankAccount, bank);
@@ -301,6 +312,7 @@ namespace BankDeposit.Forms
             }
         }
 
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -316,6 +328,12 @@ namespace BankDeposit.Forms
         private void видалитиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Введіть ID акаунту для видалення:", "Видалити акаунт", "");
+
+            if (string.IsNullOrEmpty(input))
+            {
+                return; 
+            }
+
             if (int.TryParse(input, out int accountId))
             {
                 BankAccount? selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
@@ -376,6 +394,12 @@ namespace BankDeposit.Forms
         private void редагуватиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Введіть ID акаунту для редагування:", "Редагувати акаунт", "");
+
+            if (string.IsNullOrEmpty(input))
+            {
+                return;
+            }
+
             if (int.TryParse(input, out int accountId))
             {
                 BankAccount? selectedAccount = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
@@ -405,34 +429,22 @@ namespace BankDeposit.Forms
                 }
                 buttonSearch_Click(null!, null!);
             }
-         
+
         }
-
-
-
-        private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonReset_Click(object sender, EventArgs e)
         {
-            string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
-                "Поля Id можуть мати лише числові значення" + Environment.NewLine +
-                "Поля Суми можуть мати лише числові значення,роздільником є кома (,)" + Environment.NewLine +
-                "Категорія визначається за датою народження,якщо клієнтові менше 18 років(відносно сьогоднішньої дати),то категорія її депозиту Junior(12%),якщо більше 18 - Standart(15%)";
-
-            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            categoryBox.SelectedIndex = -1;
+            dateTimePickerBirth.Value = DateTime.Today.Date;
+            dateTimePickerLastOperation.Value = DateTime.Today.Date;
+            dateTimePickerBirth.Checked = false;
+            dateTimePickerLastOperation.Checked = false;
+            idBox.Text = "";
+            sumBox.Text = "";
+            nameBox.Text = "";
+            InitializeErrorLabels();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string message = "Програма створена для керування інформацією вкладників банку" + Environment.NewLine +
-                "Додатковими функціями програми є можливість проводити фінансові операції такі як:" + Environment.NewLine +
-                "зняття коштів,поповнення рахунку,нарахування відсотків за певною категорією депозиту" + Environment.NewLine + Environment.NewLine +
-                "Програма розроблена: ст.гр ПЗПІ-23-6 Ус Владиславом";
-
-            MessageBox.Show(message, "Підказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
+       
+        
     }
 }

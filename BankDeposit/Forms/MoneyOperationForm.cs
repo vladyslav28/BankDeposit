@@ -19,8 +19,6 @@ namespace BankDeposit.Forms
             originalBankAccount = new BankAccount(account);
             DisplayAccountData();
             InitializeErrorLabels();
-
-
         }
 
         private void DisplayAccountData()
@@ -82,16 +80,53 @@ namespace BankDeposit.Forms
             return isValid;
         }
 
+        private void textBoxAmount_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInput(false);
+        }
+
         private void dateTimePickerLastOperation_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
+        private void DisplayInterestMessage(decimal interest)
+        {
+            if (interest > 0)
+            {
+                string message = $"Нараховано: {interest:F2} " + Environment.NewLine +
+                                 $"Початкова сума: {originalBankAccount.CurrentSum:F2}." + Environment.NewLine +
+                                 $"Категорія депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
+                                 $"Поточний баланс: {BankAccount.CurrentSum:F2}";
+
+                MessageBox.Show(message, "Нарахування відсотків", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        public bool IsChanged()
+        {
+            return BankAccount.Name != originalBankAccount.Name ||
+                   BankAccount.BirthDate != originalBankAccount.BirthDate ||
+                   BankAccount.DepositCategory != originalBankAccount.DepositCategory ||
+                   BankAccount.CurrentSum != originalBankAccount.CurrentSum ||
+                   BankAccount.LastOperationDate != originalBankAccount.LastOperationDate;
+        }
+
+        private void CancelOperation()
+        {
+            BankAccount.Id = originalBankAccount.Id;
+            BankAccount.Name = originalBankAccount.Name;
+            BankAccount.BirthDate = originalBankAccount.BirthDate;
+            BankAccount.DepositCategory = originalBankAccount.DepositCategory;
+            BankAccount.CurrentSum = originalBankAccount.CurrentSum;
+            BankAccount.LastOperationDate = originalBankAccount.LastOperationDate;
+        }
+        
         private void buttonIdSearch_Click(object sender, EventArgs e)
         {
             if (int.TryParse(idBox.Text, out int accountId))
             {
-                var account = bank.BankAccounts.FirstOrDefault(a => a.Id == accountId);
+                var account = bank.SearchAccountById(accountId);
                 if (account != null)
                 {
                     CancelOperation();
@@ -114,7 +149,7 @@ namespace BankDeposit.Forms
         {
             if (ValidateInput(true) && decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
-                var (success, interest) = BankAccount.Withdraw(amount);
+                var (success, interest) = bank.Withdraw(BankAccount.Id, amount);
                 if (success)
                 {
                     DisplayAccountData();
@@ -131,28 +166,15 @@ namespace BankDeposit.Forms
         {
             if (ValidateInput(true) && decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
-                decimal interest = BankAccount.Deposit(amount);
+                decimal interest = bank.Deposit(BankAccount.Id, amount);
                 DisplayAccountData();
                 DisplayInterestMessage(interest);
             }
         }
 
-        private void DisplayInterestMessage(decimal interest)
-        {
-            if (interest > 0)
-            {
-                string message = $"Нараховано: {interest:F2} " + Environment.NewLine +
-                                 $"Початкова сума: {originalBankAccount.CurrentSum:F2}." + Environment.NewLine +
-                                 $"Категорія депозиту: {BankAccount.DepositCategory}." + Environment.NewLine +
-                                 $"Поточний баланс: {BankAccount.CurrentSum:F2}";
-
-                MessageBox.Show(message, "Нарахування відсотків", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
         private void applyInterest_Click(object sender, EventArgs e)
         {
-            decimal interest = BankAccount.ApplyInterest();
+            decimal interest = bank.ApplyInterest(BankAccount.Id);
             if (interest > 0)
             {
                 DisplayAccountData();
@@ -166,43 +188,19 @@ namespace BankDeposit.Forms
             this.Close();
         }
 
-        public bool IsChanged()
-        {
-            return BankAccount.Name != originalBankAccount.Name ||
-                   BankAccount.BirthDate != originalBankAccount.BirthDate ||
-                   BankAccount.DepositCategory != originalBankAccount.DepositCategory ||
-                   BankAccount.CurrentSum != originalBankAccount.CurrentSum ||
-                   BankAccount.LastOperationDate != originalBankAccount.LastOperationDate;
-        }
-
-        private void CancelOperation()
-        {
-            BankAccount.Id = originalBankAccount.Id;
-            BankAccount.Name = originalBankAccount.Name;
-            BankAccount.BirthDate = originalBankAccount.BirthDate;
-            BankAccount.DepositCategory = originalBankAccount.DepositCategory;
-            BankAccount.CurrentSum = originalBankAccount.CurrentSum;
-            BankAccount.LastOperationDate = originalBankAccount.LastOperationDate;
-        }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             CancelOperation();
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
-        private void textBoxAmount_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInput(false);
-        }
-
+ 
         private void MoneyOperationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (IsChanged())
             {
                 DialogResult confirmResult = MessageBox.Show(
-                    "Ви впевнені, що хочете зберегти зміни?",
+                    "Ви впевнені, що хочете зберегти результати операцій?",
                     "Підтвердження збереження",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question
@@ -223,7 +221,5 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
-
     }
 }
