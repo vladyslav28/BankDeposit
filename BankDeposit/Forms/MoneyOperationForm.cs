@@ -9,7 +9,7 @@ namespace BankDeposit.Forms
     {
         public BankAccount BankAccount { get; private set; }
         private BankAccount originalBankAccount;
-        private Bank bank;
+        private readonly Bank bank;
 
         public MoneyOperationForm(BankAccount account, Bank bank)
         {

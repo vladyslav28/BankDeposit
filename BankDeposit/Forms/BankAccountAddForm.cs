@@ -20,7 +20,6 @@ namespace BankDeposit.Forms
             InitializeDatePickers();
 
 
-
             UpdateCategoryBasedOnBirthDate();
 
             BankAccount = new BankAccount { Id = newId };
@@ -49,7 +48,7 @@ namespace BankDeposit.Forms
                     labelInfoName.Text = "ПІБ не може бути порожнім";
                     labelInfoName.Visible = true;
                 }
-                else
+                else 
                 {
                     labelErrorName.Visible = false;
                     labelInfoName.Visible = false;

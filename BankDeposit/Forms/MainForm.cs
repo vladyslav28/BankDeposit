@@ -7,20 +7,25 @@ namespace BankDeposit.Forms
 {
     public partial class MainForm : Form
     {
-        Bank bank = new Bank();
+        Bank bank = new();
         const string PATH_TO_DATA = ".\\bank.txt";
 
         public MainForm()
         {
             InitializeComponent();
+            LoadBankData();
+            InitializeDatePickers();
+            InitializeCategoryBox();
+            InitializeErrorLabels();
+           
+        }
+
+        private void InitializeDatePickers()
+        {
             dateTimePickerLastOperation.Value = DateTime.Now.Date;
             dateTimePickerLastOperation.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.MaxDate = DateTime.Now.Date;
             dateTimePickerBirth.Value = DateTime.Now.Date;
-            InitializeCategoryBox();
-            LoadBankData();
-            InitializeErrorLabels();
-
         }
 
         private void LoadBankData()
@@ -59,10 +64,6 @@ namespace BankDeposit.Forms
             this.Close();
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadBankData();
-        }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -153,7 +154,7 @@ namespace BankDeposit.Forms
                 errorInfoIdLabel.Visible = false;
             }
 
-            if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.'))
+            if (nameBox.Text.Any(c => !char.IsLetter(c) && c != '.' && c != ' '))
             {
                 errorNameLabel.Visible = true;
                 if (showErrorMessages)
@@ -179,7 +180,7 @@ namespace BankDeposit.Forms
 
             if (!string.IsNullOrEmpty(sumBox.Text))
             {
-                if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ','))
+                if (!decimal.TryParse(sumBox.Text, out _) || sumBox.Text.Any(c => !char.IsDigit(c) && c != ',' && c != ' '))
                 {
                     errorSumLabel.Visible = true;
                     if (showErrorMessages)
@@ -242,7 +243,7 @@ namespace BankDeposit.Forms
                 MessageBox.Show("За обраними критеріями акаунтів не знайдено", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        //
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddBankAccount();
@@ -267,7 +268,7 @@ namespace BankDeposit.Forms
             }
         }
 
-
+        //
         private void buttonMoney_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -311,7 +312,7 @@ namespace BankDeposit.Forms
                 MessageBox.Show("Акаунти відсутні", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        //
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -374,7 +375,7 @@ namespace BankDeposit.Forms
                 }
             }
         }
-
+        //
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItems.Count > 0)
@@ -431,6 +432,7 @@ namespace BankDeposit.Forms
             }
 
         }
+        //
         private void buttonReset_Click(object sender, EventArgs e)
         {
             categoryBox.SelectedIndex = -1;

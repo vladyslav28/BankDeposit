@@ -441,7 +441,7 @@ namespace BankDeposit.Forms
             // resultList
             // 
             resultList.DataSource = bankAccountBindingSource;
-            resultList.DisplayMember = "CustomDisplay";
+            resultList.DisplayMember = "Name";
             resultList.Font = new Font("Segoe UI", 8.5F);
             resultList.FormattingEnabled = true;
             resultList.ItemHeight = 19;
@@ -467,7 +467,7 @@ namespace BankDeposit.Forms
             // 
             // showBox
             // 
-            showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay1", true));
+            showBox.DataBindings.Add(new Binding("Text", bankAccountBindingSource, "CustomDisplay", true));
             showBox.Font = new Font("Segoe UI", 8.5F);
             showBox.Location = new Point(159, 72);
             showBox.Multiline = true;

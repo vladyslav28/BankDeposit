@@ -296,8 +296,7 @@
             Controls.Add(panelEdit);
             MinimumSize = new Size(723, 383);
             Name = "BankAccountEditForm";
-            Text = "BankAccountEditForm";
-            
+            Text = "Редагування акаунта";
             panelEdit.ResumeLayout(false);
             panelEdit.PerformLayout();
             ResumeLayout(false);

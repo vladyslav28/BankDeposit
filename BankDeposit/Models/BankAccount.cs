@@ -23,24 +23,22 @@ namespace BankDeposit.Models
             LastOperationDate = account.LastOperationDate;
         }
 
-        public string CustomDisplay
-        {
-            get { return $" {Name} "; }
-        }
 
-        public string CustomDisplay1
+        public string CustomDisplay
         {
             get
             {
                 return
-                    $"ID:{Id} " + Environment.NewLine +
-                    $"ПІБ:{Name} " + Environment.NewLine +
-                    $"Дата народження:{BirthDate.ToString("dd.MM.yyyy")}" + Environment.NewLine +
-                    $"Категорія депозиту:{DepositCategory} " + Environment.NewLine +
-                    $"Поточна сума:{CurrentSum} ₴" + Environment.NewLine +
-                    $"Дата останньої операції:{LastOperationDate.ToString("dd.MM.yyyy")}" + Environment.NewLine;
+                    $"ID: {Id} \r\n" +
+                    $"ПІБ: {Name} \r\n" +
+                    $"Дата народження: {BirthDate:dd.MM.yyyy} \r\n" +
+                    $"Категорія депозиту: {DepositCategory} \r\n" +
+                    $"Поточна сума: {CurrentSum} ₴ \r\n" +
+                    $"Дата останньої операції:{LastOperationDate:dd.MM.yyyy}";
             }
         }
+
+
 
         public decimal ApplyInterest()
         {
