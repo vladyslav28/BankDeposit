@@ -39,7 +39,6 @@ namespace BankDeposit.Forms
         private bool ValidateName(bool showErrorMessages)
         {
             bool isValid = true;
-
             if (string.IsNullOrEmpty(nameBox.Text))
             {
                 if (showErrorMessages)
@@ -48,7 +47,7 @@ namespace BankDeposit.Forms
                     labelInfoName.Text = "ПІБ не може бути порожнім";
                     labelInfoName.Visible = true;
                 }
-                else 
+                else
                 {
                     labelErrorName.Visible = false;
                     labelInfoName.Visible = false;
@@ -251,6 +250,9 @@ namespace BankDeposit.Forms
             }
         }
 
+        private void BankAccountAddForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

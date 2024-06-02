@@ -56,6 +56,7 @@
             // panelAdd
             // 
             panelAdd.Anchor = AnchorStyles.Top;
+            panelAdd.BorderStyle = BorderStyle.FixedSingle;
             panelAdd.Controls.Add(labelInfoCategory);
             panelAdd.Controls.Add(labelErrorCategory);
             panelAdd.Controls.Add(buttonOk);
@@ -77,7 +78,7 @@
             panelAdd.Controls.Add(sumBox);
             panelAdd.Controls.Add(categoryBox);
             panelAdd.Controls.Add(labelSum);
-            panelAdd.Location = new Point(45, 30);
+            panelAdd.Location = new Point(12, 14);
             panelAdd.Name = "panelAdd";
             panelAdd.Size = new Size(626, 283);
             panelAdd.TabIndex = 0;
@@ -107,7 +108,7 @@
             // buttonOk
             // 
             buttonOk.Anchor = AnchorStyles.None;
-            buttonOk.Location = new Point(197, 247);
+            buttonOk.Location = new Point(196, 246);
             buttonOk.Name = "buttonOk";
             buttonOk.Size = new Size(116, 29);
             buttonOk.TabIndex = 6;
@@ -293,11 +294,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = buttonCancel;
-            ClientSize = new Size(713, 332);
+            ClientSize = new Size(655, 315);
             Controls.Add(panelAdd);
-            MinimumSize = new Size(731, 379);
+            MinimumSize = new Size(673, 362);
             Name = "BankAccountAddForm";
             Text = "Додання акаунта";
+            Load += BankAccountAddForm_Load;
             panelAdd.ResumeLayout(false);
             panelAdd.PerformLayout();
             ResumeLayout(false);

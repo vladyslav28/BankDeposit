@@ -56,6 +56,7 @@
             // panelEdit
             // 
             panelEdit.Anchor = AnchorStyles.Top;
+            panelEdit.BorderStyle = BorderStyle.FixedSingle;
             panelEdit.Controls.Add(buttonOk);
             panelEdit.Controls.Add(labelInfoCategory);
             panelEdit.Controls.Add(labelInfoSum);
@@ -77,7 +78,7 @@
             panelEdit.Controls.Add(sumBox);
             panelEdit.Controls.Add(categoryBox);
             panelEdit.Controls.Add(labelSum);
-            panelEdit.Location = new Point(18, 30);
+            panelEdit.Location = new Point(13, 14);
             panelEdit.Name = "panelEdit";
             panelEdit.Size = new Size(671, 272);
             panelEdit.TabIndex = 0;
@@ -292,9 +293,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = buttonCancel;
-            ClientSize = new Size(705, 336);
+            ClientSize = new Size(698, 300);
             Controls.Add(panelEdit);
-            MinimumSize = new Size(723, 383);
+            MinimumSize = new Size(716, 347);
             Name = "BankAccountEditForm";
             Text = "Редагування акаунта";
             panelEdit.ResumeLayout(false);

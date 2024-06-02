@@ -370,8 +370,8 @@ namespace BankDeposit.Forms
                 bool isDeleted = bank.DeleteAccount(bankAccount.Id);
                 if (isDeleted)
                 {
-                    buttonSearch_Click(null!, null!);
                     MessageBox.Show("Акаунт видалено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    buttonSearch_Click(null!, null!);
                 }
             }
         }

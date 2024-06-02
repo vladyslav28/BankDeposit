@@ -59,7 +59,7 @@
             // 
             // panelMoney
             // 
-            panelMoney.Anchor = AnchorStyles.None;
+            panelMoney.Anchor = AnchorStyles.Top;
             panelMoney.BorderStyle = BorderStyle.FixedSingle;
             panelMoney.Controls.Add(panel1);
             panelMoney.Controls.Add(buttonCancel);
@@ -79,7 +79,7 @@
             panelMoney.Controls.Add(idBox);
             panelMoney.Controls.Add(labelCategory);
             panelMoney.Controls.Add(labelSum);
-            panelMoney.Location = new Point(12, 6);
+            panelMoney.Location = new Point(15, 14);
             panelMoney.Name = "panelMoney";
             panelMoney.Size = new Size(559, 317);
             panelMoney.TabIndex = 0;
@@ -93,7 +93,7 @@
             panel1.Controls.Add(textBoxAmount);
             panel1.Controls.Add(errorSumLabel);
             panel1.Controls.Add(errorInfoAmountLabel);
-            panel1.Location = new Point(153, 114);
+            panel1.Location = new Point(153, 134);
             panel1.Name = "panel1";
             panel1.Size = new Size(249, 122);
             panel1.TabIndex = 66;
@@ -312,13 +312,13 @@
             // MoneyOperationForm
             // 
             AcceptButton = buttonOk;
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             CancelButton = buttonCancel;
-            ClientSize = new Size(587, 354);
+            ClientSize = new Size(589, 346);
             Controls.Add(panelMoney);
-            MinimumSize = new Size(605, 401);
+            MinimumSize = new Size(607, 393);
             Name = "MoneyOperationForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Фінансові операції";
             FormClosing += MoneyOperationForm_FormClosing;
             panelMoney.ResumeLayout(false);
