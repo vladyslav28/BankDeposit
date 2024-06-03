@@ -318,7 +318,6 @@
             Controls.Add(panelMoney);
             MinimumSize = new Size(607, 393);
             Name = "MoneyOperationForm";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Фінансові операції";
             FormClosing += MoneyOperationForm_FormClosing;
             panelMoney.ResumeLayout(false);

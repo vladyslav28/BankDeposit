@@ -46,7 +46,7 @@ namespace BankDeposit.Forms
                 if (showErrorMessages)
                 {
                     errorSumLabel.Visible = true;
-                    errorInfoAmountLabel.Text = "Сума не може бути порожньою";
+                    errorInfoAmountLabel.Text = "Поле не може бути порожнім";
                     errorInfoAmountLabel.Visible = true;
                 }
                 else
