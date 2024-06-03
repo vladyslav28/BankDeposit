@@ -61,7 +61,7 @@ namespace BankDeposit.Forms
                 errorSumLabel.Visible = true;
                 if (showErrorMessages)
                 {
-                    errorInfoAmountLabel.Text = "Сума містить заборонені символи";
+                    errorInfoAmountLabel.Text = "Поле містить заборонені символи";
                     errorInfoAmountLabel.Visible = true;
                 }
                 isValid = false;
