@@ -238,8 +238,6 @@ namespace BankDeposit.Forms
             dateTimePickerLastOperation.Value = dateTimePickerLastOperation.Value.Date;
         }
 
-
-
         private void buttonOk_Click(object sender, EventArgs e)
         {
             bool isNameValid = ValidateName(true);

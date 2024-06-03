@@ -299,7 +299,6 @@
             MinimumSize = new Size(673, 362);
             Name = "BankAccountAddForm";
             Text = "Додання акаунта";
-            Load += BankAccountAddForm_Load;
             panelAdd.ResumeLayout(false);
             panelAdd.PerformLayout();
             ResumeLayout(false);

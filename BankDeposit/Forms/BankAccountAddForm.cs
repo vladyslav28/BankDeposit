@@ -249,10 +249,5 @@ namespace BankDeposit.Forms
                 MessageBox.Show("Будь ласка, виправте помилки введення", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void BankAccountAddForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

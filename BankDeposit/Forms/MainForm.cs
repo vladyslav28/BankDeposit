@@ -7,9 +7,9 @@ namespace BankDeposit.Forms
 {
     public partial class MainForm : Form
     {
-        Bank bank = new();
+        private Bank bank = new();
         const string PATH_TO_DATA = ".\\bank.txt";
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -17,7 +17,6 @@ namespace BankDeposit.Forms
             InitializeDatePickers();
             InitializeCategoryBox();
             InitializeErrorLabels();
-           
         }
 
         private void InitializeDatePickers()
@@ -45,31 +44,30 @@ namespace BankDeposit.Forms
             DialogResult result = MessageBox.Show("Ви хочете зберегти зміни перед виходом?", "Зберегти зміни", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-               
+
                 bank.SaveData(PATH_TO_DATA);
             }
             else if (result == DialogResult.No)
             {
-                
+
             }
             else if (result == DialogResult.Cancel)
             {
-              
+
                 e.Cancel = true;
             }
         }
-
+        
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bank.SaveData(PATH_TO_DATA);
         }
-        
+
         private void helpWithTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string message = "Поля ПІБ Можуть мати значення:літери,точка(.)" + Environment.NewLine +
@@ -210,9 +208,7 @@ namespace BankDeposit.Forms
             return isValid;
         }
 
-
         //
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             bool isValid = ValidateInput(true);
@@ -238,7 +234,7 @@ namespace BankDeposit.Forms
             bankAccountBindingSource.DataSource = result;
             UpdateLabelCount();
 
-            if(resultList.Items.Count == 0)
+            if (resultList.Items.Count == 0)
             {
                 MessageBox.Show("За обраними критеріями акаунтів не знайдено", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -277,10 +273,10 @@ namespace BankDeposit.Forms
 
                 if (moneyOperationForm.ShowDialog() == DialogResult.OK)
                 {
-                   
+
                     if (moneyOperationForm.IsChanged())
                     {
-                        MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Результати збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     buttonSearch_Click(null!, null!);
                 }
@@ -302,7 +298,7 @@ namespace BankDeposit.Forms
                 {
                     if (moneyOperationForm.IsChanged())
                     {
-                        MessageBox.Show("Зміни збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Результати збережено", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     buttonSearch_Click(null!, null!);
                 }
@@ -313,7 +309,6 @@ namespace BankDeposit.Forms
             }
         }
         //
-
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (resultList.SelectedItem is BankAccount bankAccount)
@@ -332,7 +327,7 @@ namespace BankDeposit.Forms
 
             if (string.IsNullOrEmpty(input))
             {
-                return; 
+                return;
             }
 
             if (int.TryParse(input, out int accountId))
@@ -361,7 +356,7 @@ namespace BankDeposit.Forms
                              $"Дата народження: {bankAccount.BirthDate:dd.MM.yyyy}" + Environment.NewLine +
                              $"Категорія депозиту: {bankAccount.DepositCategory}" + Environment.NewLine +
                              $"Поточна сума: {bankAccount.CurrentSum}" + Environment.NewLine +
-                             $"Дата останьої операції: {bankAccount.LastOperationDate:dd.MM.yyyy}" + Environment.NewLine;
+                             $"Дата останньої операції: {bankAccount.LastOperationDate:dd.MM.yyyy}" + Environment.NewLine;
 
             DialogResult result = MessageBox.Show(message, "Підтвердження видалення", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
@@ -446,7 +441,5 @@ namespace BankDeposit.Forms
             InitializeErrorLabels();
         }
 
-       
-        
     }
 }

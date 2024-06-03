@@ -23,7 +23,6 @@ namespace BankDeposit.Models
             LastOperationDate = account.LastOperationDate;
         }
 
-
         public string CustomDisplay
         {
             get
@@ -37,8 +36,6 @@ namespace BankDeposit.Models
                     $"Дата останньої операції:{LastOperationDate:dd.MM.yyyy}";
             }
         }
-
-
 
         public decimal ApplyInterest()
         {
@@ -73,9 +70,6 @@ namespace BankDeposit.Models
                 return (false, interest);
             }
         }
-
-
-
 
     }
 }
